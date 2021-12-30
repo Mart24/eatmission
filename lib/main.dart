@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:eatmission/services/auth_service.dart';
 import 'package:eatmission/wrapper.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'screens/screens.dart';
+import 'package:eatmission/shared/app_cubit.dart';
+import 'package:eatmission/shared/dairy_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +24,19 @@ class MyApp extends StatelessWidget {
           create: (_) => AuthService(),
         ),
       ],
+        child: MultiBlocProvider(
+        providers: [
+    BlocProvider(
+    create: (BuildContext context) => AppCubit(),
+    ),
+    BlocProvider(
+    create: (BuildContext context) =>
+    DairyCubit()..getUsersTripsList(Source.cache),
+    ),
+    // BlocProvider(
+    // create: (BuildContext context) => GoalCubit(),
+    // )
+    ],
       child: MaterialApp(
         title: 'Flutter Auth Example',
         theme: ThemeData(
@@ -32,6 +49,8 @@ class MyApp extends StatelessWidget {
           '/register': (context) => RegisterScreen(),
         },
       ),
+        ),
     );
+
   }
 }

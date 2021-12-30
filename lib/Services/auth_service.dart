@@ -15,6 +15,8 @@ class AuthService {
     return _firebaseAuth.authStateChanges().map(_userFromFirebase);
   }
 
+
+
   Future<User?> signInWithEmailAndPassword(
     String email,
     String password,

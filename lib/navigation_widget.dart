@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
           type: BottomNavigationBarType.fixed,
           onTap: onTabTapped,
           currentIndex: _currentIndex,
-          items: [
+          items: const [
             BottomNavigationBarItem(icon: Icon(Icons.book), label: "Diary"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.restaurant), label: "Recipes"),
