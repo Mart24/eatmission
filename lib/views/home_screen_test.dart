@@ -1,10 +1,10 @@
+import 'package:eatmission/models/ingredients.dart';
+import 'package:eatmission/views/new_food_registration/food_search.dart';
 import 'package:flutter/material.dart';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:eatmission/models/ingredients.dart';
 // import 'package:food_app/Views/display_foodintake.dart';
 // import 'package:food_app/Views/nutrition_details_page.dart';
 import 'package:eatmission/shared/app_cubit.dart';
@@ -15,79 +15,79 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'new_food_registration.dart/food_search.dart';
 
-class Profiel extends StatefulWidget {
+class HomeScreenTest extends StatefulWidget {
   @override
-  _ProfielState createState() => _ProfielState();
+  _HomeScreenTestState createState() => _HomeScreenTestState();
 }
 
-class _ProfielState extends State<Profiel> {
-  final newTrip = Trip(
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      // null,
-      // null,
-      // null,
-      // null,
-      // null,
-      // null,
-      // null,
-      // null,
-      // null,
-      // null,
-      null);
+class _HomeScreenTestState extends State<HomeScreenTest> {
+  // final newTrip = Trip(
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     null,
+  //     // null,
+  //     // null,
+  //     // null,
+  //     // null,
+  //     // null,
+  //     // null,
+  //     // null,
+  //     // null,
+  //     // null,
+  //     // null,
+  //     null);
 
   @override
   Widget build(BuildContext context) {
     print('rebuild dashboard');
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => NewFoodIntake(
-          //         trip: newTrip,
-          //       ),
-          //     ));
-        },
-        label: const Text('Food'),
-        icon: const Icon(Icons.add),
-        backgroundColor: Colors.orange,
-        focusElevation: 2,
-        foregroundColor: Colors.white,
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {
+      //     Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //           builder: (context) => NewFoodIntake(
+      //             trip: newTrip,
+      //           ),
+      //         ));
+      //   },
+      //   label: const Text('Food'),
+      //   icon: const Icon(Icons.add),
+      //   backgroundColor: Colors.orange,
+      //   focusElevation: 2,
+      //   foregroundColor: Colors.white,
+      // ),
       body: Container(
         margin: EdgeInsets.only(top: 15),
         child: Column(
@@ -158,7 +158,7 @@ class _ProfielState extends State<Profiel> {
                                     showTitleActions: true,
                                     theme: DatePickerTheme(),
                                     currentTime:
-                                    cubit.currentDate ?? DateTime.now(),
+                                    cubit.currentDate,
                                     minTime: DateTime(DateTime.now().year - 20),
                                     maxTime: DateTime(DateTime.now().year + 20),
                                     onChanged: (date) {

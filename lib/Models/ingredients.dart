@@ -102,6 +102,8 @@ class Trip {
       this.vitE,
       this.zink);
 
+  Trip.empty();
+
   // formatting for upload to Firbase
   Map<String, dynamic> toJson() => {
     'productid': id,
@@ -153,8 +155,8 @@ class Trip {
   };
 
   // creating a Food object from a firebase snapshot
-  Trip.fromSnapshot(DocumentSnapshot snapshot)
-      : id = snapshot['productid'],
+  Trip.fromSnapshot(DocumentSnapshot snapshot):
+       id = snapshot['productid'],
         name = snapshot['name'],
         eatDate = snapshot['eatDate'].toDate(),
         amount = snapshot['amount'],
@@ -203,7 +205,7 @@ class Trip {
         documentId = snapshot.id;
 
   Map<String, ImageIcon> planticon() => {
-    "WAAR": ImageIcon(
+    "WAAR": const ImageIcon(
       AssetImage("assets/icons/leaf_icon.png"),
       //color: kPrimaryColor,
     ),

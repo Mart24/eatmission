@@ -5,7 +5,7 @@ import 'package:eatmission/services/auth_service.dart';
 import 'package:eatmission/wrapper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'screens/screens.dart';
+import 'Views/screens.dart';
 import 'package:eatmission/shared/app_cubit.dart';
 import 'package:eatmission/shared/dairy_cubit.dart';
 
