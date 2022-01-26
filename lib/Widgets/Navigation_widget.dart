@@ -136,11 +136,11 @@ class _HomeState extends State<Home> {
           color: Colors.black54,
         ),
         backgroundColor: Colors.white,
-         elevation: 4,
+        elevation: 4,
 
-         // foregroundColor: Colors.white,
-       ),
-       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // foregroundColor: Colors.white,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           unselectedItemColor: Colors.grey,
@@ -161,7 +161,10 @@ class _HomeState extends State<Home> {
                 activeIcon: Icon(Icons.add, color: kPrimaryColor),
                 label: AppLocalizations.of(context).intaketext),
             BottomNavigationBarItem(
-                icon: Icon(Icons.info), label: 'Informatie'),
+                icon: FaIcon(FontAwesomeIcons.chartLine),
+                // activeIcon:
+                //     Icon(Icons.bar_chart_outlined, color: kPrimaryColor),
+                label: AppLocalizations.of(context).goalstext),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_pin),
                 label: AppLocalizations.of(context).profiletext),
