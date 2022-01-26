@@ -1,7 +1,6 @@
 import 'package:eatmission/models/ingredients.dart';
 import 'package:eatmission/views/home_screen.dart';
 import 'package:eatmission/views/new_food_registration/food_search.dart';
-import 'package:eatmission/views/home_screen_test.dart';
 import 'package:eatmission/views/compare_feature/compare_page.dart';
 import 'package:eatmission/views/goals/goals_home.dart';
 import 'package:eatmission/views/profile/profile_view.dart';

@@ -30,7 +30,7 @@ class DatabaseUpdatedState extends AppStates {
   int updatedRecordID;
 
   DatabaseUpdatedState({
-    required this.updatedRecordID,
+    @required this.updatedRecordID,
   });
 }
 
@@ -38,7 +38,7 @@ class DatabaseCountedState extends AppStates {
   int count;
 
   DatabaseCountedState({
-    required this.count,
+    @required this.count,
   });
 }
 

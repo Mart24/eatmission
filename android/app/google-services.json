@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "721720515804",
+    "project_id": "eatmission-b9677",
+    "storage_bucket": "eatmission-b9677.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:721720515804:android:273d7f2975db9b5530e819",
+        "android_client_info": {
+          "package_name": "app.eatmission.eatmission"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "721720515804-4gvq4k7dpa08sbd2g9v8c0druif2n8lu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3W5OtHMWOKeCGCVCPWHpCjdOtQR5c4KU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "721720515804-4gvq4k7dpa08sbd2g9v8c0druif2n8lu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "721720515804-31r37iv2n00800pq46angegg8t83ktod.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.eatmission.eatmission"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

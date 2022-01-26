@@ -1,6 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +10,7 @@ part 'app_states.dart';
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppStateInitial());
 
-  Database? database;
+  Database database;
   List<Map> queryResult = [];
   List<Map> oneWeekQueryResult = List.generate(7, (index) {
     return {
@@ -50,7 +48,7 @@ class AppCubit extends Cubit<AppStates> {
     oneWeekQueryResult = List.generate(7, (index) {
       return {
         'date':
-        DateTime.now().subtract(Duration(days: index)).toIso8601String(),
+            DateTime.now().subtract(Duration(days: index)).toIso8601String(),
         'calories': 0.0,
         'co2': 0.0
       };
@@ -58,7 +56,7 @@ class AppCubit extends Cubit<AppStates> {
     oneMonthQueryResult = List.generate(30, (index) {
       return {
         'date':
-        DateTime.now().subtract(Duration(days: index)).toIso8601String(),
+            DateTime.now().subtract(Duration(days: index)).toIso8601String(),
         'calories': 0.0,
         'co2': 0.0
       };
@@ -66,7 +64,7 @@ class AppCubit extends Cubit<AppStates> {
     threeMonthsQueryResult = List.generate(90, (index) {
       return {
         'date':
-        DateTime.now().subtract(Duration(days: index)).toIso8601String(),
+            DateTime.now().subtract(Duration(days: index)).toIso8601String(),
         'calories': 0.0,
         'co2': 0.0
       };
@@ -92,13 +90,13 @@ class AppCubit extends Cubit<AppStates> {
       _prefs.setInt('version', 1);
       print('first time:DB version is 1');
     } else {
-      List<String?> uidList = _prefs.getStringList('uidList')!;
-      int? lastVersion = _prefs.getInt('version');
+      List<String> uidList = _prefs.getStringList('uidList');
+      int lastVersion = _prefs.getInt('version');
       if (!uidList.contains(usersTableName)) {
         //brand new user
         uidList.add(usersTableName);
-        int version = lastVersion! + 1;
-        _prefs.setStringList('uidList', uidList as List<String>);
+        int version = lastVersion + 1;
+        _prefs.setStringList('uidList', uidList);
         _prefs.setInt('version', version);
         print('this is new user so we will upgrade DB version to $version');
       } else {
@@ -111,48 +109,48 @@ class AppCubit extends Cubit<AppStates> {
 
     openDatabase('food.db', version: _prefs.getInt('version'),
         onCreate: (Database db, int version) async {
-          db
-              .execute(
+      db
+          .execute(
               'CREATE TABLE $usersTableName (date TEXT PRIMARY KEY, calories REAL, co2 REAL)')
-              .catchError((error) {
-            print('Error When Creating Table ${error.toString()}');
-          }).then((value) {
-            db
-                .execute(
+          .catchError((error) {
+        print('Error When Creating Table ${error.toString()}');
+      }).then((value) {
+        db
+            .execute(
                 'CREATE TABLE $goalTableName (userId TEXT PRIMARY KEY, co2Goal INTEGER, goalName TEXT, startDate TEXT, image BLOB )')
-                .catchError((error) {
-              print('Error When Creating Table ${error.toString()}');
-            }).then((value) {
-              print('Table $goalTableName is created');
-              emit(DatabaseTableCreatedState());
-              countDBRecords(db, usersTableName);
-              // getDataFromDatabase(db, tableName);
-              emit(DatabaseOpenedState());
-            });
-            print('Table $usersTableName is created');
-            emit(DatabaseTableCreatedState());
-            countDBRecords(db, usersTableName);
-            // getDataFromDatabase(db, tableName);
-            emit(DatabaseOpenedState());
-          });
-        }, onUpgrade: (Database db, int version, int i) async {
-          print(
-              'database upgraded as new user logged with version: $version, with: $i');
-          db
-              .execute(
-              'CREATE TABLE $usersTableName (date TEXT PRIMARY KEY, calories REAL, co2 REAL)')
-              .catchError((error) {
-            print('Error When Creating Table ${error.toString()}');
-          }).then((value) {
-            print('Table $usersTableName is created');
-            emit(DatabaseTableCreatedState());
-            countDBRecords(db, usersTableName);
-            // getDataFromDatabase(db, tableName);
-            emit(DatabaseOpenedState());
-          });
-        }, onOpen: (Database db) {
-          print('Database opened');
+            .catchError((error) {
+          print('Error When Creating Table ${error.toString()}');
         }).then((value) {
+          print('Table $goalTableName is created');
+          emit(DatabaseTableCreatedState());
+          countDBRecords(db, usersTableName);
+          // getDataFromDatabase(db, tableName);
+          emit(DatabaseOpenedState());
+        });
+        print('Table $usersTableName is created');
+        emit(DatabaseTableCreatedState());
+        countDBRecords(db, usersTableName);
+        // getDataFromDatabase(db, tableName);
+        emit(DatabaseOpenedState());
+      });
+    }, onUpgrade: (Database db, int version, int i) async {
+      print(
+          'database upgraded as new user logged with version: $version, with: $i');
+      db
+          .execute(
+              'CREATE TABLE $usersTableName (date TEXT PRIMARY KEY, calories REAL, co2 REAL)')
+          .catchError((error) {
+        print('Error When Creating Table ${error.toString()}');
+      }).then((value) {
+        print('Table $usersTableName is created');
+        emit(DatabaseTableCreatedState());
+        countDBRecords(db, usersTableName);
+        // getDataFromDatabase(db, tableName);
+        emit(DatabaseOpenedState());
+      });
+    }, onOpen: (Database db) {
+      print('Database opened');
+    }).then((value) {
       database = value;
       print('Database is created successfully');
       emit(DatabaseCreatedState());
@@ -161,7 +159,7 @@ class AppCubit extends Cubit<AppStates> {
 
   Future<void> insertIntoDB(
       String tableName, Map<String, dynamic> recordValues) async {
-    database!.insert(tableName, recordValues,
+    database.insert(tableName, recordValues,
         conflictAlgorithm: ConflictAlgorithm.replace);
     print('inserted: $recordValues in table: $tableName');
     // await database.transaction((txn) async {
@@ -177,16 +175,16 @@ class AppCubit extends Cubit<AppStates> {
     //     print('Error When Inserting New Record ${error.toString()}');
     //   });
     // }).then((value) {});
-    countDBRecords(database!, tableName);
+    countDBRecords(database, tableName);
   }
 
   Future<void> updateFieldInDB({
-    String? tableName,
-    String? updatedDate,
-    String? updatedCalories,
-    String? updatedCo2,
+    String tableName,
+    String updatedDate,
+    String updatedCalories,
+    String updatedCo2,
   }) async {
-    database!.rawUpdate(
+    database.rawUpdate(
         'UPDATE $tableName SET calories = ?, co2 = ? WHERE data = ?',
         [updatedCalories, updatedCo2, updatedDate]).then((value) {
       print('Database updated record: $value');
@@ -195,27 +193,27 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Future<void> getDataFromDatabase(String tableName,
-      {bool? distinct,
-        List<String>? columns,
-        String? where,
-        List<dynamic>? whereArgs,
-        String? groupBy,
-        String? having,
-        String? orderBy,
-        int? limit,
-        int? offset}) async {
+      {bool distinct,
+      List<String> columns,
+      String where,
+      List<dynamic> whereArgs,
+      String groupBy,
+      String having,
+      String orderBy,
+      int limit,
+      int offset}) async {
     emit(DatabaseGetLoadingState());
-    database!
+    database
         .query(tableName,
-        distinct: distinct,
-        columns: columns,
-        where: where,
-        whereArgs: whereArgs,
-        groupBy: groupBy,
-        having: having,
-        orderBy: orderBy,
-        limit: limit,
-        offset: offset)
+            distinct: distinct,
+            columns: columns,
+            where: where,
+            whereArgs: whereArgs,
+            groupBy: groupBy,
+            having: having,
+            orderBy: orderBy,
+            limit: limit,
+            offset: offset)
         .then((value) {
       queryResult = value;
       print('retrived ${value.length}');
@@ -227,16 +225,16 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Future<List<Map<String, dynamic>>> getDataFromDatabase2(String tableName,
-      {bool? distinct,
-        List<String>? columns,
-        String? where,
-        List<dynamic>? whereArgs,
-        String? groupBy,
-        String? having,
-        String? orderBy,
-        int? limit,
-        int? offset}) async {
-    return database!.query(tableName,
+      {bool distinct,
+      List<String> columns,
+      String where,
+      List<dynamic> whereArgs,
+      String groupBy,
+      String having,
+      String orderBy,
+      int limit,
+      int offset}) async {
+    return database.query(tableName,
         distinct: distinct,
         columns: columns,
         where: where,
@@ -249,11 +247,11 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Future<void> deleteDataFromDatabase({
-    required String tableName,
-    required String where,
-    required List<dynamic> whereArgs,
+    @required String tableName,
+    @required String where,
+    @required List<dynamic> whereArgs,
   }) async {
-    database!
+    database
         .delete(tableName, where: where, whereArgs: whereArgs)
         .then((value) {
       print('number of row deleted is: $value');
@@ -262,11 +260,11 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   Future<void> getOneWeekData(Database database, String tableName,
-      {DateTime? date, bool forwardDirection = false}) async {
+      {DateTime date, bool forwardDirection = false}) async {
     // emit(DatabaseGetLoadingState());
     DateTime now;
     if (forwardDirection) {
-      now = date?.add(Duration(days: 7)) ?? DateTime.now();
+      now = date.add(Duration(days: 7)) ?? DateTime.now();
     } else {
       now = date ?? DateTime.now();
     }
@@ -287,8 +285,8 @@ class AppCubit extends Cubit<AppStates> {
       value.forEach((element) {
         print(
             '${element['date']}: calories: ${element['calories']}, co2: ${element['co2']}');
-        oneWeekCals[i] = element['calories']as double;
-        oneWeekCo2[i] = element['co2']as double;
+        oneWeekCals[i] = element['calories'];
+        oneWeekCo2[i] = element['co2'];
         // oneWeekCals.add(element['calories']);
         // oneWeekCo2.add(element['co2']);
         i++;
@@ -316,8 +314,8 @@ class AppCubit extends Cubit<AppStates> {
       value.forEach((element) {
         print(
             '${element['date']}: calories: ${element['calories']}, co2: ${element['co2']}');
-        oneMonthCals[i] = element['calories']as double;
-        oneMonthCo2[i] = element['co2'] as double;
+        oneMonthCals[i] = element['calories'];
+        oneMonthCo2[i] = element['co2'];
         i++;
       });
       emit(DatabaseGetState());
@@ -344,8 +342,8 @@ class AppCubit extends Cubit<AppStates> {
       value.forEach((element) {
         print(
             '${element['date']}: calories: ${element['calories']}, co2: ${element['co2']}');
-        threeMonthsCals[i] = element['calories']as double;
-        threeMonthsCo2[i] = element['co2']as double;
+        threeMonthsCals[i] = element['calories'];
+        threeMonthsCo2[i] = element['co2'];
         // threeMonthsCals.add(element['calories']);
         // threeMonthsCo2.add(element['co2']);
         i++;
@@ -353,7 +351,6 @@ class AppCubit extends Cubit<AppStates> {
       emit(DatabaseGetState());
     });
   }
-
 
   void countDBRecords(Database db, String tableName) async {
     List<Map> result = await db.query(

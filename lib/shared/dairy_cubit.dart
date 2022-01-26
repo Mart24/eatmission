@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eatmission/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'dairy_states.dart';
 
@@ -54,7 +53,7 @@ class DairyCubit extends Cubit<DairyStates> {
         breakfastList = lunchList = dinerList = snacksList = otherList = [];
     kCalSum = breakfastKcalSum = lunchKcalSum = dinerKcalSum = snacksKcalSum =
         othersKcalSum = sumco2Sum = breakfastsumco2Sum = lunchsumco2Sum =
-        dinersumco2Sum = snackssumco2Sum = otherssumco2Sum = 0;
+            dinersumco2Sum = snackssumco2Sum = otherssumco2Sum = 0;
     carbs = protein = fats = sugars = saturatedFat = dietaryFiber = co2Sum = 0;
     fatPercent = carbsPercent = proteinPercent =
         sugarsPercent = saturatedFatPercent = dietaryFiberPercent = 0;
@@ -62,17 +61,17 @@ class DairyCubit extends Cubit<DairyStates> {
     currentDate = DateTime.now();
   }
 
-  void sumAll([List<DocumentSnapshot>? givenTripsList]) {
+  void sumAll([List<DocumentSnapshot> givenTripsList]) {
     print('sum called');
     kCalSum = breakfastKcalSum = lunchKcalSum = dinerKcalSum = snacksKcalSum =
         othersKcalSum = co2Sum = sumco2Sum = breakfastsumco2Sum =
-        lunchsumco2Sum = dinersumco2Sum = snackssumco2Sum =
-        otherssumco2Sum = carbs =
-        fats = protein = sugars = saturatedFat = dietaryFiber = 0;
+            lunchsumco2Sum = dinersumco2Sum = snackssumco2Sum =
+                otherssumco2Sum = carbs =
+                    fats = protein = sugars = saturatedFat = dietaryFiber = 0;
     // List<num> ids = [];
 
     tripsList.forEach((element) {
-      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+      Map<String, dynamic> data = element.data();
       kCalSum += data['kcal'];
       carbs += data['carbs'];
       fats += data['fat'];
@@ -85,39 +84,39 @@ class DairyCubit extends Cubit<DairyStates> {
       //ids.add(data['productid']);
     });
     breakfastList.forEach((element) {
-      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+      Map<String, dynamic> data = element.data();
       breakfastKcalSum += data['kcal'];
       breakfastsumco2Sum += data['co2'];
     });
     lunchList.forEach((element) {
-      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+      Map<String, dynamic> data = element.data();
       lunchKcalSum += data['kcal'];
       lunchsumco2Sum += data['co2'];
     });
     dinerList.forEach((element) {
-      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+      Map<String, dynamic> data = element.data();
       dinerKcalSum += data['kcal'];
       dinersumco2Sum += data['co2'];
     });
     snacksList.forEach((element) {
-      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+      Map<String, dynamic> data = element.data();
       snacksKcalSum += data['kcal'];
       snackssumco2Sum += data['co2'];
     });
     otherList.forEach((element) {
-      Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+      Map<String, dynamic> data = element.data();
       othersKcalSum += data['kcal'];
       otherssumco2Sum += data['co2'];
     });
     //_sumSugars(ids);
-    kCalSum = double.parse(kCalSum.toStringAsFixed(0));
-    carbs = double.parse(carbs.toStringAsFixed(2));
-    fats = double.parse(fats.toStringAsFixed(2));
-    co2Sum = double.parse(co2Sum.toStringAsFixed(2));
-    protein = double.parse(protein.toStringAsFixed(2));
-    sugars = double.parse(sugars.toStringAsFixed(2));
-    saturatedFat = double.parse(saturatedFat.toStringAsFixed(2));
-    dietaryFiber = double.parse(dietaryFiber.toStringAsFixed(2));
+    kCalSum = double.parse(kCalSum.toStringAsFixed(1));
+    carbs = double.parse(carbs.toStringAsFixed(1));
+    fats = double.parse(fats.toStringAsFixed(1));
+    co2Sum = double.parse(co2Sum.toStringAsFixed(1));
+    protein = double.parse(protein.toStringAsFixed(1));
+    sugars = double.parse(sugars.toStringAsFixed(1));
+    saturatedFat = double.parse(saturatedFat.toStringAsFixed(1));
+    dietaryFiber = double.parse(dietaryFiber.toStringAsFixed(1));
     emit(SumBasicUpdated());
     print('sum calculated');
     // print('energy' + kCalSum.toString());
@@ -137,10 +136,11 @@ class DairyCubit extends Cubit<DairyStates> {
       fatPercent = fats / daySum;
       carbsPercent = carbs / daySum;
       proteinPercent = protein / daySum;
+      saturatedFatPercent = saturatedFat / daySum;
     }
     if (carbs != 0) sugarsPercent = sugars / carbs;
     if (carbs != 0) dietaryFiberPercent = dietaryFiber / carbs;
-    if (fats != 0) saturatedFatPercent = saturatedFat / fats;
+    // if (fats != 0) saturatedFatPercent = saturatedFat / fats;
 
     fatPercent = double.parse((fatPercent * 100).toStringAsFixed(1));
     carbsPercent = double.parse((carbsPercent * 100).toStringAsFixed(1));
@@ -171,12 +171,11 @@ class DairyCubit extends Cubit<DairyStates> {
   }
 
   Future<void> getUsersTripsList(Source source) async {
-
-    final String? uid = FirebaseAuth.instance.currentUser!.uid;
+    final uid = FirebaseAuth.instance.currentUser.uid;
     var now = currentDate;
     var start = Timestamp.fromDate(DateTime(now.year, now.month, now.day));
     var end =
-    Timestamp.fromDate(DateTime(now.year, now.month, now.day, 23, 59, 59));
+        Timestamp.fromDate(DateTime(now.year, now.month, now.day, 23, 59, 59));
     print('Now: $now');
     print('Start: ${start.toDate()}');
     print('End: ${end.toDate()}');
@@ -211,17 +210,17 @@ class DairyCubit extends Cubit<DairyStates> {
     });
   }
 
-  Stream<QuerySnapshot>? myStream;
+  Stream<QuerySnapshot> myStream;
 
   Future<void> getUsersTripsStreamSnapshots() async {
     // final uid = await Provider.of(context).auth.getCurrentUID();
-    final String? uid = FirebaseAuth.instance.currentUser!.uid;
+    final uid = FirebaseAuth.instance.currentUser.uid;
 
     // var now =cubit.currentDate;
     var now = currentDate;
     var start = Timestamp.fromDate(DateTime(now.year, now.month, now.day));
     var end =
-    Timestamp.fromDate(DateTime(now.year, now.month, now.day, 23, 59, 59));
+        Timestamp.fromDate(DateTime(now.year, now.month, now.day, 23, 59, 59));
     print('Now: $now');
     print('Start: ${start.toDate()}');
     print('End: ${end.toDate()}');
@@ -234,7 +233,7 @@ class DairyCubit extends Cubit<DairyStates> {
         .orderBy("eatDate", descending: true)
         .snapshots();
 
-    myStream?.listen((event) {
+    myStream.listen((event) {
       print('stream listener');
       getUsersTripsList(Source.serverAndCache);
     });
@@ -244,4 +243,79 @@ class DairyCubit extends Cubit<DairyStates> {
 
     getUsersTripsList(Source.serverAndCache);
   }
+
+  double calGoal = 2000.0;
+
+  setCalGoal(double goal1) async {
+    calGoal = goal1;
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setDouble('calGoal', goal1).then((value) {
+        emit(CalGoalUpdatedState());
+      });
+    });
+  }
+
+  getCalGoal() async {
+    SharedPreferences.getInstance().then((prefs) {
+      if (prefs.containsKey('calGoal')) {
+        calGoal = prefs.getDouble('calGoal');
+        emit(CalGoalUpdatedState());
+      } else {
+        prefs.setDouble('calGoal', 2000.0).then((value) {
+          calGoal = 2000.0;
+          emit(CalGoalUpdatedState());
+        });
+      }
+    });
+  }
+
+  double saveco2Goal = 5.0;
+
+  setSaveGoal(double co2savegoal) async {
+    saveco2Goal = co2savegoal;
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setDouble('saveGoal', co2savegoal).then((value) {
+        emit(SaveGoalUpdatedState());
+      });
+    });
+  }
+
+  getSaveGoal() async {
+    SharedPreferences.getInstance().then((prefs) {
+      if (prefs.containsKey('saveGoal')) {
+        saveco2Goal = prefs.getDouble('saveGoal');
+        emit(SaveGoalUpdatedState());
+      } else {
+        prefs.setDouble('saveGoal', 5.0).then((value) {
+          saveco2Goal = 5.0;
+          emit(SaveGoalUpdatedState());
+        });
+      }
+    });
+  }
+
+  // bool isDarkMode = true;
+
+  // setDarkMode(bool darkmodevalue) async {
+  //   isDarkMode = darkmodevalue;
+  //   SharedPreferences.getInstance().then((prefs) {
+  //     prefs.setBool('saveDark', darkmodevalue).then((value) {
+  //       emit(SaveGoalUpdatedState());
+  //     });
+  //   });
+  // }
+
+  // getdarkmode() async {
+  //   SharedPreferences.getInstance().then((prefs) {
+  //     if (prefs.containsKey('saveDark')) {
+  //       isDarkMode = prefs.getBool('saveDark');
+  //       emit(SaveGoalUpdatedState());
+  //     } else {
+  //       prefs.setBool('saveDark', true).then((value) {
+  //         isDarkMode = true;
+  //         emit(SaveGoalUpdatedState());
+  //       });
+  //     }
+  //   });
+  // }
 }
