@@ -34,6 +34,8 @@ class DairyCubit extends Cubit<DairyStates> {
       otherssumco2Sum = 0;
   double carbs = 0,
       protein = 0,
+      proteinplant = 0,
+      proteinanimal = 0,
       fats = 0,
       sugars = 0,
       saturatedFat = 0,
@@ -44,7 +46,9 @@ class DairyCubit extends Cubit<DairyStates> {
       proteinPercent = 0,
       sugarsPercent = 0,
       saturatedFatPercent = 0,
-      dietaryFiberPercent = 0;
+      dietaryFiberPercent = 0,
+      proteinPlantPercent = 0,
+      proteinAnimalPercent = 0;
 
   DateTime currentDate = DateTime.now();
 
@@ -54,9 +58,11 @@ class DairyCubit extends Cubit<DairyStates> {
     kCalSum = breakfastKcalSum = lunchKcalSum = dinerKcalSum = snacksKcalSum =
         othersKcalSum = sumco2Sum = breakfastsumco2Sum = lunchsumco2Sum =
             dinersumco2Sum = snackssumco2Sum = otherssumco2Sum = 0;
-    carbs = protein = fats = sugars = saturatedFat = dietaryFiber = co2Sum = 0;
-    fatPercent = carbsPercent = proteinPercent =
-        sugarsPercent = saturatedFatPercent = dietaryFiberPercent = 0;
+    carbs = protein = proteinplant = proteinanimal =
+        fats = sugars = saturatedFat = dietaryFiber = co2Sum = 0;
+    fatPercent = carbsPercent = proteinPercent = proteinPlantPercent =
+        proteinAnimalPercent =
+            sugarsPercent = saturatedFatPercent = dietaryFiberPercent = 0;
 
     currentDate = DateTime.now();
   }
@@ -66,8 +72,8 @@ class DairyCubit extends Cubit<DairyStates> {
     kCalSum = breakfastKcalSum = lunchKcalSum = dinerKcalSum = snacksKcalSum =
         othersKcalSum = co2Sum = sumco2Sum = breakfastsumco2Sum =
             lunchsumco2Sum = dinersumco2Sum = snackssumco2Sum =
-                otherssumco2Sum = carbs =
-                    fats = protein = sugars = saturatedFat = dietaryFiber = 0;
+                otherssumco2Sum = carbs = fats = protein = proteinplant =
+                    proteinanimal = sugars = saturatedFat = dietaryFiber = 0;
     // List<num> ids = [];
 
     tripsList.forEach((element) {
@@ -76,6 +82,8 @@ class DairyCubit extends Cubit<DairyStates> {
       carbs += data['carbs'];
       fats += data['fat'];
       protein += data['protein'];
+      proteinplant += data['proteinplant'];
+      proteinanimal += data['proteinanimal'];
       sumco2Sum += data['co2'];
       co2Sum += data['co2'];
       sugars += data['sugars'];
@@ -114,6 +122,8 @@ class DairyCubit extends Cubit<DairyStates> {
     fats = double.parse(fats.toStringAsFixed(1));
     co2Sum = double.parse(co2Sum.toStringAsFixed(1));
     protein = double.parse(protein.toStringAsFixed(1));
+    proteinplant = double.parse(proteinplant.toStringAsFixed(1));
+    proteinanimal = double.parse(proteinanimal.toStringAsFixed(1));
     sugars = double.parse(sugars.toStringAsFixed(1));
     saturatedFat = double.parse(saturatedFat.toStringAsFixed(1));
     dietaryFiber = double.parse(dietaryFiber.toStringAsFixed(1));
@@ -129,8 +139,9 @@ class DairyCubit extends Cubit<DairyStates> {
   }
 
   void calcPercents() {
-    fatPercent = carbsPercent = proteinPercent =
-        dietaryFiberPercent = sugarsPercent = saturatedFatPercent = 0;
+    fatPercent = carbsPercent = proteinPercent = proteinPlantPercent =
+        proteinAnimalPercent =
+            dietaryFiberPercent = sugarsPercent = saturatedFatPercent = 0;
     double daySum = fats + carbs + protein;
     if (daySum != 0) {
       fatPercent = fats / daySum;
@@ -141,10 +152,17 @@ class DairyCubit extends Cubit<DairyStates> {
     if (carbs != 0) sugarsPercent = sugars / carbs;
     if (carbs != 0) dietaryFiberPercent = dietaryFiber / carbs;
     // if (fats != 0) saturatedFatPercent = saturatedFat / fats;
+    if (protein != 0) proteinPlantPercent = proteinplant / protein;
+    if (protein != 0) proteinAnimalPercent = proteinanimal / protein;
 
     fatPercent = double.parse((fatPercent * 100).toStringAsFixed(1));
     carbsPercent = double.parse((carbsPercent * 100).toStringAsFixed(1));
     proteinPercent = double.parse((proteinPercent * 100).toStringAsFixed(1));
+
+    proteinPlantPercent =
+        double.parse((proteinPlantPercent * 100).toStringAsFixed(1));
+    proteinAnimalPercent =
+        double.parse((proteinAnimalPercent * 100).toStringAsFixed(1));
 
     sugarsPercent = double.parse((sugarsPercent * 100).toStringAsFixed(1));
     dietaryFiberPercent =

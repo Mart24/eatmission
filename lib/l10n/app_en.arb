@@ -74,6 +74,8 @@
     "eatentext": "Eaten    ",
     "carbstext": " Carbs ",
     "proteintext": " Proteins ",
+    "proteinplanttext": "  (Plant) ",
+    "proteinanimaltext": "  (Animal) ",
     "fatstext": " Fats ",
     "breakfast": "Breakfast",
     "otherstext": "Others",

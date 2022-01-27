@@ -32,6 +32,8 @@ class Trip {
   num saturatedfat;
   num sugars;
   num protein;
+  num proteinplant;
+  num proteinanimal;
   num carbs;
   num dietaryfiber;
   num salt;
@@ -66,6 +68,8 @@ class Trip {
       this.co2,
       this.carbs,
       this.protein,
+      this.proteinplant,
+      this.proteinanimal,
       this.fat,
       this.plantbased,
       this.categorie,
@@ -121,6 +125,8 @@ class Trip {
         'co2': co2,
         'carbs': carbs,
         'protein': protein,
+        'proteinplant': proteinplant,
+        'proteinanimal': proteinanimal,
         'fat': fat,
         'nutriscore': nutriscore,
         'ecoscore': ecoscore,
@@ -178,6 +184,8 @@ class Trip {
     carbs = snapshotAsMap['carbs'];
     fat = snapshotAsMap['fat'];
     protein = snapshotAsMap['protein'];
+    proteinplant = snapshotAsMap['proteinplant'];
+    proteinanimal = snapshotAsMap['proteinanimal'];
     nutriscore = snapshotAsMap['nutriscore'];
     ecoscore = snapshotAsMap['ecoscore'];
 

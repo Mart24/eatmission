@@ -12,6 +12,11 @@ class NutritionalDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String Koolhydratentotaal = AppLocalizations.of(context).carbsfulltext;
+    String Vettentotaal = AppLocalizations.of(context).fatsfulltext;
+    String Eiwittentotaal = AppLocalizations.of(context).proteinfulltext;
+    String Calories = AppLocalizations.of(context).calories;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).fooddetailstext),
@@ -53,15 +58,15 @@ class NutritionalDetailsPage extends StatelessWidget {
                             ],
                             animationDuration: Duration(seconds: 1),
                             dataMap: {
-                              '${cubit.fatPercent.toStringAsFixed(0)}% Vet':
-                                  cubit.fatPercent,
-                              '${cubit.carbsPercent.toStringAsFixed(0)}% Koolhydraten':
+                              '${cubit.carbsPercent.toStringAsFixed(0)}% ${Koolhydratentotaal}':
                                   cubit.carbsPercent,
-                              '${cubit.proteinPercent.toStringAsFixed(0)}% Eiwitten':
+                              '${cubit.proteinPercent.toStringAsFixed(0)}% ${Eiwittentotaal}':
                                   cubit.proteinPercent,
+                              '${cubit.fatPercent.toStringAsFixed(0)}% ${Vettentotaal}':
+                                  cubit.fatPercent,
                             },
                             centerText:
-                                '${cubit.kCalSum.toStringAsFixed(0)} Calorieën',
+                                '${cubit.kCalSum.toStringAsFixed(0)} ${Calories}',
 
                             chartType: ChartType.ring,
                           ),
@@ -187,6 +192,56 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     ),
                                     Text(
                                       '${cubit.proteinPercent.toStringAsFixed(0)}%',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0),
+                                      child: Text(
+                                        AppLocalizations.of(context)
+                                            .proteinplanttext,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${cubit.proteinplant.toStringAsFixed(0)}g',
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    Text(
+                                      '${cubit.proteinPlantPercent.toStringAsFixed(0)}%',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0),
+                                      child: Text(
+                                        AppLocalizations.of(context)
+                                            .proteinanimaltext,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${cubit.proteinanimal.toStringAsFixed(0)}g',
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    Text(
+                                      '${cubit.proteinAnimalPercent.toStringAsFixed(0)}%',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(

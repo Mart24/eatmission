@@ -28,6 +28,10 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
     // };
     final ecoscoreType = widget.trip.ecoscoreimage();
     final nutriscoreType = widget.trip.nutriscoreimage();
+    String Koolhydratentotaal = AppLocalizations.of(context).carbsfulltext;
+    String Vettentotaal = AppLocalizations.of(context).fatsfulltext;
+    String Eiwittentotaal = AppLocalizations.of(context).proteinfulltext;
+    String Calories = AppLocalizations.of(context).calories;
 
     return Scaffold(
       appBar: AppBar(
@@ -88,42 +92,42 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
                       animationDuration: Duration(seconds: 1),
                       chartType: ChartType.ring,
                       centerText:
-                          '${widget.trip.kcal.toStringAsFixed(0)} Calorieën',
+                          '${widget.trip.kcal.toStringAsFixed(0)} ${Calories}',
                       dataMap: {
-                        '${(((widget.trip.carbs.toDouble() / widget.trip.kcal) * 100) * 4).toStringAsFixed(0)} % Carbs':
+                        '${(((widget.trip.carbs.toDouble() / widget.trip.kcal) * 100) * 4).toStringAsFixed(0)} % ${Koolhydratentotaal}':
                             (((widget.trip.carbs.toDouble() /
                                         widget.trip.kcal) *
                                     100) *
                                 4),
-                        '${(((widget.trip.protein.toDouble() / widget.trip.kcal) * 100) * 4).toStringAsFixed(0)} % Protein':
+                        '${(((widget.trip.protein.toDouble() / widget.trip.kcal) * 100) * 4).toStringAsFixed(0)} % ${Eiwittentotaal}':
                             (((widget.trip.protein.toDouble() /
                                         widget.trip.kcal) *
                                     100) *
                                 4),
-                        '${(((widget.trip.fat.toDouble() / widget.trip.kcal) * 100) * 9).toStringAsFixed(0)} % Fat':
+                        '${(((widget.trip.fat.toDouble() / widget.trip.kcal) * 100) * 9).toStringAsFixed(0)} % ${Vettentotaal}':
                             (((widget.trip.fat.toDouble() / widget.trip.kcal) *
                                     100) *
                                 9),
                       },
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(top: 20.0),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //     children: [
-                    //       Container(
-                    //         alignment: Alignment.center,
-                    //         child: nutriscoreType[widget.trip.nutriscore],
-                    //         width: 100,
-                    //       ),
-                    //       Container(
-                    //         alignment: Alignment.center,
-                    //         child: ecoscoreType[widget.trip.ecoscore],
-                    //         width: 100,
-                    //       ),
-                    //     ],
-                    //   ),
-                    // )
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            child: nutriscoreType[widget.trip.nutriscore],
+                            width: 100,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: ecoscoreType[widget.trip.ecoscore],
+                            width: 100,
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -137,7 +141,10 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
               alignment: Alignment.center,
               height: kToolbarHeight,
               color: kPrimaryColor,
-              child: Text('Macronutriënten', style: TextStyle(fontSize: 20)),
+              child: Text(
+                'Macronutriënten',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
             ),
           ),
           SliverList(
@@ -219,6 +226,39 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
                               ),
                               Text(
                                 '${widget.trip.protein.toStringAsFixed(0)} g',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  AppLocalizations.of(context).proteinplanttext,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.proteinplant.toStringAsFixed(0)} g',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  AppLocalizations.of(context)
+                                      .proteinanimaltext,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.proteinanimal.toStringAsFixed(0)} g',
                                 style: TextStyle(fontSize: 18),
                               ),
                             ]),
@@ -329,7 +369,7 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
               color: kPrimaryColor,
               child: Text(
                 'Micronutriënten',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
           ),

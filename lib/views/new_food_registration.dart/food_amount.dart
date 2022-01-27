@@ -203,6 +203,16 @@ class _FoodDateState extends State<FoodDate> {
                     ((double.tryParse(_sizeController.text) ?? 100)) *
                     ((double.tryParse(_portionController.text) ?? 1)) *
                     0.01.toDouble());
+                double proteinplant =
+                    ((foodDocument['proteinsplant'].toDouble()) *
+                        ((double.tryParse(_sizeController.text) ?? 100)) *
+                        ((double.tryParse(_portionController.text) ?? 1)) *
+                        0.01.toDouble());
+                double proteinanimal =
+                    ((foodDocument['proteinsanimal'].toDouble()) *
+                        ((double.tryParse(_sizeController.text) ?? 100)) *
+                        ((double.tryParse(_portionController.text) ?? 1)) *
+                        0.01.toDouble());
                 // Calorieën Vetten
                 double fat = ((foodDocument['fat'].toDouble()) *
                     ((double.tryParse(_sizeController.text) ?? 100)) *
@@ -346,6 +356,8 @@ class _FoodDateState extends State<FoodDate> {
                               widget.trip.co2 = co2;
                               widget.trip.carbs = koolhy;
                               widget.trip.protein = protein;
+                              widget.trip.proteinplant = proteinplant;
+                              widget.trip.proteinanimal = proteinanimal;
                               widget.trip.fat = fat;
                               widget.trip.sugars = sugars;
                               widget.trip.dietaryfiber = dietaryfiber;
@@ -460,6 +472,7 @@ class _FoodDateState extends State<FoodDate> {
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ]),
+                              //Proteins
                               TableRow(children: [
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -474,6 +487,42 @@ class _FoodDateState extends State<FoodDate> {
                                 ),
                                 Text(
                                   "${protein.toStringAsFixed(1)} g",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ]),
+                              //Proteins Plant
+                              TableRow(children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10.0),
+                                  child: Text(
+                                    AppLocalizations.of(context)
+                                        .proteinplanttext,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Text(
+                                  "${proteinplant.toStringAsFixed(1)} g",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ]),
+                              //Proteins Animal
+                              TableRow(children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10.0),
+                                  child: Text(
+                                    AppLocalizations.of(context)
+                                        .proteinanimaltext,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Text(
+                                  "${proteinanimal.toStringAsFixed(1)} g",
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ]),

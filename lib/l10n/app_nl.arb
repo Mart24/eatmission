@@ -38,6 +38,8 @@
     "energy": "Energie",
     "carbsfulltext": "Koolhydraten",
     "proteinfulltext": "Eiwitten",
+    "proteinplanttext": "  (Plantaardig) ",
+    "proteinanimaltext": "  (Dierlijk) ",
     "fatsfulltext": "Vetten",
     "saturatedfats": "Verzadigd vet",
     "sugartext": "Suikers",

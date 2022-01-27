@@ -70,6 +70,8 @@ class _ComparePageState extends State<ComparePage> {
       null,
       null,
       null,
+      null,
+      null,
       null);
 
   @override
