@@ -301,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       AutoSizeText(
                         trip.name,
-                        // style: new TextStyle(fontSize: 20.0),
+                        style: TextStyle(fontSize: 16.0),
                       ),
                       Spacer(),
                       Tooltip(
@@ -317,7 +317,8 @@ class _HomePageState extends State<HomePage> {
                       //     color: kPrimaryColor,
                       //   ),
                       // ),
-                      Text("${trip.kcal.toStringAsFixed(0)} Kcal"),
+                      Text("${trip.kcal.toStringAsFixed(0)} Kcal",
+                          style: TextStyle(fontSize: 14.0)),
                     ],
                   ),
                 ),
@@ -330,11 +331,12 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     Text(
                       "${(trip.amount == null) ? "n/a" : trip.amount.toStringAsFixed(0)} ${trip.amountUnit ?? 'gram'}",
-                      style: new TextStyle(fontSize: 15.0),
+                      style: TextStyle(fontSize: 13.0),
                     ),
                     Spacer(),
                     //Icon(Icons.emoji_nature),
-                    Text("${trip.co2.toStringAsFixed(1)} CO₂"),
+                    Text("${trip.co2.toStringAsFixed(1)} CO₂",
+                        style: TextStyle(fontSize: 13.0)),
                   ],
                 ),
               ],
@@ -596,19 +598,19 @@ class LinearCo2Indecator extends StatelessWidget {
                       ),
                       TextSpan(text: ' kg/CO₂', style: TextStyle(fontSize: 12)),
                     ])),
-                // Text.rich(TextSpan(
-                //     style: TextStyle(
-                //       fontSize: 20,
-                //     ),
-                //     children: <TextSpan>[
-                //       TextSpan(text: 'Max. '),
-                //       TextSpan(
-                //         text: '${cubit.saveco2Goal.toStringAsFixed(1)}',
-                //         style: TextStyle(
-                //             fontWeight: FontWeight.bold, color: kPrimaryColor),
-                //       ),
-                //       TextSpan(text: ' kg/CO₂', style: TextStyle(fontSize: 12)),
-                //     ])),
+                Text.rich(TextSpan(
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(text: 'Max. '),
+                      TextSpan(
+                        text: '${cubit.saveco2Goal.toStringAsFixed(1)}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: kPrimaryColor),
+                      ),
+                      TextSpan(text: ' kg/CO₂', style: TextStyle(fontSize: 12)),
+                    ])),
 
                 // Text('max 5.0 kg/Co²')
               ],
@@ -798,7 +800,7 @@ class ImpactButton extends StatelessWidget {
               return CustomDialogBox(
                 title: "Jouw klimaat impact",
                 descriptions:
-                    "Jouw klimaat impact is ${cubit.co2Sum.toStringAsFixed(1)} kg/CO₂. Dat staat gelijk aan ${benzine.toStringAsFixed(1)} km autorijden, ${douchen.toStringAsFixed(1)} minuten douchen of ${charging.toStringAsFixed(1)} keer je mobiel opladen",
+                    "Jouw klimaat impact is ${cubit.co2Sum.toStringAsFixed(1)} kg/CO₂. Dat staat gelijk aan ${benzine.toStringAsFixed(1)} km autorijden, ${douchen.toStringAsFixed(0)} minuten douchen of ${charging.toStringAsFixed(0)} keer je mobiel opladen",
                 text: "Sluit",
               );
             });

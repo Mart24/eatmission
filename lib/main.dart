@@ -23,6 +23,8 @@ import 'package:food_app/Views/introduction_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // @dart=2.9
+// /test
+
 /// Custom [BlocObserver] which observes all bloc and cubit instances.
 class MyBlocObserver extends BlocObserver {
   @override
