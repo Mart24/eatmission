@@ -49,6 +49,7 @@ class Profiel extends StatelessWidget {
             buildDarkMode(context),
             SettingsGroup(title: 'Goals', children: <Widget>[
               GoalSettingsPage(),
+              //BMRPage(),
               const SizedBox(
                 height: 8,
               ),

@@ -21,7 +21,8 @@ class Mythemes {
   );
   static final lightTheme = ThemeData(
       scaffoldBackgroundColor: Colors.white,
-      colorScheme: ColorScheme.light(secondary: Color(0xFF84AB5C)),
+      // colorScheme: ColorScheme.light(secondary: Color(0xFF84AB5C)),
+      colorScheme: ColorScheme.light().copyWith(primary: kPrimaryColor),
       primarySwatch: Colors.green,
       primaryColor: Colors.black,
       iconTheme: IconThemeData(color: Colors.white));

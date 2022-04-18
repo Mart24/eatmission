@@ -40,11 +40,11 @@ class _NewFoodIntakeState extends State<NewFoodIntake> {
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).searchyourproductstext),
         backgroundColor: kPrimaryColor,
-        actions: [
-          IconButton(
-              icon: Icon(Icons.camera_alt_outlined),
-              onPressed: searchCubit.scanBarcode)
-        ],
+        // actions: [
+        //   IconButton(
+        //       icon: Icon(Icons.camera_alt_outlined),
+        //       onPressed: searchCubit.scanBarcode)
+        // ],
       ),
       body: BlocConsumer<SearchCubit, SearchStates>(
         listener: (context, state) {

@@ -110,50 +110,52 @@ class _HomePageState extends State<HomePage> {
                       if (barPercent > 1) {
                         barPercent = 1;
                       }
-                      return Column(children: [
-                        CaloriesIndecator(
-                            // cubit: cubit,
-                            kCalSum: kCalSum,
-                            calGoal: calGoal,
-                            circularPercent: circularPercent,
-                            diff: diff),
+                      return SingleChildScrollView(
+                        child: Column(children: [
+                          CaloriesIndecator(
+                              // cubit: cubit,
+                              kCalSum: kCalSum,
+                              calGoal: calGoal,
+                              circularPercent: circularPercent,
+                              diff: diff),
 
-                        CarbsProtienFatRow(cubit: cubit),
+                          CarbsProtienFatRow(cubit: cubit),
 
-                        SizedBox(height: 20),
+                          SizedBox(height: 10),
 
-                        LinearCo2Indecator(
-                          barPercent: barPercent,
-                          cubit: cubit,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            ImpactButton(
-                              cubit: cubit,
-                              benzine: benzine,
-                              douchen: douchen,
-                              charging: charging,
-                            ),
-                            DetailsButton(),
-                          ],
-                        ),
+                          LinearCo2Indecator(
+                            barPercent: barPercent,
+                            cubit: cubit,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ImpactButton(
+                                cubit: cubit,
+                                benzine: benzine,
+                                douchen: douchen,
+                                charging: charging,
+                              ),
+                              DetailsButton(),
+                            ],
+                          ),
 
-                        // Expanded(
-                        //   child: Builder(
-                        //     builder: (context) {
-                        //       if (cubit.tripsList.isNotEmpty) {
-                        //         return ListView.builder(
-                        //           itemCount: cubit.tripsList.length,
-                        //           itemBuilder: (BuildContext context, int index) =>
-                        //               buildTripCard(context, cubit.tripsList[index]),
-                        //         );
-                        //       }
-                        //       return const Text("No items entered...");
-                        //     },
-                        //   ),
-                        // ),
-                      ]);
+                          // Expanded(
+                          //   child: Builder(
+                          //     builder: (context) {
+                          //       if (cubit.tripsList.isNotEmpty) {
+                          //         return ListView.builder(
+                          //           itemCount: cubit.tripsList.length,
+                          //           itemBuilder: (BuildContext context, int index) =>
+                          //               buildTripCard(context, cubit.tripsList[index]),
+                          //         );
+                          //       }
+                          //       return const Text("No items entered...");
+                          //     },
+                          //   ),
+                          // ),
+                        ]),
+                      );
                     });
                   } else {
                     return Center(
@@ -304,12 +306,12 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(fontSize: 16.0),
                       ),
                       Spacer(),
-                      Tooltip(
-                        message: 'plantaardig',
-                        child: (plantType.containsKey(trip.plantbased))
-                            ? plantType[trip.plantbased]
-                            : plantType["n"],
-                      ),
+                      // Tooltip(
+                      //   message: 'plantaardig',
+                      //   child: (plantType.containsKey(trip.plantbased))
+                      //       ? plantType[trip.plantbased]
+                      //       : plantType["n"],
+                      // ),
                       // Tooltip(
                       //   message: 'plantaardig',
                       //   child: ImageIcon(
@@ -658,61 +660,42 @@ class CarbsProtienFatRow extends StatelessWidget {
 
               Row(
                 children: [
-                  Icon(
-                    Icons.circle,
-                    color: kPrimaryColor,
-                    size: 12,
-                  ),
+                  // Icon(
+                  //   Icons.circle,
+                  //   color: kPrimaryColor,
+                  //   size: 12,
+                  // ),
                   Text.rich(TextSpan(
                       style: TextStyle(fontSize: 16),
                       children: <TextSpan>[
-                        TextSpan(text: AppLocalizations.of(context).carbstext),
                         TextSpan(
-                          text: '${cubit.carbs.toStringAsFixed(0)}',
-                          // style: TextStyle(
-                          //     fontWeight: FontWeight.bold, color: kPrimaryColor),
-                        ),
-                        TextSpan(text: 'g', style: TextStyle(fontSize: 14)),
+                            text: AppLocalizations.of(context).carbstext,
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        // TextSpan(
+                        //   text: '${cubit.carbs.toStringAsFixed(0)}',
+                        //   // style: TextStyle(
+                        //   //     fontWeight: FontWeight.bold, color: kPrimaryColor),
+                        // ),
+                        // TextSpan(text: 'g', style: TextStyle(fontSize: 14)),
                       ])),
                   // Text(
                   //   ' Carbs ${cubit.carbs.toStringAsFixed(0)}g',
                   // ),
                 ],
               ),
-            ],
-          ),
-          Column(
-            children: [
-              // new LinearPercentIndicator(
-              //   width: 100.0,
-              //   lineHeight: 8.0,
-              //   percent: 0.7,
-              //   progressColor: Colors.yellow,
-              // ),
               Row(
                 children: [
-                  Icon(
-                    Icons.circle,
-                    color: kPrimaryColor,
-                    size: 12,
+                  new LinearPercentIndicator(
+                    width: 100.0,
+                    lineHeight: 8.0,
+                    percent: 0.2,
+                    progressColor: Colors.red,
                   ),
-
-                  Text.rich(TextSpan(
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: AppLocalizations.of(context).proteintext),
-                        TextSpan(
-                          text: '${cubit.protein.toStringAsFixed(0)}',
-                          // style: TextStyle(
-                          //     fontWeight: FontWeight.bold, color: kPrimaryColor),
-                        ),
-                        TextSpan(text: 'g', style: TextStyle(fontSize: 14)),
-                      ])),
-
-                  //  Text(' Proteins ${cubit.protein.toStringAsFixed(0)}g'),
+                ],
+              ),
+              Row(
+                children: [
+                  Text('${cubit.carbs.toStringAsFixed(0)}g over'),
                 ],
               ),
             ],
@@ -722,33 +705,103 @@ class CarbsProtienFatRow extends StatelessWidget {
               // new LinearPercentIndicator(
               //   width: 100.0,
               //   lineHeight: 8.0,
-              //   percent: 0.3,
-              //   progressColor: Colors.blue,
+              //   percent: 0.2,
+              //   progressColor: Colors.red,
               // ),
+
               Row(
                 children: [
-                  Icon(
-                    Icons.circle,
-                    color: kPrimaryColor,
-                    size: 12,
-                  ),
-
+                  // Icon(
+                  //   Icons.circle,
+                  //   color: kPrimaryColor,
+                  //   size: 12,
+                  // ),
                   Text.rich(TextSpan(
                       style: TextStyle(fontSize: 16),
                       children: <TextSpan>[
-                        TextSpan(text: AppLocalizations.of(context).fatstext),
                         TextSpan(
-                          text: '${cubit.fats.toStringAsFixed(0)}',
-                          // style: TextStyle(
-                          //     fontWeight: FontWeight.bold, color: kPrimaryColor),
-                        ),
-                        TextSpan(text: 'g', style: TextStyle(fontSize: 14)),
+                            text: AppLocalizations.of(context).proteintext,
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        // TextSpan(
+                        //   text: '${cubit.carbs.toStringAsFixed(0)}',
+                        //   // style: TextStyle(
+                        //   //     fontWeight: FontWeight.bold, color: kPrimaryColor),
+                        // ),
+                        // TextSpan(text: 'g', style: TextStyle(fontSize: 14)),
                       ])),
-                  //   Text(' Fats ${cubit.fats.toStringAsFixed(0)}g'),
+                  // Text(
+                  //   ' Carbs ${cubit.carbs.toStringAsFixed(0)}g',
+                  // ),
+                ],
+              ),
+              Row(
+                children: [
+                  new LinearPercentIndicator(
+                    width: 100.0,
+                    lineHeight: 8.0,
+                    percent: 0.2,
+                    progressColor: Colors.yellow,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text('${cubit.protein.toStringAsFixed(0)}g over'),
                 ],
               ),
             ],
-          )
+          ),
+          Column(
+            children: [
+              // new LinearPercentIndicator(
+              //   width: 100.0,
+              //   lineHeight: 8.0,
+              //   percent: 0.2,
+              //   progressColor: Colors.red,
+              // ),
+
+              Row(
+                children: [
+                  // Icon(
+                  //   Icons.circle,
+                  //   color: kPrimaryColor,
+                  //   size: 12,
+                  // ),
+                  Text.rich(TextSpan(
+                      style: TextStyle(fontSize: 16),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: AppLocalizations.of(context).fatstext,
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        // TextSpan(
+                        //   text: '${cubit.carbs.toStringAsFixed(0)}',
+                        //   // style: TextStyle(
+                        //   //     fontWeight: FontWeight.bold, color: kPrimaryColor),
+                        // ),
+                        // TextSpan(text: 'g', style: TextStyle(fontSize: 14)),
+                      ])),
+                  // Text(
+                  //   ' Carbs ${cubit.carbs.toStringAsFixed(0)}g',
+                  // ),
+                ],
+              ),
+              Row(
+                children: [
+                  new LinearPercentIndicator(
+                    width: 100.0,
+                    lineHeight: 8.0,
+                    percent: 0.2,
+                    progressColor: Colors.blue,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text('${cubit.fats.toStringAsFixed(0)}g over'),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     );

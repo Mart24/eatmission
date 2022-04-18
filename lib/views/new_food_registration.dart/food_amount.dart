@@ -10,6 +10,7 @@ import 'package:food_app/Widgets/Provider_Auth.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 // Step 2: The user chooses the amount he or she have eaten
 // The fooddata changes due to the budgetcontroller
@@ -113,6 +114,12 @@ class _FoodDateState extends State<FoodDate> {
 
   @override
   Widget build(BuildContext context) {
+    String Koolhydratentotaal = AppLocalizations.of(context).carbsfulltext;
+    String Vettentotaal = AppLocalizations.of(context).fatsfulltext;
+    String Eiwittentotaal = AppLocalizations.of(context).proteinfulltext;
+    String Calories = AppLocalizations.of(context).calories;
+    String Ontbijt = AppLocalizations.of(context).breakfast;
+
     return GestureDetector(
       onTap: () {
         // call this method here to hide soft keyboard
@@ -145,7 +152,6 @@ class _FoodDateState extends State<FoodDate> {
             //     }
             //   },
             // ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.save)),
             IconButton(
                 onPressed: () => Utils.openEmail(
                       toEmail: 'martijnformer24@gmail.com',
@@ -154,6 +160,8 @@ class _FoodDateState extends State<FoodDate> {
                       body: 'I have a question or suggestion for this product',
                     ),
                 icon: Icon(Icons.message)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
+            IconButton(onPressed: () {}, icon: Icon(Icons.save)),
 
             //   onPressed: () => Utils.openEmail(
             //     toEmail: 'martijnformer24@gmail.com',
@@ -296,11 +304,47 @@ class _FoodDateState extends State<FoodDate> {
                 //     ((double.tryParse(_budgetController.text) ?? 100)) *
                 //     0.01.toDouble());
 
+                Map<String, double> dataMap = {
+                  "Carbs": kcal,
+                  "Protein": 2,
+                  "Fats": 2,
+                };
+
                 return Container(
                   child: Column(children: <Widget>[
                     Text(
                       "${foodDocument['name']}",
                       style: new TextStyle(fontSize: 24.0),
+                    ),
+
+                    PieChart(
+                      chartRadius: 125.0,
+                      ringStrokeWidth: 10,
+                      chartLegendSpacing: 25,
+                      initialAngleInDegree: 270,
+                      // legendOptions: LegendOptions(),
+                      chartValuesOptions: ChartValuesOptions(
+                        decimalPlaces: 0,
+                        showChartValues: true,
+                        showChartValuesInPercentage: true,
+                        showChartValuesOutside: false,
+                        chartValueBackgroundColor: Colors.white,
+                      ),
+                      colorList: [
+                        Colors.green[200],
+                        Colors.teal[200],
+                        Colors.red[200]
+                      ],
+                      animationDuration: Duration(seconds: 1),
+                      dataMap: {
+                        "${koolhy.toStringAsFixed(0)}g ${Koolhydratentotaal}":
+                            koolhy,
+                        "${protein.toStringAsFixed(0)}g ${Eiwittentotaal}":
+                            protein,
+                        "${fat.toStringAsFixed(0)}g ${Vettentotaal}": fat,
+                      },
+                      centerText: "${kcal.toStringAsFixed(0)} ${Calories}",
+                      chartType: ChartType.ring,
                     ),
 
                     Padding(
@@ -332,7 +376,7 @@ class _FoodDateState extends State<FoodDate> {
                           // ),
 
                           DropdownButton(
-                            hint: Text('Breakfast'),
+                            hint: Text(Ontbijt),
                             value: categoryChoice,
                             onChanged: (newValue) {
                               setState(() {
@@ -384,20 +428,20 @@ class _FoodDateState extends State<FoodDate> {
                         ],
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          child: nutriscoreType[nutriscore],
-                          width: 100,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: ecoscoreType[ecoscore],
-                          width: 100,
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: [
+                    //     Container(
+                    //       child: nutriscoreType[nutriscore],
+                    //       width: 100,
+                    //     ),
+                    //     Container(
+                    //       alignment: Alignment.center,
+                    //       child: ecoscoreType[ecoscore],
+                    //       width: 100,
+                    //     ),
+                    //   ],
+                    // ),
 
                     TextButton(
                       child: Text(

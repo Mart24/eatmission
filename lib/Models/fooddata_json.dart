@@ -3,6 +3,9 @@
 // I have the productID and the Food name
 // Then I want to connect the product ID to the food values in the Firebase database
 
+// I would like to have a feature where products which are select as favorites as shown in a list
+// I would like to save a list of recent clicked foods as well
+
 class FooddataSQLJSON {
   int productid;
   String foodname;

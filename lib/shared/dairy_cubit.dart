@@ -312,6 +312,31 @@ class DairyCubit extends Cubit<DairyStates> {
     });
   }
 
+  double carbGoal = 600;
+
+  setCarbGoal(double goal2) async {
+    carbGoal = goal2;
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setDouble('carbGoal', goal2).then((value) {
+        emit(CalGoalUpdatedState());
+      });
+    });
+  }
+
+  getCarbGoal() async {
+    SharedPreferences.getInstance().then((prefs) {
+      if (prefs.containsKey('carbGoal')) {
+        calGoal = prefs.getDouble('carbGoal');
+        emit(CalGoalUpdatedState());
+      } else {
+        prefs.setDouble('carbGoal', 600).then((value) {
+          carbGoal = 600.0;
+          emit(CalGoalUpdatedState());
+        });
+      }
+    });
+  }
+
   // bool isDarkMode = true;
 
   // setDarkMode(bool darkmodevalue) async {

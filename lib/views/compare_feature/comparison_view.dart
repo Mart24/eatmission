@@ -292,19 +292,19 @@ class _ComparisonViewState extends State<ComparisonView> {
                         children: [],
                       ),
                     ),
-                    Center(
-                      child: Container(
-                        child: nutriscoreType[nutriscore],
-                        width: 100,
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: ecoscoreType[ecoscore],
-                        width: 100,
-                      ),
-                    ),
+                    // Center(
+                    //   child: Container(
+                    //     child: nutriscoreType[nutriscore],
+                    //     width: 100,
+                    //   ),
+                    // ),
+                    // Center(
+                    //   child: Container(
+                    //     alignment: Alignment.center,
+                    //     child: ecoscoreType[ecoscore],
+                    //     width: 100,
+                    //   ),
+                    // ),
 
                     FittedBox(
                       child: Row(

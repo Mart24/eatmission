@@ -9,6 +9,9 @@ import 'package:food_app/Views/new_food_registration.dart/food_search1.dart';
 import 'package:food_app/shared/app_cubit.dart';
 import 'package:food_app/shared/productOne_cubit.dart';
 import 'package:food_app/shared/productTwo_cubit.dart';
+import 'package:food_app/views/profile/bmr_test.dart';
+import 'package:food_app/views/profile/faq_widget_view.dart';
+import 'package:food_app/views/profile/setting_page_view.dart';
 import '../Views/new_food_registration.dart/food_search.dart';
 import '../Views/profile/profile_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -77,8 +80,9 @@ class _HomeState extends State<Home> {
     HomePage(),
     ComparePage(),
     NewFoodIntake(),
-    GoalsHome(),
-    Profiel(),
+    FaqView(),
+    // GoalsHome(),
+    SettingsThreePage(),
     //Lijstje(),
   ];
 
@@ -163,10 +167,15 @@ class _HomeState extends State<Home> {
                 activeIcon: Icon(Icons.add, color: kPrimaryColor),
                 label: AppLocalizations.of(context).intaketext),
             BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.chartLine),
+                icon: FaIcon(FontAwesomeIcons.questionCircle),
                 // activeIcon:
                 //     Icon(Icons.bar_chart_outlined, color: kPrimaryColor),
-                label: AppLocalizations.of(context).goalstext),
+                label: 'Info'),
+            // BottomNavigationBarItem(
+            //     icon: FaIcon(FontAwesomeIcons.chartLine),
+            //     // activeIcon:
+            //     //     Icon(Icons.bar_chart_outlined, color: kPrimaryColor),
+            //     label: AppLocalizations.of(context).goalstext),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_pin),
                 label: AppLocalizations.of(context).profiletext),
