@@ -7,6 +7,7 @@ import 'package:food_app/Views/constants.dart';
 import 'package:food_app/Views/new_food_registration.dart/summary.dart';
 import 'package:food_app/Views/profile/utils.dart';
 import 'package:food_app/Widgets/Provider_Auth.dart';
+import 'package:food_app/shared/fav_cubit.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -160,7 +161,10 @@ class _FoodDateState extends State<FoodDate> {
                       body: 'I have a question or suggestion for this product',
                     ),
                 icon: Icon(Icons.message)),
-            IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
+            IconButton(onPressed: () {
+              FavCubit favCubit = FavCubit.instance(context);
+              favCubit.addFavTrip(widget.trip);
+            }, icon: Icon(Icons.favorite)),
             IconButton(onPressed: () {}, icon: Icon(Icons.save)),
 
             //   onPressed: () => Utils.openEmail(

@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart'
     as settingsscreen;
 import 'package:food_app/Widgets/theme_provider.dart';
+import 'package:food_app/shared/fav_cubit.dart';
 import 'package:food_app/shared/productOne_cubit.dart';
 import 'package:food_app/shared/productTwo_cubit.dart';
 import 'package:provider/provider.dart' as provider1;
@@ -118,6 +119,9 @@ class MyApp extends StatelessWidget {
                 ),
                 BlocProvider(
                   create: (BuildContext context) => ProductOneCubit(),
+                ),
+                BlocProvider(
+                  create: (BuildContext context) => FavCubit()..getUserFavTripsList(Source.serverAndCache),
                 ),
               ],
               child: MaterialApp(

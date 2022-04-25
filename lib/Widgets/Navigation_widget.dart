@@ -5,14 +5,13 @@ import 'package:food_app/Views/compare_feature/compare_page.dart';
 import 'package:food_app/Views/constants.dart';
 import 'package:food_app/Views/goals/goals_home.dart';
 import 'package:food_app/Views/dashboard_diary_view.dart';
-import 'package:food_app/Views/new_food_registration.dart/food_search1.dart';
 import 'package:food_app/shared/app_cubit.dart';
 import 'package:food_app/shared/productOne_cubit.dart';
 import 'package:food_app/shared/productTwo_cubit.dart';
+import 'package:food_app/views/new_food_registration.dart/food_search/food_search.dart';
 import 'package:food_app/views/profile/bmr_test.dart';
 import 'package:food_app/views/profile/faq_widget_view.dart';
 import 'package:food_app/views/profile/setting_page_view.dart';
-import '../Views/new_food_registration.dart/food_search.dart';
 import '../Views/profile/profile_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -132,7 +131,6 @@ class _HomeState extends State<Home> {
               context,
               MaterialPageRoute(
                 builder: (context) => NewFoodIntake(
-                  trip: newTrip,
                 ),
               ));
         },

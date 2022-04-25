@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/Views/constants.dart';
 
+import 'fooddata_json.dart';
+
 class Trip {
   int id;
   String documentId;
