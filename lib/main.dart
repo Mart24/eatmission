@@ -146,7 +146,7 @@ class MyApp extends StatelessWidget {
                 localizationsDelegates: [
                   AppLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,flut
                   GlobalWidgetsLocalizations.delegate,
                 ],
               ),
