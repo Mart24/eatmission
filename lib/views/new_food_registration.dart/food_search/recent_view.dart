@@ -9,6 +9,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:food_app/Services/groente_service_json_.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:food_app/Widgets/rounded_button.dart';
+import 'package:food_app/shared/recent_cubit.dart';
 import 'package:food_app/shared/search_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -27,77 +28,38 @@ class _RecentViewState extends State<RecentView> {
 
   @override
   Widget build(BuildContext context) {
-    SearchCubit searchCubit = SearchCubit.instance(context);
+    RecentCubit recentCubit = RecentCubit.instance(context);
 
-    return BlocConsumer<SearchCubit, SearchStates>(
-      listener: (context, state) {
-        if (state is ScanValidResultReturned) {
-          print('SearchValidResultReturned');
-          print(searchCubit.scanResult);
+    return BlocConsumer<RecentCubit, RecentState>(listener: (context, state) {
+      if (state is RecentResultFound) {
+        print('RecentResultFound');
+        print(recentCubit.tripsList);
+      } else if (state is SearchResultNotFound) {
+        print('favResultNotFound');
+        print(recentCubit.tripsList);
 
-          searchCubit.searchOnDb();
-        } else if (state is SearchResultFound) {
-          print('SearchResultFound');
-          print(searchCubit.scanResult);
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (BuildContext context) {
-            return FoodDate(
-              trip: state.trip,
-            );
-          }));
-        } else if (state is SearchResultNotFound) {
-          print('SearchResultNotFound');
-          print(searchCubit.scanResult);
-
-          showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text('This Product is not found currently'),
-                  content: Text(
-                      'we work hard to include all the product in our database, please search for a similar product or send us an email'),
-                  actions: [
-                    RoundedButton(
-                      color: Colors.green,
-                      text: 'OK',
-                    )
-                  ],
-                );
-              });
-        } else {
-          print('___^----^___');
-        }
-      },
-      builder: (context, state) {
-        return SingleChildScrollView(
-          child: GestureDetector(
-            onTap: () {
-              print('Clicked outside');
-              FocusScope.of(context).unfocus();
-            },
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  //     Text(scanResult == null ? 'Scan a code!' : 'Scan Result : $scanResult'),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      autofocus: true,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText:
-                              AppLocalizations.of(context).typesomething),
-                      onChanged: (value) {
-                        keyword = value;
-                        setState(() {});
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: 800,
-                    child: FutureBuilder<List<FooddataSQLJSON>>(
-                      future: dbService.searchGFooddata(keyword),
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('This Product is not found currently'),
+                content: Text(
+                    'we work hard to include all the product in our database, please search for a similar product or send us an email'),
+                actions: [
+                  RoundedButton(
+                    color: Colors.green,
+                    text: 'OK',
+                  )
+                ],
+              );
+            });
+      } else {
+        print('___^----^___');
+      }
+    }, builder: (context, state) {
+      if (state is RecentResultFound) {
+        return FutureBuilder<List<FooddataSQLJSON>>(
+                      future: dbService.getGFooddata(),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData)
                           return Center(
@@ -105,38 +67,38 @@ class _RecentViewState extends State<RecentView> {
                           );
                         return ListView.builder(
                             keyboardDismissBehavior:
-                                ScrollViewKeyboardDismissBehavior.onDrag,
-                            itemCount: snapshot.data.length,
+                            ScrollViewKeyboardDismissBehavior.onDrag,
+                            itemCount: state.tripsList.length,
                             itemBuilder: (context, index) {
+                              List<Trip> tripsList = state.tripsList;
+                              FooddataSQLJSON tripFromLocalDB = snapshot.data.where((element) => element.productid == state.tripsList[index].id).first;
                               return ListTile(
-                                title: Text(snapshot.data[index].foodname),
+                                title: Text(tripFromLocalDB.foodname),
                                 subtitle: Text(
-                                    '${snapshot.data[index].category}, ${snapshot.data[index].brand}'),
+                                    '${tripFromLocalDB.category}, ${tripFromLocalDB.brand}'),
                                 // Text(snapshot.data[index].productid.toString()),
-                                trailing: Text(
-                                    '${snapshot.data[index].kcal.toString()} Kcal'),
+                                trailing: IconButton(
+                                    onPressed: () {
+                                      recentCubit.deleteFavTrip(tripsList[index]);
+                                    },
+                                    icon: Icon(Icons.delete)),
                                 onTap: () {
-                                  trip.name = snapshot.data[index].foodname;
-                                  trip.id = snapshot.data[index].productid;
                                   // push the amount value to the summary page
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            FoodDate(trip: trip)),
+                                        builder: (context) => FoodDate(trip: tripsList[index])),
                                   );
                                 },
                               );
                             });
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+                      }
+                  );
+      } else {
+        return Center(
+          child: CircularProgressIndicator(),
         );
-      },
-    );
+      }
+    });
   }
 }

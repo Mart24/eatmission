@@ -9,6 +9,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:food_app/Services/groente_service_json_.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:food_app/Widgets/rounded_button.dart';
+import 'package:food_app/shared/recent_cubit.dart';
 import 'package:food_app/shared/search_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,6 +29,7 @@ class _AllViewState extends State<AllView> {
   @override
   Widget build(BuildContext context) {
     SearchCubit searchCubit = SearchCubit.instance(context);
+    RecentCubit recentCubit = RecentCubit.instance(context);
 
     return BlocConsumer<SearchCubit, SearchStates>(
       listener: (context, state) {

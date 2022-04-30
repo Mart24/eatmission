@@ -9,6 +9,7 @@ import 'package:food_app/Views/new_food_registration.dart/summary.dart';
 import 'package:food_app/Views/profile/utils.dart';
 import 'package:food_app/Widgets/Provider_Auth.dart';
 import 'package:food_app/shared/fav_cubit.dart';
+import 'package:food_app/shared/recent_cubit.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -122,6 +123,9 @@ class _FoodDateState extends State<FoodDate> {
     String Calories = AppLocalizations.of(context).calories;
     String Ontbijt = AppLocalizations.of(context).breakfast;
     FavCubit favCubit = FavCubit.instance(context);
+
+    RecentCubit recentCubit = RecentCubit.instance(context);
+    recentCubit.addFavTrip(widget.trip);
 
     return GestureDetector(
       onTap: () {
