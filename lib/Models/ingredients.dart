@@ -197,7 +197,7 @@ class Trip {
     plantbased = snapshotAsMap['plantbased'];
     categorie = snapshotAsMap['categorie'];
     // ean = snapshot['ean'];
-    brand = snapshot['brand'];
+    brand = snapshotAsMap['brand'];
     // amound = snapshot['amound'];
     // portionsize = snapshot['portionsize'];
     // sizep1 = snapshot['sizep1'];
