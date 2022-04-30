@@ -76,7 +76,7 @@ class Trip {
       this.plantbased,
       this.categorie,
       // this.ean,
-      // this.brand,
+      this.brand,
       // this.amound,
       // this.portionsize,
       // this.sizep1,
@@ -118,6 +118,7 @@ class Trip {
   // formatting for upload to Firbase
   Map<String, dynamic> toJson() => {
         'productid': id,
+        'documentId': documentId,
         'name': name,
         'eatDate': eatDate,
         'amount': amount,
@@ -139,7 +140,7 @@ class Trip {
         'plantbased': plantbased,
         'categorie': categorie,
         // 'ean': ean,
-        // 'brand': brand,
+        'brand': brand,
         // 'amound': amound,
         // 'portionsize': portionsize,
         // 'sizep1': sizep1,
@@ -196,7 +197,7 @@ class Trip {
     plantbased = snapshotAsMap['plantbased'];
     categorie = snapshotAsMap['categorie'];
     // ean = snapshot['ean'];
-    // brand = snapshot['brand'];
+    brand = snapshot['brand'];
     // amound = snapshot['amound'];
     // portionsize = snapshot['portionsize'];
     // sizep1 = snapshot['sizep1'];
@@ -229,6 +230,7 @@ class Trip {
     // niacine = snapshot['niacine'];
 
     documentId = snapshot.id;
+    productid = snapshotAsMap['productid'];
   }
 
   Map<String, ImageIcon> planticon() => {

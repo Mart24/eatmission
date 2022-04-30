@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_app/Models/fooddata_json.dart';
 import 'package:food_app/Models/ingredients.dart';
 import 'package:food_app/Views/constants.dart';
@@ -120,6 +121,7 @@ class _FoodDateState extends State<FoodDate> {
     String Eiwittentotaal = AppLocalizations.of(context).proteinfulltext;
     String Calories = AppLocalizations.of(context).calories;
     String Ontbijt = AppLocalizations.of(context).breakfast;
+    FavCubit favCubit = FavCubit.instance(context);
 
     return GestureDetector(
       onTap: () {
@@ -161,10 +163,20 @@ class _FoodDateState extends State<FoodDate> {
                       body: 'I have a question or suggestion for this product',
                     ),
                 icon: Icon(Icons.message)),
-            IconButton(onPressed: () {
-              FavCubit favCubit = FavCubit.instance(context);
-              favCubit.addFavTrip(widget.trip);
-            }, icon: Icon(Icons.favorite)),
+            BlocConsumer<FavCubit, FavState>(
+              listener: (BuildContext context, state) {},
+              builder: (BuildContext context, state) {
+                return IconButton(
+                    onPressed: () {
+                      favCubit.contains(widget.trip)
+                          ? favCubit.deleteFavTrip(widget.trip)
+                          : favCubit.addFavTrip(widget.trip);
+                    },
+                    icon: favCubit.contains(widget.trip)
+                        ? Icon(Icons.favorite)
+                        : Icon(Icons.favorite_outline));
+              },
+            ),
             IconButton(onPressed: () {}, icon: Icon(Icons.save)),
 
             //   onPressed: () => Utils.openEmail(

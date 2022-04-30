@@ -56,4 +56,21 @@ class SearchCubit extends Cubit<SearchStates> {
       emit(SearchResultNotFound());
     }
   }
+
+  Future searchByIdOnDb(num productId) async {
+    QuerySnapshot<Map<String, dynamic>> searchResult = await FirebaseFirestore.instance
+        .collection('fdd')
+        .where('productid', isEqualTo: productId)
+        .get();
+    List<QueryDocumentSnapshot<Map<String,dynamic>>> productDocs = searchResult.docs;
+    if (productDocs.length > 0) {
+      QueryDocumentSnapshot<Map<String,dynamic>> productDoc = productDocs[0];
+      print('searchDB');
+      print(productDoc['productid']);
+      Trip trip = Trip.fromSnapshot(productDoc,'gram');
+      emit(SearchResultFound(trip: trip));
+    } else {
+      emit(SearchResultNotFound());
+    }
+  }
 }

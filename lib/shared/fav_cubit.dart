@@ -36,7 +36,7 @@ class FavCubit extends Cubit<FavState> {
   static FavCubit instance(BuildContext context) =>
       BlocProvider.of(context, listen: false);
 
-  List<Trip> tripsList;
+  List<Trip> tripsList = [];
   final uid = FirebaseAuth.instance.currentUser.uid;
   final db = FirebaseFirestore.instance;
 
@@ -58,7 +58,7 @@ class FavCubit extends Cubit<FavState> {
 
   Future<void> addFavTrip(Trip trip) async {
     tripsList.add(trip);
-    print("id: "+trip.productid.toString());
+    print("id: " + trip.productid.toString());
     await db
         .collection("userData")
         .doc(uid)
@@ -66,6 +66,18 @@ class FavCubit extends Cubit<FavState> {
         .doc(trip.productid.toString())
         .set(trip.toJson());
     emit(FavResultFound(tripsList: tripsList));
+  }
+
+  bool contains(Trip trip) {
+    for (int i = 0; i<tripsList.length ;i++) {
+      if (trip.documentId == tripsList[i].documentId) {
+        print('contains will return true');
+        return true;
+      }
+    }
+    print('contains will return false');
+    return false;
+    // return tripsList.contains(trip);
   }
 
   Future<void> deleteFavTrip(Trip trip) async {
