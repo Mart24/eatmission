@@ -65,33 +65,43 @@ class _FavViewState extends State<FavView> {
               children: <Widget>[
                 Container(
                   height: 800,
-                  child: ListView.builder(
-                      keyboardDismissBehavior:
-                          ScrollViewKeyboardDismissBehavior.onDrag,
-                      itemCount: state.tripsList.length,
-                      itemBuilder: (context, index) {
-                        List<Trip> tripsList = state.tripsList;
-                        return ListTile(
-                          title: Text(tripsList[index].name),
-                          subtitle: Text(
-                              '${tripsList[index].categorie}, ${tripsList[index].brand}'),
-                          // Text(snapshot.data[index].productid.toString()),
-                          trailing: IconButton(
-                              onPressed: () {
-                                FavCubit favCubit = FavCubit.instance(context);
-                                favCubit.deleteFavTrip(tripsList[index]);
+                  child: FutureBuilder<List<FooddataSQLJSON>>(
+                      future: dbService.getGFooddata(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData)
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        return ListView.builder(
+                          keyboardDismissBehavior:
+                              ScrollViewKeyboardDismissBehavior.onDrag,
+                          itemCount: state.tripsList.length,
+                          itemBuilder: (context, index) {
+                            List<Trip> tripsList = state.tripsList;
+                            FooddataSQLJSON tripFromLocalDB = snapshot.data.where((element) => element.productid == state.tripsList[index].id).first;
+                            return ListTile(
+                              title: Text(tripFromLocalDB.foodname),
+                              subtitle: Text(
+                                  '${tripFromLocalDB.category}, ${tripFromLocalDB.brand}'),
+                              // Text(snapshot.data[index].productid.toString()),
+                              trailing: IconButton(
+                                  onPressed: () {
+                                    FavCubit favCubit = FavCubit.instance(context);
+                                    favCubit.deleteFavTrip(tripsList[index]);
+                                  },
+                                  icon: Icon(Icons.delete)),
+                              onTap: () {
+                                // push the amount value to the summary page
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => FoodDate(trip: tripsList[index])),
+                                );
                               },
-                              icon: Icon(Icons.delete)),
-                          onTap: () {
-                            // push the amount value to the summary page
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => FoodDate(trip: tripsList[index])),
                             );
-                          },
-                        );
-                      }),
+                          });
+                    }
+                  ),
                 ),
               ],
             ),

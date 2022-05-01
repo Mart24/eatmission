@@ -9,6 +9,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:food_app/Services/groente_service_json_.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:food_app/Widgets/rounded_button.dart';
+import 'package:food_app/shared/recent_cubit.dart';
 import 'package:food_app/shared/search_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,6 +29,7 @@ class _AllViewState extends State<AllView> {
   @override
   Widget build(BuildContext context) {
     SearchCubit searchCubit = SearchCubit.instance(context);
+    RecentCubit recentCubit = RecentCubit.instance(context);
 
     return BlocConsumer<SearchCubit, SearchStates>(
       listener: (context, state) {
@@ -39,6 +41,7 @@ class _AllViewState extends State<AllView> {
         } else if (state is SearchResultFound) {
           print('SearchResultFound');
           print(searchCubit.scanResult);
+          print("trip:\n"+state.trip.toJson().toString());
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (BuildContext context) {
             return FoodDate(
@@ -120,13 +123,15 @@ class _AllViewState extends State<AllView> {
                                   trip.productid =
                                       snapshot.data[index].productid;
                                   trip.id = snapshot.data[index].productid;
+                                  trip.documentId = snapshot.data[index].productid.toString();
+                                  searchCubit.searchByIdOnDb(snapshot.data[index].productid);
                                   // push the amount value to the summary page
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            FoodDate(trip: trip)),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //           FoodDate(trip: trip)),
+                                  // );
                                 },
                               );
                             });

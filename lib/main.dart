@@ -10,6 +10,7 @@ import 'package:food_app/Widgets/theme_provider.dart';
 import 'package:food_app/shared/fav_cubit.dart';
 import 'package:food_app/shared/productOne_cubit.dart';
 import 'package:food_app/shared/productTwo_cubit.dart';
+import 'package:food_app/shared/recent_cubit.dart';
 import 'package:provider/provider.dart' as provider1;
 import '../l10n/l10n.dart';
 import 'package:food_app/shared/app_cubit.dart';
@@ -125,6 +126,9 @@ class MyApp extends StatelessWidget {
                 BlocProvider(
                   create: (BuildContext context) =>
                       FavCubit()..getUserFavTripsList(Source.serverAndCache),
+                ),
+                BlocProvider(
+                  create: (BuildContext context) => RecentCubit()..getUserRecentTripsList(Source.serverAndCache),
                 ),
               ],
               child: MaterialApp(
