@@ -42,13 +42,13 @@ class DatabaseGService {
     _db = await openDatabase(path, readOnly: true);
   }
 
-  // Future<List<FooddataSQLJSON>> getGFooddata() async {
-  //   await initDatabase();
-  //   List<Map> list = await _db.rawQuery('SELECT * FROM groente');
-  //   return list
-  //       .map((foodddata) => FooddataSQLJSON.fromJson(foodddata))
-  //       .toList();
-  // }
+  Future<List<FooddataSQLJSON>> getGFooddata() async {
+    await initDatabase();
+    List<Map> list = await _db.rawQuery('SELECT * FROM groente');
+    return list
+        .map((foodddata) => FooddataSQLJSON.fromJson(foodddata))
+        .toList();
+  }
 
   Future<List<FooddataSQLJSON>> searchGFooddata(String keyword) async {
     await initDatabase();
