@@ -106,7 +106,9 @@ class MyApp extends StatelessWidget {
                   create: (BuildContext context) => DairyCubit()
                     ..getUsersTripsList(Source.cache)
                     ..getCalGoal()
-                    ..getSaveGoal(),
+                    ..getSaveGoal()
+                    ..getCarbGoal()
+                    ..getProteinGoal(),
                 ),
                 BlocProvider(
                   create: (BuildContext context) => GoalCubit(),
@@ -121,7 +123,8 @@ class MyApp extends StatelessWidget {
                   create: (BuildContext context) => ProductOneCubit(),
                 ),
                 BlocProvider(
-                  create: (BuildContext context) => FavCubit()..getUserFavTripsList(Source.serverAndCache),
+                  create: (BuildContext context) =>
+                      FavCubit()..getUserFavTripsList(Source.serverAndCache),
                 ),
               ],
               child: MaterialApp(

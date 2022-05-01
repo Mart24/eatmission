@@ -312,13 +312,13 @@ class DairyCubit extends Cubit<DairyStates> {
     });
   }
 
-  double carbGoal = 600;
+  double carbGoal = 300;
 
   setCarbGoal(double goal2) async {
     carbGoal = goal2;
     SharedPreferences.getInstance().then((prefs) {
       prefs.setDouble('carbGoal', goal2).then((value) {
-        emit(CalGoalUpdatedState());
+        emit(CarbGoalUpdatedState());
       });
     });
   }
@@ -326,12 +326,62 @@ class DairyCubit extends Cubit<DairyStates> {
   getCarbGoal() async {
     SharedPreferences.getInstance().then((prefs) {
       if (prefs.containsKey('carbGoal')) {
-        calGoal = prefs.getDouble('carbGoal');
-        emit(CalGoalUpdatedState());
+        carbGoal = prefs.getDouble('carbGoal');
+        emit(CarbGoalUpdatedState());
       } else {
         prefs.setDouble('carbGoal', 600).then((value) {
           carbGoal = 600.0;
-          emit(CalGoalUpdatedState());
+          emit(CarbGoalUpdatedState());
+        });
+      }
+    });
+  }
+
+  double proteinGoal = 300;
+
+  setProteinGoal(double goal3) async {
+    proteinGoal = goal3;
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setDouble('proteinGoal', goal3).then((value) {
+        emit(ProteinsGoalUpdatedState());
+      });
+    });
+  }
+
+  getProteinGoal() async {
+    SharedPreferences.getInstance().then((prefs) {
+      if (prefs.containsKey('proteinGoal')) {
+        proteinGoal = prefs.getDouble('proteinGoal');
+        emit(ProteinsGoalUpdatedState());
+      } else {
+        prefs.setDouble('proteinGoal', 600).then((value) {
+          proteinGoal = 600.0;
+          emit(ProteinsGoalUpdatedState());
+        });
+      }
+    });
+  }
+
+  double fatsGoal = 80;
+
+  setFatsGoal(double goal4) async {
+    fatsGoal = goal4;
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setDouble('fatsGoal', goal4).then((value) {
+        emit(FatsGoalUpdatedState());
+      });
+    });
+  }
+
+  getFatsGoal() async {
+    SharedPreferences.getInstance().then((prefs) {
+      if (prefs.containsKey('fatsGoal')) {
+        fatsGoal = prefs.getDouble('fatsGoal');
+        emit(FatsGoalUpdatedState());
+      } else {
+        prefs.setDouble('fatsGoal', 600).then((value) {
+          fatsGoal = 600.0;
+          emit(FatsGoalUpdatedState());
         });
       }
     });

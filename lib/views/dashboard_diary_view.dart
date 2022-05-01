@@ -97,6 +97,9 @@ class _HomePageState extends State<HomePage> {
                       double calGoal = cubit.calGoal;
                       double saveGoal = cubit.saveco2Goal;
                       double kCalSum = cubit.kCalSum;
+                      double carbGoal = cubit.carbGoal;
+                      double proteinGoal = cubit.proteinGoal;
+                      double fatsGoal = cubit.fatsGoal;
 
                       double circularPercent = diff / calGoal;
                       if (circularPercent > 1) {
@@ -110,6 +113,22 @@ class _HomePageState extends State<HomePage> {
                       if (barPercent > 1) {
                         barPercent = 1;
                       }
+
+                      double carbPercent = cubit.carbs / carbGoal;
+                      if (carbPercent > 1) {
+                        carbPercent = 1;
+                      }
+
+                      double proteinPercent = cubit.protein / proteinGoal;
+                      if (proteinPercent > 1) {
+                        proteinPercent = 1;
+                      }
+
+                      double fatPercent = cubit.fats / fatsGoal;
+                      if (fatPercent > 1) {
+                        fatPercent = 1;
+                      }
+
                       return SingleChildScrollView(
                         child: Column(children: [
                           CaloriesIndecator(
@@ -119,7 +138,12 @@ class _HomePageState extends State<HomePage> {
                               circularPercent: circularPercent,
                               diff: diff),
 
-                          CarbsProtienFatRow(cubit: cubit),
+                          CarbsProtienFatRow(
+                            cubit: cubit,
+                            carbPercent: carbPercent,
+                            proteinPercent: proteinPercent,
+                            fatPercent: fatPercent,
+                          ),
 
                           SizedBox(height: 10),
 
@@ -300,12 +324,15 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      AutoSizeText(
-                        trip.name,
-                        style: TextStyle(fontSize: 16.0),
+                      Flexible(
+                        child: AutoSizeText(
+                          trip.name,
+                          style: TextStyle(fontSize: 16.0),
+                        ),
                       ),
-                      Spacer(),
+                      //  Spacer(),
                       // Tooltip(
                       //   message: 'plantaardig',
                       //   child: (plantType.containsKey(trip.plantbased))
@@ -635,12 +662,18 @@ Color calculateBackgroundColor({double barPercent}) {
 }
 
 class CarbsProtienFatRow extends StatelessWidget {
-  const CarbsProtienFatRow({
-    Key key,
-    @required this.cubit,
-  }) : super(key: key);
+  const CarbsProtienFatRow(
+      {Key key,
+      @required this.cubit,
+      @required this.carbPercent,
+      @required this.proteinPercent,
+      @required this.fatPercent})
+      : super(key: key);
 
   final DairyCubit cubit;
+  final double carbPercent;
+  final double proteinPercent;
+  final double fatPercent;
 
   @override
   Widget build(BuildContext context) {
@@ -688,14 +721,16 @@ class CarbsProtienFatRow extends StatelessWidget {
                   new LinearPercentIndicator(
                     width: 100.0,
                     lineHeight: 8.0,
-                    percent: 0.2,
+                    percent: carbPercent,
                     progressColor: Colors.red,
                   ),
                 ],
               ),
               Row(
                 children: [
-                  Text('${cubit.carbs.toStringAsFixed(0)}g over'),
+                  //    Text('${cubit.carbs.toStringAsFixed(0)}g over'),
+                  Text(
+                      '${(cubit.carbGoal - cubit.carbs).toStringAsFixed(0)}g over'),
                 ],
               ),
             ],
@@ -739,14 +774,15 @@ class CarbsProtienFatRow extends StatelessWidget {
                   new LinearPercentIndicator(
                     width: 100.0,
                     lineHeight: 8.0,
-                    percent: 0.2,
+                    percent: proteinPercent,
                     progressColor: Colors.yellow,
                   ),
                 ],
               ),
               Row(
                 children: [
-                  Text('${cubit.protein.toStringAsFixed(0)}g over'),
+                  Text(
+                      '${(cubit.proteinGoal - cubit.protein).toStringAsFixed(0)}g over'),
                 ],
               ),
             ],
@@ -790,14 +826,15 @@ class CarbsProtienFatRow extends StatelessWidget {
                   new LinearPercentIndicator(
                     width: 100.0,
                     lineHeight: 8.0,
-                    percent: 0.2,
+                    percent: fatPercent,
                     progressColor: Colors.blue,
                   ),
                 ],
               ),
               Row(
                 children: [
-                  Text('${cubit.fats.toStringAsFixed(0)}g over'),
+                  Text(
+                      '${(cubit.fatsGoal - cubit.fats).toStringAsFixed(0)}g over'),
                 ],
               ),
             ],

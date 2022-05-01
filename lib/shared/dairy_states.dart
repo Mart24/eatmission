@@ -21,3 +21,9 @@ class StreamUpdatedState extends DairyStates {}
 class CalGoalUpdatedState extends DairyStates {}
 
 class SaveGoalUpdatedState extends DairyStates {}
+
+class CarbGoalUpdatedState extends DairyStates {}
+
+class ProteinsGoalUpdatedState extends DairyStates {}
+
+class FatsGoalUpdatedState extends DairyStates {}

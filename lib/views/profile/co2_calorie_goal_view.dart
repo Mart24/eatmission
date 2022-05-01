@@ -34,7 +34,7 @@ class _HomePage extends State<RadioGroup> {
   double initialvalue = 2000;
   double _carbGoalPercentage = 50;
   double _proteinGoalPercentage = 30;
-  double _fatGoalPercentage = 20;
+  double _fatsGoalPercentage = 20;
 
   TextEditingController carbcontroler = TextEditingController()..text = '50';
   TextEditingController proteincontroler = TextEditingController()..text = '30';
@@ -66,9 +66,11 @@ class _HomePage extends State<RadioGroup> {
   _setcarbGoalPercentage() {
     print('set budget total');
     setState(() {
-      _carbGoalPercentage = double.tryParse(carbcontroler.text);
+      _carbGoalPercentage = (carbcontroler.text == null)
+          ? 0
+          : double.tryParse(carbcontroler.text);
       _proteinGoalPercentage = double.tryParse(proteincontroler.text);
-      _fatGoalPercentage = double.tryParse(fatcontroler.text);
+      _fatsGoalPercentage = double.tryParse(fatcontroler.text);
     });
   }
 
@@ -96,6 +98,7 @@ class _HomePage extends State<RadioGroup> {
   Widget build(BuildContext context) {
     DairyCubit cubit = DairyCubit.instance(context);
     //int carbgoal = initialvalue*_carbGoalPercentage;
+    //double koolgram = _groupValue * ((_carbGoalPercentage ?? '').isEmpty ? 0 : double.parse(_carbGoalPercentage));;
 
     return Scaffold(
       resizeToAvoidBottomInset: false, // set it to false
@@ -117,13 +120,22 @@ class _HomePage extends State<RadioGroup> {
                   new Flexible(
                     child: Padding(
                       padding: const EdgeInsets.all(18.0),
-                      child: new TextFormField(
+                      child: Form(
+                        child: new TextFormField(
                           controller: carbcontroler,
                           keyboardType: TextInputType.number,
                           // initialValue: 30.toString(),
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(2),
-                          ]),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          onChanged: (carbGoal) async {
+                            cubit.setCarbGoal(cubit.calGoal /
+                                4 *
+                                (_carbGoalPercentage / 100));
+                          },
+                        ),
+                      ),
                     ),
                   ),
                   Text(
@@ -136,16 +148,22 @@ class _HomePage extends State<RadioGroup> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: new TextFormField(
-                          controller: proteincontroler,
-                          keyboardType: TextInputType.number,
-                          //  initialValue: 30.toString(),
-                          // decoration: InputDecoration(hintText: '30'),
-                          // onChanged: (newGoal) async {
-                          //   cubit.setCalGoal(double.tryParse(newGoal));
-                          // },
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(2),
-                          ]),
+                        controller: proteincontroler,
+                        keyboardType: TextInputType.number,
+                        //  initialValue: 30.toString(),
+                        // decoration: InputDecoration(hintText: '30'),
+                        // onChanged: (newGoal) async {
+                        //   cubit.setCalGoal(double.tryParse(newGoal));
+                        // },
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(2),
+                        ],
+                        onChanged: (proteinGoal) async {
+                          cubit.setProteinGoal(cubit.calGoal /
+                              4 *
+                              (_proteinGoalPercentage / 100));
+                        },
+                      ),
                     ),
                   ),
                   Text(
@@ -164,6 +182,11 @@ class _HomePage extends State<RadioGroup> {
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(2),
                         ],
+
+                        onChanged: (fatsGoal) async {
+                          cubit.setFatsGoal(
+                              cubit.calGoal / 9 * (_fatsGoalPercentage / 100));
+                        },
                       ),
                     ),
                   ),
@@ -196,8 +219,9 @@ class _HomePage extends State<RadioGroup> {
               ),
             ),
             Text('Koolhydraten percentage ${_carbGoalPercentage.toString()}'),
+            //   Text('Koolhydraten hoeveel gram ${koolaantal.toString()}'),
             Text('Eiwitten percentage ${_proteinGoalPercentage.toString()}'),
-            Text('Vetten percentage ${_fatGoalPercentage.toString()}'),
+            Text('Vetten percentage ${_fatsGoalPercentage.toString()}'),
             Text('Jouw CO2 doel $_groupValue kg/co2 per dag'),
             Padding(
               padding: const EdgeInsets.all(15.0),
