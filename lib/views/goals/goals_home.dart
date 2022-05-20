@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/Views/constants.dart';
 import 'package:food_app/Views/goals/graphs_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:food_app/views/profile/faq_widget_view.dart';
 
 import 'goals_screen.dart';
 
@@ -18,13 +19,14 @@ class _GoalsHomeState extends State<GoalsHome>
   List<Widget> screens = [
     GoalsScreen(),
     GraphsScreen(),
+    FaqView(),
   ];
   TabController tabController;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
   }
 
   @override
@@ -50,6 +52,7 @@ class _GoalsHomeState extends State<GoalsHome>
               tabs: [
                 Tab(child: Text(AppLocalizations.of(context).goals)),
                 Tab(child: Text(AppLocalizations.of(context).graphs)),
+                Tab(child: Text('Tips')),
               ],
               onTap: (index) {
                 setState(() {

@@ -80,8 +80,8 @@ class _HomeState extends State<Home> {
     HomePage(),
     ComparePage(),
     NewFoodIntake(),
-    FaqView(),
-    // GoalsHome(),
+    //FaqView(),
+    GoalsHome(),
     SettingsThreePage(),
     //Lijstje(),
   ];
@@ -131,8 +131,7 @@ class _HomeState extends State<Home> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => NewFoodIntake(
-                ),
+                builder: (context) => NewFoodIntake(),
               ));
         },
         //  label: const Text('Food'),
@@ -165,16 +164,16 @@ class _HomeState extends State<Home> {
                 icon: Icon(Icons.add),
                 activeIcon: Icon(Icons.add, color: kPrimaryColor),
                 label: AppLocalizations.of(context).intaketext),
-            BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.questionCircle),
-                // activeIcon:
-                //     Icon(Icons.bar_chart_outlined, color: kPrimaryColor),
-                label: 'Info'),
             // BottomNavigationBarItem(
-            //     icon: FaIcon(FontAwesomeIcons.chartLine),
+            //     icon: FaIcon(FontAwesomeIcons.questionCircle),
             //     // activeIcon:
             //     //     Icon(Icons.bar_chart_outlined, color: kPrimaryColor),
-            //     label: AppLocalizations.of(context).goalstext),
+            //     label: 'Info'),
+            BottomNavigationBarItem(
+                icon: FaIcon(FontAwesomeIcons.chartLine),
+                // activeIcon:
+                //     Icon(Icons.bar_chart_outlined, color: kPrimaryColor),
+                label: AppLocalizations.of(context).goalstext),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_pin),
                 label: AppLocalizations.of(context).profiletext),
