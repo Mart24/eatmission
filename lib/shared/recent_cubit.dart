@@ -35,7 +35,7 @@ class RecentCubit extends Cubit<RecentState> {
     });
   }
 
-  Future<void> addFavTrip(Trip trip) async {
+  Future<void> addRecentTrip(Trip trip) async {
     trip.eatDate = DateTime.now();
     if (!contains(trip)) {
       print('add to state list');
@@ -63,7 +63,7 @@ class RecentCubit extends Cubit<RecentState> {
     return false;
   }
 
-  Future<void> deleteFavTrip(Trip trip) async {
+  Future<void> deleteRecentTrip(Trip trip) async {
     tripsList.removeWhere((element) => element.documentId == trip.documentId);
     await db
         .collection("userData")
