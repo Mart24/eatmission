@@ -79,7 +79,7 @@ class _RecentViewState extends State<RecentView> {
                                 // Text(snapshot.data[index].productid.toString()),
                                 trailing: IconButton(
                                     onPressed: () {
-                                      recentCubit.deleteFavTrip(tripsList[index]);
+                                      recentCubit.deleteRecentTrip(tripsList[index]);
                                     },
                                     icon: Icon(Icons.delete)),
                                 onTap: () {
