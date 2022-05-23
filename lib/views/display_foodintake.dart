@@ -125,6 +125,30 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
                             child: ecoscoreType[widget.trip.ecoscore],
                             width: 100,
                           ),
+
+                          Text.rich(TextSpan(
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                              children: <TextSpan>[
+                                //  TextSpan(text: 'CO₂ '),
+                                TextSpan(
+                                  text: '${widget.trip.co2.toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.orange),
+                                ),
+                                TextSpan(
+                                    text: ' kg/CO₂',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold)),
+                              ])),
+                          //   child: RichText(
+                          //     '${widget.trip.co2.toStringAsFixed(2)} kg/CO₂',
+                          //     style: TextStyle(fontSize: 18),
+                          //   ),
+                          // )
                         ],
                       ),
                     )
@@ -197,22 +221,22 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ]),
-                            TableRow(children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5.0),
-                                child: Text(
-                                  'CO₂',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Text(
-                                '${widget.trip.co2.toStringAsFixed(2)} kg/CO₂',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ]),
+                            // TableRow(children: [
+                            //   Padding(
+                            //     padding:
+                            //         const EdgeInsets.symmetric(vertical: 5.0),
+                            //     child: Text(
+                            //       'CO₂',
+                            //       style: TextStyle(
+                            //           fontSize: 18,
+                            //           fontWeight: FontWeight.bold),
+                            //     ),
+                            //   ),
+                            //   Text(
+                            //     '${widget.trip.co2.toStringAsFixed(2)} kg/CO₂',
+                            //     style: TextStyle(fontSize: 18),
+                            //   ),
+                            // ]),
                             TableRow(children: [
                               Padding(
                                 padding:

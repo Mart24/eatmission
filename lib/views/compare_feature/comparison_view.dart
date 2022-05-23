@@ -286,7 +286,7 @@ class _ComparisonViewState extends State<ComparisonView> {
 
                     // Spacer(),
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.symmetric(horizontal: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [],
@@ -305,6 +305,25 @@ class _ComparisonViewState extends State<ComparisonView> {
                     //     width: 100,
                     //   ),
                     // ),
+
+                    Text.rich(TextSpan(
+                        style: TextStyle(
+                          fontSize: 20,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: 'CO₂ ',
+                              style: TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.bold)),
+                          TextSpan(
+                            text: '${co2.toStringAsFixed(2)}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.orange),
+                          ),
+                          TextSpan(
+                              text: ' kg/CO₂', style: TextStyle(fontSize: 10)),
+                        ])),
 
                     FittedBox(
                       child: Row(
@@ -359,22 +378,22 @@ class _ComparisonViewState extends State<ComparisonView> {
                                   style: TextStyle(fontSize: 14),
                                 ),
                               ]),
-                              TableRow(children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 10.0),
-                                  child: Text(
-                                    'Co²',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Text(
-                                  "${co2.toStringAsFixed(1)} kg/co²",
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                              ]),
+                              // TableRow(children: [
+                              //   Padding(
+                              //     padding: const EdgeInsets.symmetric(
+                              //         vertical: 10.0),
+                              //     child: Text(
+                              //       'Co²',
+                              //       style: TextStyle(
+                              //           fontSize: 14,
+                              //           fontWeight: FontWeight.bold),
+                              //     ),
+                              //   ),
+                              //   Text(
+                              //     "${co2.toStringAsFixed(1)} kg/co²",
+                              //     style: TextStyle(fontSize: 14),
+                              //   ),
+                              // ]),
                               TableRow(children: [
                                 Padding(
                                   padding: const EdgeInsets.symmetric(

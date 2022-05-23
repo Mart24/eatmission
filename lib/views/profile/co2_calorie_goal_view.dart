@@ -103,181 +103,197 @@ class _HomePage extends State<RadioGroup> {
     return Scaffold(
       resizeToAvoidBottomInset: false, // set it to false
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              'Caloriegoal',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            calorieFormField(cubit: cubit),
-            Text('Verhouding koolhydraten, eiwitten en vetten'),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  new Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Form(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text(
+                'Caloriegoal',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              calorieFormField(cubit: cubit),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Text('Verhouding koolhydraten, eiwitten en vetten',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    new Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Form(
+                          child: new TextFormField(
+                            controller: carbcontroler,
+                            keyboardType: TextInputType.number,
+                            // initialValue: 30.toString(),
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(2),
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            onChanged: (carbGoal) async {
+                              cubit.setCarbGoal(cubit.calGoal /
+                                  4 *
+                                  (_carbGoalPercentage / 100));
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "Kooly",
+                      textAlign: TextAlign.center,
+                      style: TextStyle()
+                          .copyWith(color: Colors.black, fontSize: 18.0),
+                    ),
+                    new Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: new TextFormField(
-                          controller: carbcontroler,
+                          controller: proteincontroler,
                           keyboardType: TextInputType.number,
-                          // initialValue: 30.toString(),
+                          //  initialValue: 30.toString(),
+                          // decoration: InputDecoration(hintText: '30'),
+                          // onChanged: (newGoal) async {
+                          //   cubit.setCalGoal(double.tryParse(newGoal));
+                          // },
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(2),
-                            FilteringTextInputFormatter.digitsOnly,
                           ],
-                          onChanged: (carbGoal) async {
-                            cubit.setCarbGoal(cubit.calGoal /
+                          onChanged: (proteinGoal) async {
+                            cubit.setProteinGoal(cubit.calGoal /
                                 4 *
-                                (_carbGoalPercentage / 100));
+                                (_proteinGoalPercentage / 100));
                           },
                         ),
                       ),
                     ),
-                  ),
-                  Text(
-                    "Kooly",
-                    textAlign: TextAlign.center,
-                    style: TextStyle()
-                        .copyWith(color: Colors.black, fontSize: 18.0),
-                  ),
-                  new Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: new TextFormField(
-                        controller: proteincontroler,
-                        keyboardType: TextInputType.number,
-                        //  initialValue: 30.toString(),
-                        // decoration: InputDecoration(hintText: '30'),
-                        // onChanged: (newGoal) async {
-                        //   cubit.setCalGoal(double.tryParse(newGoal));
-                        // },
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(2),
-                        ],
-                        onChanged: (proteinGoal) async {
-                          cubit.setProteinGoal(cubit.calGoal /
-                              4 *
-                              (_proteinGoalPercentage / 100));
-                        },
-                      ),
+                    Text(
+                      "Eiwit",
+                      textAlign: TextAlign.center,
+                      style: TextStyle()
+                          .copyWith(color: Colors.black, fontSize: 18.0),
                     ),
-                  ),
-                  Text(
-                    "Eiwit",
-                    textAlign: TextAlign.center,
-                    style: TextStyle()
-                        .copyWith(color: Colors.black, fontSize: 18.0),
-                  ),
-                  new Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: new TextFormField(
-                        controller: fatcontroler,
-                        keyboardType: TextInputType.number,
-                        // initialValue: 30.toString(),
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(2),
-                        ],
+                    new Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: new TextFormField(
+                          controller: fatcontroler,
+                          keyboardType: TextInputType.number,
+                          // initialValue: 30.toString(),
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(2),
+                          ],
 
-                        onChanged: (fatsGoal) async {
-                          cubit.setFatsGoal(
-                              cubit.calGoal / 9 * (_fatsGoalPercentage / 100));
-                        },
+                          onChanged: (fatsGoal) async {
+                            cubit.setFatsGoal(cubit.calGoal /
+                                9 *
+                                (_fatsGoalPercentage / 100));
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    "Vet",
-                    textAlign: TextAlign.center,
-                    style: TextStyle()
-                        .copyWith(color: Colors.black, fontSize: 18.0),
-                  ),
-                  // Container(
-                  //   height: 60,
-                  //   width: 60,
-                  //   margin: const EdgeInsets.all(16.0),
-                  //   decoration: BoxDecoration(
-                  //     shape: BoxShape.circle,
-                  //     border: Border.all(
-                  //       color: Colors.pink,
-                  //       width: 3.5,
-                  //     ),
-                  //   ),
-                  //   // child: IconButton(
-                  //   //   icon: Icon(
-                  //   //     IconData(57669, fontFamily: 'MaterialIcons'),
-                  //   //     size: 38,
-                  //   //     color: Colors.red,
-                  //   //   ),
-                  //   // ),
-                  // ),
-                ],
+                    Text(
+                      "Vet",
+                      textAlign: TextAlign.center,
+                      style: TextStyle()
+                          .copyWith(color: Colors.black, fontSize: 18.0),
+                    ),
+                    // Container(
+                    //   height: 60,
+                    //   width: 60,
+                    //   margin: const EdgeInsets.all(16.0),
+                    //   decoration: BoxDecoration(
+                    //     shape: BoxShape.circle,
+                    //     border: Border.all(
+                    //       color: Colors.pink,
+                    //       width: 3.5,
+                    //     ),
+                    //   ),
+                    //   // child: IconButton(
+                    //   //   icon: Icon(
+                    //   //     IconData(57669, fontFamily: 'MaterialIcons'),
+                    //   //     size: 38,
+                    //   //     color: Colors.red,
+                    //   //   ),
+                    //   // ),
+                    // ),
+                  ],
+                ),
               ),
-            ),
-            Text('Koolhydraten percentage ${_carbGoalPercentage.toString()}'),
-            //   Text('Koolhydraten hoeveel gram ${koolaantal.toString()}'),
-            Text('Eiwitten percentage ${_proteinGoalPercentage.toString()}'),
-            Text('Vetten percentage ${_fatsGoalPercentage.toString()}'),
-            Text('Jouw CO2 doel $_groupValue kg/co2 per dag'),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: TextField(
-                decoration: new InputDecoration(labelText: "Je eigen doel"),
-                keyboardType: TextInputType.number,
+              Text('Koolhydraten percentage ${_carbGoalPercentage.toString()}'),
+              //   Text('Koolhydraten hoeveel gram ${koolaantal.toString()}'),
+              Text('Eiwitten percentage ${_proteinGoalPercentage.toString()}'),
+              Text('Vetten percentage ${_fatsGoalPercentage.toString()}'),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0, bottom: 8),
+                child: Text('Jouw CO2 doel $_groupValue kg/co2 per dag',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              ),
+
+              // Padding(
+              //   padding: const EdgeInsets.all(15.0),
+              //   child: TextField(
+              //     decoration: new InputDecoration(labelText: "Je eigen doel"),
+              //     keyboardType: TextInputType.number,
 //             inputFormatters: <TextInputFormatter>[
 //     FilteringTextInputFormatter.digitsOnly
 // ], // Only numbers can be entered
+              //   ),
+              // ),
+              ListTile(
+                title: Text('Gemiddelde Nederlander: 5 kg/CO₂'),
+                leading: Radio(
+                    value: 5.0,
+                    groupValue: _groupValue,
+                    onChanged: (co2value) async {
+                      cubit.setSaveGoal(co2value);
+                      checkRadio(co2value);
+                      debugPrint('key-radio-sync-period: $co2value days');
+                    }),
               ),
-            ),
-            ListTile(
-              title: Text('Gemiddelde Nederlander: 5 kg/CO₂'),
-              leading: Radio(
-                  value: 5.0,
-                  groupValue: _groupValue,
-                  onChanged: (co2value) async {
-                    cubit.setSaveGoal(co2value);
-                    checkRadio(co2value);
-                    debugPrint('key-radio-sync-period: $co2value days');
-                  }),
-            ),
-            ListTile(
-              title: Text('Doel voor 2030: 2.58 kg/CO₂'),
-              leading: Radio(
-                  value: 2.58,
-                  groupValue: _groupValue,
-                  onChanged: (co2value) async {
-                    cubit.setSaveGoal(co2value);
-                    checkRadio(co2value);
-                    debugPrint('key-radio-sync-period: $co2value days');
-                  }),
-            ),
-            ListTile(
-              title: Text('Doel voor 2030 (streng): 2.1 kg/CO₂'),
-              leading: Radio(
-                  value: 2.1,
-                  groupValue: _groupValue,
-                  onChanged: (co2value) async {
-                    cubit.setSaveGoal(co2value);
-                    checkRadio(co2value);
-                    debugPrint('key-radio-sync-period: $co2value days');
-                  }),
-            ),
-            ListTile(
-              title: Text('Doel voor 2050: 1.1 kg/CO₂'),
-              leading: Radio(
-                  value: 1.1,
-                  groupValue: _groupValue,
-                  onChanged: (co2value) async {
-                    cubit.setSaveGoal(co2value);
-                    checkRadio(co2value);
-                    debugPrint('key-radio-sync-period: $co2value days');
-                  }),
-            ),
-          ],
+              ListTile(
+                title: Text('Doel voor 2030: 2.58 kg/CO₂'),
+                leading: Radio(
+                    value: 2.58,
+                    groupValue: _groupValue,
+                    onChanged: (co2value) async {
+                      cubit.setSaveGoal(co2value);
+                      checkRadio(co2value);
+                      debugPrint('key-radio-sync-period: $co2value days');
+                    }),
+              ),
+              ListTile(
+                title: Text('Doel voor 2030 (streng): 2.1 kg/CO₂'),
+                leading: Radio(
+                    value: 2.1,
+                    groupValue: _groupValue,
+                    onChanged: (co2value) async {
+                      cubit.setSaveGoal(co2value);
+                      checkRadio(co2value);
+                      debugPrint('key-radio-sync-period: $co2value days');
+                    }),
+              ),
+              ListTile(
+                title: Text('Doel voor 2050: 1.1 kg/CO₂'),
+                leading: Radio(
+                    value: 1.1,
+                    groupValue: _groupValue,
+                    onChanged: (co2value) async {
+                      cubit.setSaveGoal(co2value);
+                      checkRadio(co2value);
+                      debugPrint('key-radio-sync-period: $co2value days');
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
     );

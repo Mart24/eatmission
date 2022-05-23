@@ -332,13 +332,13 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(fontSize: 16.0),
                         ),
                       ),
-                      //  Spacer(),
-                      // Tooltip(
-                      //   message: 'plantaardig',
-                      //   child: (plantType.containsKey(trip.plantbased))
-                      //       ? plantType[trip.plantbased]
-                      //       : plantType["n"],
-                      // ),
+                      // Spacer(),
+                      Tooltip(
+                        message: 'plantaardig',
+                        child: (plantType.containsKey(trip.plantbased))
+                            ? plantType[trip.plantbased]
+                            : plantType["n"],
+                      ),
                       // Tooltip(
                       //   message: 'plantaardig',
                       //   child: ImageIcon(

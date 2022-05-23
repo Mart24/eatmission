@@ -30,7 +30,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Column(
       children: <Widget>[
         const ExpansionTile(
-          title: Text('What is sustaianble food?'),
+          title: Text('What is sustainable food?'),
           //  subtitle: Text('Trailing expansion arrow icon'),
           children: <Widget>[
             ListTile(title: Text('Answer number 1')),
