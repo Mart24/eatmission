@@ -312,7 +312,7 @@ class DairyCubit extends Cubit<DairyStates> {
     });
   }
 
-  double carbGoal = 300;
+  double carbGoal = 250;
 
   setCarbGoal(double goal2) async {
     carbGoal = goal2;
@@ -329,15 +329,15 @@ class DairyCubit extends Cubit<DairyStates> {
         carbGoal = prefs.getDouble('carbGoal');
         emit(CarbGoalUpdatedState());
       } else {
-        prefs.setDouble('carbGoal', 600).then((value) {
-          carbGoal = 600.0;
+        prefs.setDouble('carbGoal', 250).then((value) {
+          carbGoal = 250.0;
           emit(CarbGoalUpdatedState());
         });
       }
     });
   }
 
-  double proteinGoal = 300;
+  double proteinGoal = 150;
 
   setProteinGoal(double goal3) async {
     proteinGoal = goal3;
@@ -354,15 +354,15 @@ class DairyCubit extends Cubit<DairyStates> {
         proteinGoal = prefs.getDouble('proteinGoal');
         emit(ProteinsGoalUpdatedState());
       } else {
-        prefs.setDouble('proteinGoal', 600).then((value) {
-          proteinGoal = 600.0;
+        prefs.setDouble('proteinGoal', 150).then((value) {
+          proteinGoal = 150.0;
           emit(ProteinsGoalUpdatedState());
         });
       }
     });
   }
 
-  double fatsGoal = 80;
+  double fatsGoal = 44.4;
 
   setFatsGoal(double goal4) async {
     fatsGoal = goal4;
@@ -379,8 +379,8 @@ class DairyCubit extends Cubit<DairyStates> {
         fatsGoal = prefs.getDouble('fatsGoal');
         emit(FatsGoalUpdatedState());
       } else {
-        prefs.setDouble('fatsGoal', 600).then((value) {
-          fatsGoal = 600.0;
+        prefs.setDouble('fatsGoal', 44.4).then((value) {
+          fatsGoal = 44.4;
           emit(FatsGoalUpdatedState());
         });
       }
