@@ -142,7 +142,14 @@ class _FoodDateState extends State<FoodDate> {
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
           // title: Text(AppLocalizations.of(context).chooseamountstext),
-          title: Text(widget.trip.name),
+          title: Text(
+            widget.trip.name,
+            style: TextStyle(
+              // color: kPrimaryColor,
+              fontSize: 14,
+              // fontWeight: FontWeight.bold,
+            ),
+          ),
           actions: [
             // GestureDetector(
             //   child: FooddataSQLJSON.isFavorite
@@ -196,512 +203,381 @@ class _FoodDateState extends State<FoodDate> {
                     .add(widget.trip.toJson());
                 //sends user back to the dashboard page
                 Navigator.of(context).popUntil((route) => route.isFirst);
-
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) =>
-                //           NewFoodSummaryView(trip: widget.trip)),
-                // );
               },
               icon: Icon(Icons.save),
             ),
-
-            //   onPressed: () => Utils.openEmail(
-            //     toEmail: 'martijnformer24@gmail.com',
-            //     subject:
-            //         'Melding van product: ${widget.trip.name}: ${widget.trip.id}',
-            //     body: 'I have a question or suggestion for this product',
-            //   ),
-            //   child: Text(AppLocalizations.of(context).reporttext),
-            // ),
           ],
         ),
-        body: Center(
-          child: FutureBuilder<Map<String,dynamic>>(
-              future: AmountCubit.instance(context).getFood(
-                  widget.trip, size, portion, _eattime, categoryChoice, unit),
-              builder: (BuildContext context, AsyncSnapshot<Map<String,dynamic>> futureSnapshot) {
-                if (futureSnapshot.hasData) {
-                  var foodDocument = futureSnapshot.data["foodDocument"];
-                  var trip = futureSnapshot.data["trip"];
+        body: FutureBuilder<Map<String, dynamic>>(
+            future: AmountCubit.instance(context).getFood(
+                widget.trip, size, portion, _eattime, categoryChoice, unit),
+            builder: (BuildContext context,
+                AsyncSnapshot<Map<String, dynamic>> futureSnapshot) {
+              if (futureSnapshot.hasData) {
+                var foodDocument = futureSnapshot.data["foodDocument"];
+                var trip = futureSnapshot.data["trip"];
 
-                  Map<String, double> dataMap = {
-                    "Carbs": trip.kcal,
-                    "Protein": 2,
-                    "Fats": 2,
-                  };
+                Map<String, double> dataMap = {
+                  "Carbs": trip.kcal,
+                  "Protein": 2,
+                  "Fats": 2,
+                };
 
-                  return Container(
-                    child: Column(children: <Widget>[
-                      Text(
-                        "${foodDocument['name']}",
-                        style: new TextStyle(fontSize: 24.0),
-                      ),
+                return CustomScrollView(
+                  slivers: <Widget>[
+                    // Text(
+                    //   "${foodDocument['name']}",
+                    //   style: new TextStyle(fontSize: 24.0),
+                    // ),
 
-                      PieChart(
-                        chartRadius: 125.0,
-                        ringStrokeWidth: 10,
-                        chartLegendSpacing: 25,
-                        initialAngleInDegree: 270,
-                        // legendOptions: LegendOptions(),
-                        chartValuesOptions: ChartValuesOptions(
-                          decimalPlaces: 0,
-                          showChartValues: true,
-                          showChartValuesInPercentage: true,
-                          showChartValuesOutside: false,
-                          chartValueBackgroundColor: Colors.white,
-                        ),
-                        colorList: [
-                          Colors.green[200],
-                          Colors.teal[200],
-                          Colors.red[200]
-                        ],
-                        animationDuration: Duration(seconds: 1),
-                        dataMap: {
-                          "${trip.carbs.toStringAsFixed(0)}g ${Koolhydratentotaal}":
-                              trip.carbs,
-                          "${trip.protein.toStringAsFixed(0)}g ${Eiwittentotaal}":
-                              trip.protein,
-                          "${trip.fat.toStringAsFixed(0)}g ${Vettentotaal}":
-                              trip.fat,
-                        },
-                        centerText:
-                            "${trip.kcal.toStringAsFixed(0)} ${Calories}",
-                        chartType: ChartType.ring,
-                      ),
+                    SliverAppBar(
+                      automaticallyImplyLeading: false,
+                      expandedHeight: 280,
+                      floating: false,
+                      elevation: 0,
+                      backgroundColor: Colors.transparent,
 
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                        child: InputBar(
-                          sizeController: _sizeController,
-                          portionController: _portionController,
-                          portionUnitController: _portionUnitController,
-                          id: widget.trip.id.toString(),
-                        ),
-                      ),
-                      // Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            RaisedButton(
-                              child: Text(
-                                  "${DateFormat('dd/MM/yyyy').format(_eattime).toString()}"),
-                              onPressed: () => _selectDate(context),
-                              // await displayDateRangePicker(context);
-                              //   },
-                            ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(left: 8.0),
-                            //   child: Text(
-                            //       "Datum: ${DateFormat('dd/MM/yyyy').format(_eattime).toString()}"),
-                            // ),
+                      //   backgroundColor: Colors.white,
+                      flexibleSpace: SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.all(15),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              PieChart(
+                                chartRadius: 125.0,
+                                ringStrokeWidth: 10,
+                                chartLegendSpacing: 25,
+                                initialAngleInDegree: 270,
+                                // legendOptions: LegendOptions(),
+                                chartValuesOptions: ChartValuesOptions(
+                                  decimalPlaces: 0,
+                                  showChartValues: false,
+                                  showChartValuesInPercentage: false,
+                                  showChartValuesOutside: false,
+                                  chartValueBackgroundColor: Colors.white,
+                                ),
+                                colorList: [
+                                  Colors.green[200],
+                                  Colors.teal[200],
+                                  Colors.red[200]
+                                ],
+                                animationDuration: Duration(seconds: 1),
+                                dataMap: {
+                                  "${trip.carbs.toStringAsFixed(0)}g ${Koolhydratentotaal}":
+                                      trip.carbs,
+                                  "${trip.protein.toStringAsFixed(0)}g ${Eiwittentotaal}":
+                                      trip.protein,
+                                  "${trip.fat.toStringAsFixed(0)}g ${Vettentotaal}":
+                                      trip.fat,
+                                },
+                                centerText:
+                                    "${trip.kcal.toStringAsFixed(0)} ${Calories}",
+                                chartType: ChartType.ring,
+                              ),
 
-                            DropdownButton(
-                              hint: Text(Ontbijt),
-                              value: categoryChoice,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  categoryChoice = newValue;
-                                });
-                                print(categoryChoice);
-                              },
-                              items: categoryItem.map((valueItem) {
-                                return DropdownMenuItem(
-                                  value: valueItem,
-                                  child: Text(valueItem),
-                                );
-                              }).toList(),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //   children: [
-                      //     Container(
-                      //       child: nutriscoreType[nutriscore],
-                      //       width: 100,
-                      //     ),
-                      //     Container(
-                      //       alignment: Alignment.center,
-                      //       child: ecoscoreType[ecoscore],
-                      //       width: 100,
-                      //     ),
-                      //   ],
-                      // ),
-
-                      TextButton(
-                        child: Text(
-                          AppLocalizations.of(context).macronutrients,
-                          style: TextStyle(
-                            color: kPrimaryColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16.0, right: 16.0),
+                                child: InputBar(
+                                  sizeController: _sizeController,
+                                  portionController: _portionController,
+                                  portionUnitController: _portionUnitController,
+                                  id: widget.trip.id.toString(),
+                                ),
+                              ),
+                              // Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton(
+                                      child: Text(
+                                          "${DateFormat('dd/MM/yyyy').format(_eattime).toString()}"),
+                                      onPressed: () => _selectDate(context),
+                                    ),
+                                    DropdownButton(
+                                      hint: Text(Ontbijt),
+                                      value: categoryChoice,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          categoryChoice = newValue;
+                                        });
+                                        print(categoryChoice);
+                                      },
+                                      items: categoryItem.map((valueItem) {
+                                        return DropdownMenuItem(
+                                          value: valueItem,
+                                          child: Text(valueItem),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        onPressed: null,
                       ),
-
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            child: Table(
-                              columnWidths: {
-                                0: FractionColumnWidth(0.40),
-                                1: FractionColumnWidth(0.45),
-                              },
-                              textBaseline: TextBaseline.alphabetic,
-                              defaultVerticalAlignment:
-                                  TableCellVerticalAlignment.middle,
+                    ),
+                    SliverAppBar(
+                      automaticallyImplyLeading: false,
+                      pinned: true,
+                      elevation: 0,
+                      flexibleSpace: Container(
+                        alignment: Alignment.center,
+                        height: kToolbarHeight,
+                        color: kPrimaryColor,
+                        child: Text(
+                          'Macronutriënten',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        [
+                          Container(
+                            child: Column(
                               children: [
-                                TableRow(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
-                                    child: Text(
-                                      AppLocalizations.of(context).energy,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                Container(
+                                  child: Table(
+                                    columnWidths: {
+                                      0: FractionColumnWidth(0.50),
+                                      1: FractionColumnWidth(0.30),
+                                    },
+                                    textBaseline: TextBaseline.alphabetic,
+                                    defaultVerticalAlignment:
+                                        TableCellVerticalAlignment.middle,
+                                    children: [
+                                      TableRow(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 1.0),
+                                            child: Text(
+                                              AppLocalizations.of(context)
+                                                  .howmuchtext,
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Text(
+                                            '${(trip.amount == null) ? "n/a" : widget.trip.amount.toStringAsFixed(0)} ${widget.trip.amountUnit ?? 'g'}',
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                        ],
+                                      ),
+                                      TableRow(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: Text(
+                                            AppLocalizations.of(context).energy,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Text(
+                                          '${trip.kcal.toStringAsFixed(0)} kcal',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ]),
+                                      // TableRow(children: [
+                                      //   Padding(
+                                      //     padding:
+                                      //         const EdgeInsets.symmetric(vertical: 5.0),
+                                      //     child: Text(
+                                      //       'CO₂',
+                                      //       style: TextStyle(
+                                      //           fontSize: 18,
+                                      //           fontWeight: FontWeight.bold),
+                                      //     ),
+                                      //   ),
+                                      //   Text(
+                                      //     '${widget.trip.co2.toStringAsFixed(2)} kg/CO₂',
+                                      //     style: TextStyle(fontSize: 18),
+                                      //   ),
+                                      // ]),
+                                      TableRow(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: Text(
+                                            AppLocalizations.of(context)
+                                                .proteinfulltext,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Text(
+                                          '${trip.protein.toStringAsFixed(0)} g',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ]),
+                                      TableRow(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: Text(
+                                            AppLocalizations.of(context)
+                                                .proteinplanttext,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Text(
+                                          '${trip.proteinplant.toStringAsFixed(0)} g',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ]),
+                                      TableRow(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: Text(
+                                            AppLocalizations.of(context)
+                                                .proteinanimaltext,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Text(
+                                          '${trip.proteinanimal.toStringAsFixed(0)} g',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ]),
+                                      TableRow(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: Text(
+                                            AppLocalizations.of(context)
+                                                .fatsfulltext,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Text(
+                                          '${trip.fat.toStringAsFixed(0)} g',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ]),
+                                      TableRow(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: Text(
+                                            AppLocalizations.of(context)
+                                                .dotssaturatedstext,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Text(
+                                          '${trip.saturatedfat.toStringAsFixed(0)} g',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ]),
+                                      TableRow(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: Text(
+                                            AppLocalizations.of(context)
+                                                .carbsfulltext,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Text(
+                                          '${trip.carbs.toStringAsFixed(0)} g',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ]),
+                                      TableRow(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: Text(
+                                            AppLocalizations.of(context)
+                                                .dotsfiberstext,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Text(
+                                          '${trip.dietaryfiber.toStringAsFixed(0)} g',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ]),
+                                      TableRow(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: Text(
+                                            AppLocalizations.of(context)
+                                                .dotssugarsstext,
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Text(
+                                          '${widget.trip.sugars.toStringAsFixed(0)} g',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ]),
+                                    ],
                                   ),
-                                  Text(
-                                    "${trip.kcal.toStringAsFixed(1)} kcal",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ]),
-                                TableRow(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
-                                    child: Text(
-                                      'Co²',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Text(
-                                    "${trip.co2.toStringAsFixed(1)} kg/co²",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ]),
-                                TableRow(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
-                                    child: Text(
-                                      AppLocalizations.of(context)
-                                          .carbsfulltext,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Text(
-                                    "${trip.carbs.toStringAsFixed(1)} g",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ]),
-                                //Proteins
-                                TableRow(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
-                                    child: Text(
-                                      AppLocalizations.of(context)
-                                          .proteinfulltext,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Text(
-                                    "${trip.protein.toStringAsFixed(1)} g",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ]),
-                                //Proteins Plant
-                                TableRow(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
-                                    child: Text(
-                                      AppLocalizations.of(context)
-                                          .proteinplanttext,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Text(
-                                    "${trip.proteinplant.toStringAsFixed(1)} g",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ]),
-                                //Proteins Animal
-                                TableRow(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
-                                    child: Text(
-                                      AppLocalizations.of(context)
-                                          .proteinanimaltext,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Text(
-                                    "${trip.proteinanimal.toStringAsFixed(1)} g",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ]),
-                                TableRow(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
-                                    child: Text(
-                                      AppLocalizations.of(context).fatstext,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Text(
-                                    "${trip.fat.toStringAsFixed(1)} g",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ]),
-                                TableRow(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
-                                    child: Text(
-                                      AppLocalizations.of(context)
-                                          .saturatedfats,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Text(
-                                    "${trip.saturatedfat.toStringAsFixed(1)} g",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ]),
-                                TableRow(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
-                                    child: Text(
-                                      AppLocalizations.of(context).sugartext,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Text(
-                                    "${trip.sugars.toStringAsFixed(1)} g",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ]),
-                                TableRow(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0),
-                                    child: Text(
-                                      AppLocalizations.of(context).fiberstext,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Text(
-                                    "${trip.dietaryfiber.toStringAsFixed(1)} g",
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                ]),
-                                // TableRow(children: [
-                                //   Padding(
-                                //     padding:
-                                //         const EdgeInsets.symmetric(vertical: 10.0),
-                                //     child: Text(
-                                //       'Plantbased',
-                                //       style: TextStyle(
-                                //           fontSize: 18,
-                                //           fontWeight: FontWeight.bold),
-                                //     ),
-                                //   ),
-                                //   Text(
-                                //     "$plantbased",
-                                //     style: TextStyle(fontSize: 18),
-                                //   ),
-                                // ]),
+                                ),
                               ],
                             ),
                           ),
+                        ],
+                      ),
+                    ),
+                    SliverAppBar(
+                      automaticallyImplyLeading: false,
+                      pinned: true,
+                      elevation: 0,
+                      flexibleSpace: Container(
+                        alignment: Alignment.center,
+                        height: kToolbarHeight,
+                        color: kPrimaryColor,
+                        child: Text(
+                          'Micronutriënten',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                       ),
-
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     Text(
-                      //       "Calories ${kcal.toStringAsFixed(1)}",
-                      //       style: new TextStyle(fontSize: 16.0),
-                      //     ),
-                      //     Text(
-                      //       "Co2 ${co2.toStringAsFixed(2)}",
-                      //       style: new TextStyle(fontSize: 16.0),
-                      //     ),
-                      //     Text(
-                      //       "Carbs ${koolhy.toStringAsFixed(1)}",
-                      //       style: new TextStyle(fontSize: 16.0),
-                      //     ),
-                      //     Text(
-                      //       "Protein ${protein.toStringAsFixed(1)}",
-                      //       style: new TextStyle(fontSize: 16.0),
-                      //     ),
-                      //   ],
-                      // ),
-
-                      // Text(
-                      //   "Fat ${fat.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "Saturatedfat ${saturatedfat.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "Sugars ${sugars.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "Dietary Fiver ${dietaryfiber.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "plantbased $plantbased",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "nutriscore $nutriscore",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-
-                      // VANAFFFF HIERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRBOVEN IS GOED
-                      // ImageIcon(nutriscore.containsKey(trip.plantbased)
-                      //                              ? nutriscoreimage[trip.plantbased]
-                      //                              : nutriscoreimage["n"],)
-                      // child: (plantType.containsKey(trip.plantbased))
-                      //           ? plantType[trip.plantbased]
-                      //           : plantType["n"],
-
-                      // Text(
-                      //   "salt ${salt.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "alcohol ${alcohol.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "natrium ${natrium.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "kalium ${kalium.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "calcium ${calcium.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "magnesium ${magnesium.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "iron ${iron.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "selenium ${selenium.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "zink ${zink.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "vitA ${vitA.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "vitB ${vitB.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "vitC ${vitC.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "vitE ${vitE.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "vitB1 ${vitB1.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "vitB2 ${vitB2.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "vitB6 ${vitB6.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "vitB12 ${vitB12.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "vitB6 ${vitB6.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "foliumzuur ${foliumzuur.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "niacine ${niacine.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "jodium ${jodium.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                      // Text(
-                      //   "fosfor ${fosfor.toStringAsFixed(1)}",
-                      //   style: new TextStyle(fontSize: 16.0),
-                      // ),
-                    ]),
-                  );
-                }
-                else if (futureSnapshot.hasError) {
-                  return Icon(Icons.error_outline);
-                }
-                else {
-                  return CircularProgressIndicator();
-                }
-              }),
-        ),
+                    ),
+                    SliverGrid.count(
+                      crossAxisCount: 2,
+                      children: List.generate(5, (index) {
+                        return Card(
+                          color: Colors.white,
+                        );
+                      }),
+                    ), // SliverGrid.count(
+                  ],
+                );
+              } else if (futureSnapshot.hasError) {
+                return Icon(Icons.error_outline);
+              } else {
+                return CircularProgressIndicator();
+              }
+            }),
       ),
     );
   }
