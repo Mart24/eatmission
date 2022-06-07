@@ -295,7 +295,70 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
+  Future<void> getOneWeekDataCo2(Database database, String tableName,
+      {DateTime date, bool forwardDirection = false}) async {
+    // emit(DatabaseGetLoadingState());
+    DateTime now;
+    if (forwardDirection) {
+      now = date.add(Duration(days: 7)) ?? DateTime.now();
+    } else {
+      now = date ?? DateTime.now();
+    }
+    now = DateTime(now.year, now.month, now.day);
+    database.query(tableName,
+        limit: 7,
+        where: "date > ? and date <= ?",
+        orderBy: 'date DESC',
+        whereArgs: [
+          now.subtract(Duration(days: 7)).toIso8601String(),
+          now.toIso8601String()
+        ]).then((value) {
+      oneWeekQueryResult.setAll(0, value);
+      print('retrived ${value.length}');
+      // oneWeekCals = [];
+      // oneWeekCo2 = [];
+      int i = 0;
+      value.forEach((element) {
+        print(
+            '${element['date']}: calories: ${element['calories']}, co2: ${element['co2']}');
+        oneWeekCals[i] = element['calories'];
+        oneWeekCo2[i] = element['co2'];
+        // oneWeekCals.add(element['calories']);
+        // oneWeekCo2.add(element['co2']);
+        i++;
+      });
+      emit(DatabaseGetState());
+    });
+  }
+
   Future<void> getOneMonthData(Database database, String tableName) async {
+    // emit(DatabaseGetLoadingState());
+    DateTime now = DateTime.now();
+    now = DateTime(now.year, now.month, now.day);
+    database.query(tableName,
+        limit: 31,
+        where: "date > ? and date <= ?",
+        whereArgs: [
+          now.subtract(Duration(days: 30)).toIso8601String(),
+          now.toIso8601String()
+        ]).then((value) {
+      oneMonthQueryResult.setAll(0, value);
+      print('retrived ${value.length}');
+      // oneMonthCals = [];
+      // oneMonthCo2 = [];
+      int i = 0;
+      value.forEach((element) {
+        print(
+            '${element['date']}: calories: ${element['calories']}, co2: ${element['co2']}');
+        oneMonthCals[i] = element['calories'];
+        oneMonthCo2[i] = element['co2'];
+        i++;
+      });
+      emit(DatabaseGetState());
+    });
+  }
+
+  Future<void> getOneMonthDataCo2(Database database, String tableName) async {
     // emit(DatabaseGetLoadingState());
     DateTime now = DateTime.now();
     now = DateTime(now.year, now.month, now.day);

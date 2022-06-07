@@ -27,7 +27,7 @@ class _GraphsScreenState extends State<GraphsScreen>
     type = 'Calories';
     tabController = TabController(
       vsync: this,
-      length: 3,
+      length: 4,
       initialIndex: 0,
     );
     appCubit = AppCubit.instance(context);
@@ -36,9 +36,11 @@ class _GraphsScreenState extends State<GraphsScreen>
       if (tabController.index == 0) {
         appCubit.getOneWeekData(appCubit.database, uid);
       } else if (tabController.index == 1) {
-        appCubit.getOneMonthData(appCubit.database, uid);
+        appCubit.getOneWeekDataCo2(appCubit.database, uid);
       } else if (tabController.index == 2) {
-        appCubit.getThreeMonthData(appCubit.database, uid);
+        appCubit.getOneMonthData(appCubit.database, uid);
+      } else if (tabController.index == 3) {
+        appCubit.getOneMonthDataCo2(appCubit.database, uid);
       }
     });
   }
@@ -58,9 +60,11 @@ class _GraphsScreenState extends State<GraphsScreen>
               if (index == 0) {
                 appCubit.getOneWeekData(appCubit.database, uid);
               } else if (index == 1) {
-                appCubit.getOneMonthData(appCubit.database, uid);
+                appCubit.getOneWeekDataCo2(appCubit.database, uid);
               } else if (index == 2) {
-                appCubit.getThreeMonthData(appCubit.database, uid);
+                appCubit.getOneMonthData(appCubit.database, uid);
+              } else if (index == 3) {
+                appCubit.getOneMonthDataCo2(appCubit.database, uid);
               } else {
                 print('error in tab index');
               }
@@ -70,12 +74,13 @@ class _GraphsScreenState extends State<GraphsScreen>
               borderRadius: BorderRadius.circular(5),
             ),
             controller: tabController,
-            labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
             labelColor: Colors.white,
             tabs: [
-              Text('1 Week'),
-              Text('1 ${AppLocalizations.of(context).month}'),
-              Text('3 ${AppLocalizations.of(context).months}'),
+              Text('Week kcal'),
+              Text('Week co2'),
+              Text('${AppLocalizations.of(context).month} kcal'),
+              Text('${AppLocalizations.of(context).month} co2'),
             ],
           ),
         ),
@@ -84,8 +89,9 @@ class _GraphsScreenState extends State<GraphsScreen>
         controller: tabController,
         children: [
           OneWeekGraph(),
+          OneWeekGraphCo2(),
           OneMonthGraph(),
-          ThreeMonthsGraph(),
+          OneMonthGraphCo2(),
         ],
       ),
     );
@@ -129,15 +135,15 @@ class OneWeekGraph extends StatelessWidget {
                   enableAxisAnimation: true,
 
                   // adding multiple axis
-                  axes: <ChartAxis>[
-                    NumericAxis(
-                        name: 'yAxis',
-                        opposedPosition: true,
-                        title: AxisTitle(
-                            text: 'kg-CO₂',
-                            textStyle: TextStyle(
-                                color: Color.fromRGBO(192, 108, 132, 1))))
-                  ],
+                  // axes: <ChartAxis>[
+                  //   NumericAxis(
+                  //       name: 'yAxis',
+                  //       opposedPosition: true,
+                  //       title: AxisTitle(
+                  //           text: 'kg-CO₂',
+                  //           textStyle: TextStyle(
+                  //               color: Color.fromRGBO(192, 108, 132, 1))))
+                  // ],
                   series: <LineSeries<double, DateTime>>[
                     LineSeries<double, DateTime>(
                         name: AppLocalizations.of(context).calories,
@@ -151,8 +157,77 @@ class OneWeekGraph extends StatelessWidget {
                           // return day;
                         },
                         yValueMapper: (double calories, int index) => calories),
+                    //   LineSeries<double, DateTime>(
+                    //       name: 'CO₂',
+                    //       animationDuration: 5000,
+                    //       dataSource: appCubit.oneWeekCo2,
+                    //       xValueMapper: (double co2, int index) {
+                    //         return DateTime.parse(
+                    //             appCubit.oneWeekQueryResult[index]['date']);
+
+                    //         // String day = DateFormat.MEd().format(DateTime.parse(
+                    //         //     appCubit.oneWeekQueryResult[index]['date']));
+                    //         // return day;
+                    //       },
+                    //       yValueMapper: (double co2, int index) => co2,
+                    //       yAxisName: 'yAxis'),
+                  ]),
+            );
+          }
+        });
+  }
+}
+
+class OneWeekGraphCo2 extends StatelessWidget {
+  const OneWeekGraphCo2({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final appCubit = AppCubit.instance(context);
+    return BlocConsumer<AppCubit, AppStates>(
+        listener: (BuildContext context, state) {},
+        builder: (BuildContext context, state) {
+          if (state is DatabaseGetLoadingState) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Container(
+              child: SfCartesianChart(
+                  primaryXAxis: DateTimeAxis(),
+                  legend: Legend(
+                    isVisible: true,
+                    // title: LegendTitle(text: type),
+                    isResponsive: true,
+                    position: LegendPosition.top,
+                    alignment: ChartAlignment.near,
+                    orientation: LegendItemOrientation.horizontal,
+                  ),
+                  tooltipBehavior: TooltipBehavior(enable: true),
+                  primaryYAxis: NumericAxis(
+                      title: AxisTitle(
+                          text: 'kg-CO₂-eq',
+                          textStyle: TextStyle(
+                              color: Color.fromRGBO(75, 135, 185, 1))),
+                      labelAlignment: LabelAlignment.start),
+                  enableAxisAnimation: true,
+
+                  // adding multiple axis
+                  // axes: <ChartAxis>[
+                  //   NumericAxis(
+                  //       name: 'yAxis',
+                  //       opposedPosition: true,
+                  //       title: AxisTitle(
+                  //           text: 'kg-CO₂',
+                  //           textStyle: TextStyle(
+                  //               color: Color.fromRGBO(192, 108, 132, 1))))
+                  // ],
+                  series: <LineSeries<double, DateTime>>[
                     LineSeries<double, DateTime>(
-                        name: 'CO₂',
+                        name: 'kg-CO₂-eq',
+                        animationDuration: 5000,
                         dataSource: appCubit.oneWeekCo2,
                         xValueMapper: (double co2, int index) {
                           return DateTime.parse(
@@ -209,15 +284,15 @@ class OneMonthGraph extends StatelessWidget {
                       labelAlignment: LabelAlignment.start),
                   enableAxisAnimation: true,
                   // adding multiple axis
-                  axes: <ChartAxis>[
-                    NumericAxis(
-                        name: 'yAxis',
-                        opposedPosition: true,
-                        title: AxisTitle(
-                            text: 'kg-Co2',
-                            textStyle: TextStyle(
-                                color: Color.fromRGBO(192, 108, 132, 1))))
-                  ],
+                  // axes: <ChartAxis>[
+                  //   NumericAxis(
+                  //       name: 'yAxis',
+                  //       opposedPosition: true,
+                  //       title: AxisTitle(
+                  //           text: 'kg-Co2',
+                  //           textStyle: TextStyle(
+                  //               color: Color.fromRGBO(192, 108, 132, 1))))
+                  // ],
                   series: <LineSeries<double, DateTime>>[
                     LineSeries<double, DateTime>(
                         name: 'Calories',
@@ -231,8 +306,94 @@ class OneMonthGraph extends StatelessWidget {
                           // return day;
                         },
                         yValueMapper: (double calories, int index) => calories),
+                    // LineSeries<double, DateTime>(
+                    //   name: 'kg/CO₂',
+                    //   animationDuration: 5000,
+
+                    //   dataSource: appCubit.oneMonthCo2,
+                    //   xValueMapper: (double co2, int index) {
+                    //     return DateTime.parse(
+                    //         appCubit.oneMonthQueryResult[index]['date']);
+
+                    //     // String day = DateFormat.Md().format(DateTime.parse(
+                    //     //     appCubit.oneMonthQueryResult[index]['date']));
+                    //     // return day;
+                    //   },
+                    //   yValueMapper: (double co2, int index) => co2,
+                    //   // xAxisName: 'xAxis',
+                    //   yAxisName: 'yAxis',
+                    // ),
+                  ]),
+            );
+          }
+        });
+  }
+}
+
+class OneMonthGraphCo2 extends StatelessWidget {
+  const OneMonthGraphCo2({
+    Key key,
+    // @required this.oneMonthData,
+  }) : super(key: key);
+
+  // final List<Map> oneMonthData;
+
+  @override
+  Widget build(BuildContext context) {
+    final appCubit = AppCubit.instance(context);
+    return BlocConsumer<AppCubit, AppStates>(
+        listener: (BuildContext context, state) {},
+        builder: (BuildContext context, state) {
+          if (state is DatabaseGetLoadingState) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Container(
+              child: SfCartesianChart(
+                  legend: Legend(
+                    isVisible: true,
+                    isResponsive: true,
+                    position: LegendPosition.top,
+                    alignment: ChartAlignment.near,
+                    orientation: LegendItemOrientation.horizontal,
+                  ),
+                  tooltipBehavior: TooltipBehavior(enable: true),
+                  primaryXAxis: DateTimeAxis(),
+                  primaryYAxis: NumericAxis(
+                      title: AxisTitle(
+                          text: 'kg-Co2-eq',
+                          textStyle: TextStyle(
+                              color: Color.fromRGBO(75, 135, 185, 1))),
+                      labelAlignment: LabelAlignment.start),
+                  enableAxisAnimation: true,
+                  // adding multiple axis
+                  // axes: <ChartAxis>[
+                  //   NumericAxis(
+                  //       name: 'yAxis',
+                  //       opposedPosition: true,
+                  //       title: AxisTitle(
+                  //           text: 'kg-Co2',
+                  //           textStyle: TextStyle(
+                  //               color: Color.fromRGBO(192, 108, 132, 1))))
+                  // ],
+                  series: <LineSeries<double, DateTime>>[
+                    // LineSeries<double, DateTime>(
+                    //     name: 'Calories',
+                    //     dataSource: appCubit.oneMonthCals,
+                    //     xValueMapper: (double calories, int index) {
+                    //       return DateTime.parse(
+                    //           appCubit.oneMonthQueryResult[index]['date']);
+
+                    //       // String day = DateFormat.Md().format(DateTime.parse(
+                    //       //     appCubit.oneMonthQueryResult[index]['date']));
+                    //       // return day;
+                    //     },
+                    //     yValueMapper: (double calories, int index) => calories),
                     LineSeries<double, DateTime>(
                       name: 'kg/CO₂',
+                      animationDuration: 5000,
+
                       dataSource: appCubit.oneMonthCo2,
                       xValueMapper: (double co2, int index) {
                         return DateTime.parse(
@@ -253,83 +414,85 @@ class OneMonthGraph extends StatelessWidget {
   }
 }
 
-class ThreeMonthsGraph extends StatelessWidget {
-  const ThreeMonthsGraph({
-    Key key,
-    // @required this.threeMonthsData,
-  }) : super(key: key);
 
-  // final List<Map> threeMonthsData;
+// class ThreeMonthsGraph extends StatelessWidget {
+//   const ThreeMonthsGraph({
+//     Key key,
+//     // @required this.threeMonthsData,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final appCubit = AppCubit.instance(context);
-    return BlocConsumer<AppCubit, AppStates>(
-        listener: (BuildContext context, state) {},
-        builder: (BuildContext context, state) {
-          if (state is DatabaseGetLoadingState) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return Container(
-              child: SfCartesianChart(
-                  primaryXAxis: DateTimeAxis(),
-                  legend: Legend(
-                    isVisible: true,
-                    // title: LegendTitle(text: type),
-                    isResponsive: true,
-                    position: LegendPosition.top,
-                    alignment: ChartAlignment.near,
-                    orientation: LegendItemOrientation.horizontal,
-                  ),
-                  tooltipBehavior: TooltipBehavior(enable: true),
-                  primaryYAxis: NumericAxis(
-                      title: AxisTitle(
-                          text: 'Calories',
-                          textStyle: TextStyle(
-                              color: Color.fromRGBO(75, 135, 185, 1))),
-                      labelAlignment: LabelAlignment.start),
-                  enableAxisAnimation: true,
-                  // adding multiple axis
-                  axes: <ChartAxis>[
-                    NumericAxis(
-                        name: 'yAxis',
-                        opposedPosition: true,
-                        title: AxisTitle(
-                            text: 'kg-Co2',
-                            textStyle: TextStyle(
-                                color: Color.fromRGBO(192, 108, 132, 1))))
-                  ],
-                  series: <LineSeries<double, DateTime>>[
-                    LineSeries<double, DateTime>(
-                        name: 'Calories',
-                        dataSource: appCubit.threeMonthsCals,
-                        xValueMapper: (double calories, int index) {
-                          return DateTime.parse(
-                              appCubit.threeMonthsQueryResult[index]['date']);
+//   // final List<Map> threeMonthsData;
 
-                          // String day = DateFormat.m().format(DateTime.parse(
-                          //     appCubit.threeMonthsQueryResult[index]['date']));
-                          // return day;
-                        },
-                        yValueMapper: (double calories, int index) => calories),
-                    LineSeries<double, DateTime>(
-                        name: 'Co2',
-                        dataSource: appCubit.threeMonthsCo2,
-                        xValueMapper: (double co2, int index) {
-                          return DateTime.parse(
-                              appCubit.threeMonthsQueryResult[index]['date']);
+//   @override
+//   Widget build(BuildContext context) {
+//     final appCubit = AppCubit.instance(context);
+//     return BlocConsumer<AppCubit, AppStates>(
+//         listener: (BuildContext context, state) {},
+//         builder: (BuildContext context, state) {
+//           if (state is DatabaseGetLoadingState) {
+//             return Center(
+//               child: CircularProgressIndicator(),
+//             );
+//           } else {
+//             return Container(
+//               child: SfCartesianChart(
+//                   primaryXAxis: DateTimeAxis(),
+//                   legend: Legend(
+//                     isVisible: true,
+//                     // title: LegendTitle(text: type),
+//                     isResponsive: true,
+//                     position: LegendPosition.top,
+//                     alignment: ChartAlignment.near,
+//                     orientation: LegendItemOrientation.horizontal,
+//                   ),
+//                   tooltipBehavior: TooltipBehavior(enable: true),
+//                   primaryYAxis: NumericAxis(
+//                       title: AxisTitle(
+//                           text: 'Calories',
+//                           textStyle: TextStyle(
+//                               color: Color.fromRGBO(75, 135, 185, 1))),
+//                       labelAlignment: LabelAlignment.start),
+//                   enableAxisAnimation: true,
+//                   // adding multiple axis
+//                   axes: <ChartAxis>[
+//                     NumericAxis(
+//                         name: 'yAxis',
+//                         opposedPosition: true,
+//                         title: AxisTitle(
+//                             text: 'kg-Co2',
+//                             textStyle: TextStyle(
+//                                 color: Color.fromRGBO(192, 108, 132, 1))))
+//                   ],
+//                   series: <LineSeries<double, DateTime>>[
+//                     LineSeries<double, DateTime>(
+//                         name: 'Calories',
+//                         dataSource: appCubit.threeMonthsCals,
+//                         xValueMapper: (double calories, int index) {
+//                           return DateTime.parse(
+//                               appCubit.threeMonthsQueryResult[index]['date']);
 
-                          // String day = DateFormat.MEd().format(DateTime.parse(
-                          //     appCubit.threeMonthsQueryResult[index]['date']));
-                          // return day;
-                        },
-                        yValueMapper: (double co2, int index) => co2,
-                        yAxisName: 'yAxis'),
-                  ]),
-            );
-          }
-        });
-  }
-}
+//                           // String day = DateFormat.m().format(DateTime.parse(
+//                           //     appCubit.threeMonthsQueryResult[index]['date']));
+//                           // return day;
+//                         },
+//                         yValueMapper: (double calories, int index) => calories),
+//                     LineSeries<double, DateTime>(
+//                         name: 'Co2',
+//                         animationDuration: 5000,
+//                         dataSource: appCubit.threeMonthsCo2,
+//                         xValueMapper: (double co2, int index) {
+//                           return DateTime.parse(
+//                               appCubit.threeMonthsQueryResult[index]['date']);
+
+//                           // String day = DateFormat.MEd().format(DateTime.parse(
+//                           //     appCubit.threeMonthsQueryResult[index]['date']));
+//                           // return day;
+//                         },
+//                         yValueMapper: (double co2, int index) => co2,
+//                         yAxisName: 'yAxis'),
+//                   ]),
+//             );
+//           }
+//         });
+//   }
+// }

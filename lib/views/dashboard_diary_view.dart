@@ -332,13 +332,14 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(fontSize: 16.0),
                         ),
                       ),
+
                       // Spacer(),
-                      Tooltip(
-                        message: 'plantaardig',
-                        child: (plantType.containsKey(trip.plantbased))
-                            ? plantType[trip.plantbased]
-                            : plantType["n"],
-                      ),
+                      // Tooltip(
+                      //   message: 'plantaardig',
+                      //   child: (plantType.containsKey(trip.plantbased))
+                      //       ? plantType[trip.plantbased]
+                      //       : plantType["n"],
+                      // ),
                       // Tooltip(
                       //   message: 'plantaardig',
                       //   child: ImageIcon(
@@ -625,7 +626,8 @@ class LinearCo2Indecator extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: kPrimaryColor),
                       ),
-                      TextSpan(text: ' kg/CO₂', style: TextStyle(fontSize: 12)),
+                      TextSpan(
+                          text: ' kg/CO₂-eq', style: TextStyle(fontSize: 12)),
                     ])),
                 Text.rich(TextSpan(
                     style: TextStyle(
@@ -638,7 +640,8 @@ class LinearCo2Indecator extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: kPrimaryColor),
                       ),
-                      TextSpan(text: ' kg/CO₂', style: TextStyle(fontSize: 12)),
+                      TextSpan(
+                          text: ' kg/CO₂-eq', style: TextStyle(fontSize: 12)),
                     ])),
 
                 // Text('max 5.0 kg/Co²')

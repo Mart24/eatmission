@@ -48,7 +48,7 @@ class Trip {
   num selenium;
   num zink;
   num vitA;
-  num vitB;
+  num vitD;
   num vitC;
   num vitE;
   num vitB1;
@@ -59,6 +59,9 @@ class Trip {
   num niacine;
   num jodium;
   num fosfor;
+  num water;
+  num recomco2;
+  String recommendation;
 
   Trip(
       this.id,
@@ -104,14 +107,17 @@ class Trip {
       this.selenium,
       this.sugars,
       this.vitA,
-      this.vitB,
+      this.vitD,
       this.vitB1,
       this.vitB12,
       this.vitB2,
       this.vitB6,
       this.vitC,
       this.vitE,
-      this.zink);
+      this.zink,
+      this.water,
+      this.recomco2,
+      this.recommendation);
 
   Trip.empty();
 
@@ -149,27 +155,30 @@ class Trip {
         'sugars': sugars,
         'dietaryfiber': dietaryfiber,
 
-        // 'salt': salt,
-        // 'selenium': selenium,
-        // 'vitA': vitA,
-        // 'vitB': vitB,
-        // 'vitB1': vitB1,
-        // 'vitB12': vitB12,
-        // 'vitB2': vitB2,
-        // 'vitB6': vitB6,
-        // 'vitC': vitC,
-        // 'vitE': vitE,
-        // 'zink': zink,
-        // 'alcohol': alcohol,
-        // 'calcium': calcium,
-        // 'foliumzuur': foliumzuur,
-        // 'fosfor': fosfor,
-        // 'iron': iron,
-        // 'jodium': jodium,
-        // 'kalium': kalium,
-        // 'magnesium': magnesium,
-        // 'natrium': natrium,
-        // 'niacine': niacine,
+        'salt': salt,
+        'selenium': selenium,
+        'vitA': vitA,
+        'vitD': vitD,
+        'vitB1': vitB1,
+        'vitB12': vitB12,
+        'vitB2': vitB2,
+        'vitB6': vitB6,
+        'vitC': vitC,
+        'vitE': vitE,
+        'zink': zink,
+        'alcohol': alcohol,
+        'calcium': calcium,
+        'foliumzuur': foliumzuur,
+        'fosfor': fosfor,
+        'iron': iron,
+        'jodium': jodium,
+        'kalium': kalium,
+        'magnesium': magnesium,
+        'natrium': natrium,
+        'water': water,
+        'niacine': niacine,
+        'recommendation': recommendation,
+        'recomco2': recomco2,
       };
 
   // creating a Food object from a firebase snapshot
@@ -206,29 +215,31 @@ class Trip {
     sugars = snapshotAsMap['sugars'];
     dietaryfiber = snapshotAsMap['dietaryfiber'];
 
-    // salt = snapshot['salt'];
-    // selenium = snapshot['selenium'];
+    salt = snapshot['salt'];
+    selenium = snapshot['selenium'];
     // unit = snapshot['unit'];
-    // vitA = snapshot['vitA'];
-    // vitB = snapshot['vitB'];
-    // vitB1 = snapshot['vitB1'];
-    // vitB12 = snapshot['vitB12'];
-    // vitB2 = snapshot['vitB2'];
-    // vitB6 = snapshot['vitB6'];
-    // vitC = snapshot['vitC'];
-    // vitE = snapshot['vitE'];
-    // zink = snapshot['zink'];
-    // alcohol = snapshot['alcohol'];
-    // calcium = snapshot['calcium'];
-    // foliumzuur = snapshot['foliumzuur'];
-    // fosfor = snapshot['fosfor'];
-    // iron = snapshot['iron'];
-    // jodium = snapshot['jodium'];
-    // kalium = snapshot['kalium'];
-    // magnesium = snapshot['magnesium'];
-    // natrium = snapshot['natrium'];
-    // niacine = snapshot['niacine'];
-
+    vitA = snapshot['vitA'];
+    vitD = snapshot['vitD'];
+    vitB1 = snapshot['vitB1'];
+    vitB12 = snapshot['vitB12'];
+    vitB2 = snapshot['vitB2'];
+    vitB6 = snapshot['vitB6'];
+    vitC = snapshot['vitC'];
+    vitE = snapshot['vitE'];
+    zink = snapshot['zink'];
+    alcohol = snapshot['alcohol'];
+    calcium = snapshot['calcium'];
+    foliumzuur = snapshot['foliumzuur'];
+    fosfor = snapshot['fosfor'];
+    iron = snapshot['iron'];
+    jodium = snapshot['jodium'];
+    kalium = snapshot['kalium'];
+    magnesium = snapshot['magnesium'];
+    natrium = snapshot['natrium'];
+    niacine = snapshot['niacine'];
+    water = snapshot['water'];
+    recommendation = snapshot['recommendation'];
+    recomco2 = snapshot['recomco2'];
     documentId = snapshot.id;
     productid = snapshotAsMap['productid'];
   }

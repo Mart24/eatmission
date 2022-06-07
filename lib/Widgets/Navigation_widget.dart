@@ -65,14 +65,14 @@ class _HomeState extends State<Home> {
       null,
       null,
       null,
+      null,
       // null,
       // null,
       // null,
       // null,
       // null,
-      // null,
-      // null,
-      // null,
+      null,
+      null,
       null);
 
   int _currentIndex = 0;

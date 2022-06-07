@@ -162,11 +162,11 @@ class _CompareSearch1State extends State<CompareSearch1> {
       appBar: AppBar(
         title: Text('Product 1'),
         backgroundColor: kPrimaryColor,
-        actions: [
-          IconButton(
-              icon: Icon(Icons.camera_alt_outlined),
-              onPressed: productOneCubit.scanBarcode)
-        ],
+        //  actions: [
+        //   IconButton(
+        //       icon: Icon(Icons.camera_alt_outlined),
+        //       onPressed: productOneCubit.scanBarcode)
+        // ],
       ),
       body: body,
     );
@@ -311,11 +311,11 @@ class _CompareSearch2State extends State<CompareSearch2> {
       appBar: AppBar(
         title: Text('Product 2'),
         backgroundColor: kPrimaryColor,
-        actions: [
-          IconButton(
-              icon: Icon(Icons.camera_alt_outlined),
-              onPressed: productTwoCubit.scanBarcode)
-        ],
+        // actions: [
+        //   IconButton(
+        //       icon: Icon(Icons.camera_alt_outlined),
+        //       onPressed: productTwoCubit.scanBarcode)
+        // ],
       ),
       body: body,
     );

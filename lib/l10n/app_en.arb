@@ -23,7 +23,7 @@
     "@introtexteone": {
       "description": "The third title in the introduction screen"
      },
-    "introtextthird": "With Eatmission, sustainable choices have never been easier.",
+    "introtextthird": "With this app, sustainable choices have never been easier.",
     "@introtexteone": {
       "description": "The third text in the introduction screen"
      },
@@ -98,6 +98,9 @@
     "saturatedfats": "Saturated Fats",
     "sugartext": "Sugars",
     "fiberstext": "Fibers",
+    "salttext": "Salt",
+    "irontext": "Iron",
+
     "savetext": "Save",
 
     "fooddetailstext": "Food details",
@@ -122,11 +125,11 @@
 
 
     "goal1atext": "Think of a Goal",
-    "goal1btext": "It can be anything, a train ticket, clothing basket, car ride etc.",
+    "goal1btext": "It can be anything, two t-shirts, jeans etc.",
     "goal2atext": "Calculate Goal",
     "goal2btext": "Search online for the amount of CO₂ it costs",
     "goal3atext": "Fill goal in this App",
-    "goal3btext": "Stay below 300 kg/CO₂ for a reachable goal",
+    "goal3btext": "Stay below 25 kg/CO₂ for a reachable goal for this study",
     "goal4atext": "Start eating sustainable",
     "goal4btext": "Fill in your starting data. The more sustainable your diet, the more you save!",
     "goalheaderntext": "Set a CO₂ goal",

@@ -45,16 +45,16 @@ class SettingsThreePage extends StatelessWidget {
                 children: <Widget>[
                   ListTile(
                     leading: Icon(Icons.person),
-                    title: Text("Naam Achternaam"),
+                    title: Text("Participant"),
                     onTap: () {},
                   ),
                   _buildDivider(),
-                  SwitchListTile(
-                    activeColor: Colors.green,
-                    value: false,
-                    title: Text("Dark mode"),
-                    onChanged: (val) {},
-                  ),
+                  // SwitchListTile(
+                  //   activeColor: Colors.green,
+                  //   value: false,
+                  //   title: Text("Dark mode"),
+                  //   onChanged: (val) {},
+                  // ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.chartLine),
 

@@ -115,16 +115,16 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            alignment: Alignment.center,
-                            child: nutriscoreType[widget.trip.nutriscore],
-                            width: 100,
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: ecoscoreType[widget.trip.ecoscore],
-                            width: 100,
-                          ),
+                          // Container(
+                          //   alignment: Alignment.center,
+                          //   child: nutriscoreType[widget.trip.nutriscore],
+                          //   width: 100,
+                          // ),
+                          // Container(
+                          //   alignment: Alignment.center,
+                          //   child: ecoscoreType[widget.trip.ecoscore],
+                          //   width: 100,
+                          // ),
 
                           Text.rich(TextSpan(
                               style: TextStyle(
