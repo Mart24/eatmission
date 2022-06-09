@@ -11,6 +11,7 @@ import 'package:food_app/Widgets/Provider_Auth.dart';
 import 'package:food_app/shared/amount_cubit.dart';
 import 'package:food_app/shared/fav_cubit.dart';
 import 'package:food_app/shared/recent_cubit.dart';
+import 'package:food_app/views/goals/log_cubit.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -130,7 +131,7 @@ class _FoodDateState extends State<FoodDate> {
 
     double size = ((double.tryParse(_sizeController.text) ?? 100));
     double portion = ((double.tryParse(_portionController.text) ?? 1));
-    String unit = _portionUnitController.value.text;
+    // String unit = _portionUnitController.value.text;
 
     return GestureDetector(
       onTap: () {
@@ -210,13 +211,22 @@ class _FoodDateState extends State<FoodDate> {
         ),
         body: FutureBuilder<Map<String, dynamic>>(
             future: AmountCubit.instance(context).getFood(
-                widget.trip, size, portion, _eattime, categoryChoice, unit),
+                widget.trip,
+                size,
+                portion,
+                _eattime,
+                categoryChoice,
+                _portionUnitController.value.text),
             builder: (BuildContext context,
                 AsyncSnapshot<Map<String, dynamic>> futureSnapshot) {
               if (futureSnapshot.hasData) {
                 var foodDocument = futureSnapshot.data["foodDocument"];
-                var trip = futureSnapshot.data["trip"];
-
+                Trip trip = futureSnapshot.data["trip"];
+                double co2RecommendationPercentage = 0;
+                if (trip.recomco2 != null) {
+                  co2RecommendationPercentage =
+                      ((trip.recomco2 - trip.co2) / trip.recomco2) * 100;
+                }
                 Map<String, double> dataMap = {
                   "Carbs": trip.kcal,
                   "Protein": 2,
@@ -342,7 +352,41 @@ class _FoodDateState extends State<FoodDate> {
                                         ])),
                                     ElevatedButton(
                                       child: Text("Recommendation"),
-                                      onPressed: () => _showToast(context),
+                                      onPressed: () {
+                                        _showToast(context);
+                                        LogCubit logCubit =
+                                            LogCubit.instance(context);
+                                        logCubit
+                                            .addLog("button recommendation");
+
+                                        showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text(trip.name +
+                                                    ' recommendation'),
+                                                content: co2RecommendationPercentage ==
+                                                        0
+                                                    ? Text(
+                                                        "No recommendation Found.")
+                                                    : Text("Recommendation: " +
+                                                        trip.recommendation +
+                                                        " ,You 'll save: " +
+                                                        co2RecommendationPercentage
+                                                            .toString() +
+                                                        " % kg-Co2-eq"),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            context, 'OK'),
+                                                    child: const Text('OK'),
+                                                  ),
+                                                ],
+                                              );
+                                            });
+                                        print("log recommendation");
+                                      },
                                       style: ElevatedButton.styleFrom(
                                           primary: Colors.purple,
                                           textStyle: const TextStyle(
@@ -580,7 +624,7 @@ class _FoodDateState extends State<FoodDate> {
                                               vertical: 5.0),
                                           child: Text(
                                             AppLocalizations.of(context)
-                                                .salttext,
+                                                .starttext,
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold),
@@ -796,7 +840,7 @@ class _FoodDateState extends State<FoodDate> {
                                               vertical: 5.0),
                                           child: Text(
                                             AppLocalizations.of(context)
-                                                .irontext,
+                                                .intaketext,
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold),
@@ -1012,7 +1056,7 @@ class InputBar extends StatelessWidget {
   final TextEditingController _portionUnitController;
   final String id;
 
-  final ValueNotifier<String> currentValue = ValueNotifier('gram');
+  final ValueNotifier<String> currentValue = ValueNotifier<String>('gram');
 
   @override
   Widget build(BuildContext context) {
@@ -1083,25 +1127,17 @@ class InputBar extends StatelessWidget {
                   value: e,
                 );
               }).toList();
-
-              return ValueListenableBuilder<String>(
-                  valueListenable: currentValue,
-                  builder:
-                      (BuildContext context, String hasError, Widget child) {
-                    return DropdownButtonFormField(
-                      // value: _portionController.value.text,
-                      value: currentValue.value,
-                      isExpanded: true,
-                      items: itemsWidgets,
-                      onChanged: (s) {
-                        print(s);
-                        _portionController.value =
-                            TextEditingValue(text: itemsData[s].toString());
-                        _portionUnitController.value =
-                            TextEditingValue(text: s);
-                        currentValue.value = s;
-                      },
-                    );
+              return DropdownButtonFormField(
+                  // value: _portionController.value.text,
+                  value: currentValue.value,
+                  isExpanded: true,
+                  items: itemsWidgets,
+                  onChanged: (s) {
+                    print(s);
+                    _portionController.value =
+                        TextEditingValue(text: itemsData[s].toString());
+                    _portionUnitController.value = TextEditingValue(text: s);
+                    currentValue.value = s;
                   });
             } else {
               return DropdownButtonFormField(
