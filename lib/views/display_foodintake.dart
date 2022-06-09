@@ -335,6 +335,23 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ]),
+
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  AppLocalizations.of(context).dotssugarsstext,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.sugars.toStringAsFixed(0)} g',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
                             TableRow(children: [
                               Padding(
                                 padding:
@@ -356,14 +373,14 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 5.0),
                                 child: Text(
-                                  AppLocalizations.of(context).dotssugarsstext,
+                                  AppLocalizations.of(context).salttext,
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
                               Text(
-                                '${widget.trip.sugars.toStringAsFixed(0)} g',
+                                '${widget.trip.salt.toStringAsFixed(1)} g',
                                 style: TextStyle(fontSize: 18),
                               ),
                             ]),
@@ -397,13 +414,351 @@ class _DetailFoodIntakeViewState extends State<DetailFoodIntakeView> {
               ),
             ),
           ),
-          SliverGrid.count(
-            crossAxisCount: 2,
-            children: List.generate(5, (index) {
-              return Card(
-                color: Colors.white,
-              );
-            }),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Table(
+                          columnWidths: {
+                            0: FractionColumnWidth(0.50),
+                            1: FractionColumnWidth(0.30),
+                          },
+                          textBaseline: TextBaseline.alphabetic,
+                          defaultVerticalAlignment:
+                              TableCellVerticalAlignment.middle,
+                          children: [
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Vitamine A',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.vitA.toStringAsFixed(0)} µg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Vitamine B1',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.vitB1.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Vitamine B2',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.vitB2.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Vitamine B6',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.vitB6.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Vitamine B12',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.vitB12.toStringAsFixed(0)} µg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Vitamine C',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.vitC.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Vitamine D',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.vitD.toStringAsFixed(0)} µg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Vitamine E',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.vitE.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Zink',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.zink.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Calcium',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.calcium.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  AppLocalizations.of(context).irontext,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.iron.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Kalium',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.kalium.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Magnesium',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.magnesium.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Niacine',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.niacine.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Natrium',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.natrium.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Jodium',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              //'${(trip.amount == null) ? "n/a" : widget.trip.amount.toStringAsFixed(0)} ${widget.trip.amountUnit ?? 'g'}'
+                              Text(
+                                '${widget.trip.jodium.toStringAsFixed(0)} µg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Alcohol',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.alcohol.toStringAsFixed(0)} g',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Water',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.water.toStringAsFixed(0)} g',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Fosfor',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.fosfor.toStringAsFixed(0)} mg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5.0),
+                                child: Text(
+                                  'Foliumzuur',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Text(
+                                '${widget.trip.foliumzuur.toStringAsFixed(0)} µg',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ]),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

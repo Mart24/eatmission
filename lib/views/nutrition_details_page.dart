@@ -23,93 +23,118 @@ class NutritionalDetailsPage extends StatelessWidget {
         backgroundColor: kPrimaryColor,
       ),
       body: BlocConsumer<DairyCubit, DairyStates>(
-          listener: (BuildContext context, DairyStates states) {},
-          builder: (BuildContext context, DairyStates states) {
-            DairyCubit cubit = DairyCubit.instance(context);
-            double calGoal = cubit.calGoal;
-            print(cubit.proteinPercent);
-            return SingleChildScrollView(
-              child: Container(
-                margin: EdgeInsets.all(8),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          PieChart(
-                            chartRadius: 125.0,
-                            ringStrokeWidth: 10,
-                            chartLegendSpacing: 25,
-                            initialAngleInDegree: 270,
-                            // legendOptions: LegendOptions(),
-                            chartValuesOptions: ChartValuesOptions(
-                              decimalPlaces: 2,
-                              showChartValues: false,
-                              showChartValuesInPercentage: true,
-                              showChartValuesOutside: true,
-                              chartValueBackgroundColor: Colors.white,
-                            ),
-                            colorList: [
-                              Colors.green[200],
-                              Colors.teal[200],
-                              Colors.red[200]
-                            ],
-                            animationDuration: Duration(seconds: 1),
-                            dataMap: {
-                              '${cubit.carbsPercent.toStringAsFixed(0)}% ${Koolhydratentotaal}':
-                                  cubit.carbsPercent,
-                              '${cubit.proteinPercent.toStringAsFixed(0)}% ${Eiwittentotaal}':
-                                  cubit.proteinPercent,
-                              '${cubit.fatPercent.toStringAsFixed(0)}% ${Vettentotaal}':
-                                  cubit.fatPercent,
-                            },
-                            centerText:
-                                '${cubit.kCalSum.toStringAsFixed(0)} ${Calories}',
+        listener: (BuildContext context, DairyStates states) {},
+        builder: (BuildContext context, DairyStates states) {
+          DairyCubit cubit = DairyCubit.instance(context);
+          double calGoal = cubit.calGoal;
+          print(cubit.proteinPercent);
 
-                            chartType: ChartType.ring,
+          return CustomScrollView(
+            slivers: <Widget>[
+              // Text(
+              //   "${foodDocument['name']}",
+              //   style: new TextStyle(fontSize: 24.0),
+              // ),
+
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                expandedHeight: 200,
+                floating: false,
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+
+                //   backgroundColor: Colors.white,
+                flexibleSpace: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        PieChart(
+                          chartRadius: 125.0,
+                          ringStrokeWidth: 10,
+                          chartLegendSpacing: 25,
+                          initialAngleInDegree: 270,
+                          // legendOptions: LegendOptions(),
+                          chartValuesOptions: ChartValuesOptions(
+                            decimalPlaces: 0,
+                            showChartValues: false,
+                            showChartValuesInPercentage: false,
+                            showChartValuesOutside: false,
+                            chartValueBackgroundColor: Colors.white,
                           ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextButton(
-                            child: Text(
-                              AppLocalizations.of(context).nutritiontext,
-                              style: TextStyle(
-                                color: kPrimaryColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                          colorList: [
+                            Colors.green[200],
+                            Colors.teal[200],
+                            Colors.red[200]
+                          ],
+                          animationDuration: Duration(seconds: 1),
+                          dataMap: {
+                            '${cubit.carbsPercent.toStringAsFixed(0)}% ${Koolhydratentotaal}':
+                                cubit.carbsPercent,
+                            '${cubit.proteinPercent.toStringAsFixed(0)}% ${Eiwittentotaal}':
+                                cubit.proteinPercent,
+                            '${cubit.fatPercent.toStringAsFixed(0)}% ${Vettentotaal}':
+                                cubit.fatPercent,
+                          },
+                          centerText:
+                              '${cubit.kCalSum.toStringAsFixed(0)} ${Calories}',
+                          chartType: ChartType.ring,
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextButton(
+                                child: Text(
+                                  AppLocalizations.of(context).nutritiontext,
+                                  style: TextStyle(
+                                    color: kPrimaryColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                onPressed: null,
                               ),
-                            ),
-                            onPressed: null,
+                              IconButton(
+                                icon: const Icon(Icons.info),
+                                color: kPrimaryColor,
+                                // tooltip: 'Increase volume by 10',
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        _buildPopupDialog(context),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.info), color: kPrimaryColor,
-                            // tooltip: 'Increase volume by 10',
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    _buildPopupDialog(context),
-                              );
-                            },
-                          ),
-                          // onPressed: () {
-                          //   showDialog(
-                          //     context: context,
-                          //     builder: (BuildContext context) =>
-                          //         _buildPopupDialog(context),
-                          //   );
-                          // },
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    SingleChildScrollView(
+                  ),
+                ),
+              ),
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                pinned: true,
+                elevation: 0,
+                flexibleSpace: Container(
+                  alignment: Alignment.center,
+                  height: kToolbarHeight,
+                  color: kPrimaryColor,
+                  child: Text(
+                    'Macronutriënten',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: Container(
                         child: Column(
                           children: [
@@ -149,7 +174,6 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                   ]),
-
                                   TableRow(children: [
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -192,7 +216,9 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     ),
                                     Text(
                                       '${cubit.proteinPercent.toStringAsFixed(0)}%',
-                                      style: TextStyle(fontSize: 16),
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     Text(
                                       '',
@@ -267,7 +293,9 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     ),
                                     Text(
                                       '${cubit.fatPercent.toStringAsFixed(0)}%',
-                                      style: TextStyle(fontSize: 16),
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     Text(
                                       '',
@@ -318,12 +346,40 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     ),
                                     Text(
                                       '${cubit.carbsPercent.toStringAsFixed(0)}%',
-                                      style: TextStyle(fontSize: 16),
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                     Text(
                                       '',
                                       style: TextStyle(fontSize: 16),
                                     ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0),
+                                      child: Text(
+                                        AppLocalizations.of(context)
+                                            .dotssugarsstext,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${cubit.sugars.toStringAsFixed(0)}g',
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    Text(
+                                      '${cubit.sugarsPercent.toStringAsFixed(0)}%',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '60g',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.red),
+                                    )
                                   ]),
                                   TableRow(children: [
                                     Padding(
@@ -356,96 +412,26 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 10.0),
                                       child: Text(
-                                        AppLocalizations.of(context)
-                                            .dotssugarsstext,
+                                        AppLocalizations.of(context).salttext,
                                         style: TextStyle(
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     Text(
-                                      '${cubit.sugars.toStringAsFixed(0)}g',
+                                      '${cubit.salt}g',
                                       style: TextStyle(fontSize: 18),
                                     ),
                                     Text(
-                                      '${cubit.sugarsPercent.toStringAsFixed(0)}%',
+                                      '',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      '60g',
+                                      '6g',
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.red),
-                                    )
+                                    ),
                                   ]),
-                                  // TableRow(children: [
-                                  //   Padding(
-                                  //     padding:
-                                  //         const EdgeInsets.symmetric(vertical: 10.0),
-                                  //     child: Text(
-                                  //       '        Suiker',
-                                  //       style: TextStyle(
-                                  //           fontSize: 18,
-                                  //           fontWeight: FontWeight.bold),
-                                  //     ),
-                                  //   ),
-                                  //   Text(
-                                  //     '${cubit.sugars.toStringAsFixed(0)}g',
-                                  //     style: TextStyle(fontSize: 18),
-                                  //   ),
-                                  //   Text(
-                                  //     '${cubit.sugarsPercent.toStringAsFixed(0)}%',
-                                  //     style: TextStyle(fontSize: 16),
-                                  //   ),
-                                  //   Text(
-                                  //     '60g',
-                                  //     style:
-                                  //         TextStyle(fontSize: 16, color: Colors.red),
-                                  //   )
-                                  // ]),
-                                  // TableRow(children: [
-                                  //   Padding(
-                                  //     padding:
-                                  //         const EdgeInsets.symmetric(vertical: 10.0),
-                                  //     child: Text(
-                                  //       '        Suiker',
-                                  //       style: TextStyle(
-                                  //           fontSize: 18,
-                                  //           fontWeight: FontWeight.bold),
-                                  //     ),
-                                  //   ),
-                                  //   Text(
-                                  //     '${cubit.sugars.toStringAsFixed(0)}g',
-                                  //     style: TextStyle(fontSize: 18),
-                                  //   ),
-                                  //   Text(
-                                  //     '${cubit.sugarsPercent.toStringAsFixed(0)}%',
-                                  //     style: TextStyle(fontSize: 16),
-                                  //   ),
-                                  //   Text(
-                                  //     '60g',
-                                  //     style:
-                                  //         TextStyle(fontSize: 16, color: Colors.red),
-                                  //   )
-                                  // ]),
-                                  // TableRow(children: [
-                                  //   Padding(
-                                  //     padding:
-                                  //         const EdgeInsets.symmetric(vertical: 10.0),
-                                  //     child: Text(
-                                  //       'Cholesterol',
-                                  //       style: TextStyle(
-                                  //           fontSize: 18, fontWeight: FontWeight.bold),
-                                  //     ),
-                                  //   ),
-                                  //   Text(
-                                  //     '3g',
-                                  //     style: TextStyle(fontSize: 18),
-                                  //   ),
-                                  //   Text(
-                                  //     '3%',
-                                  //     style: TextStyle(fontSize: 18),
-                                  //   ),
-                                  // ]),
                                 ],
                               ),
                             ),
@@ -456,8 +442,510 @@ class NutritionalDetailsPage extends StatelessWidget {
                   ],
                 ),
               ),
-            );
-          }),
+              SliverAppBar(
+                automaticallyImplyLeading: false,
+                pinned: true,
+                elevation: 0,
+                flexibleSpace: Container(
+                  alignment: Alignment.center,
+                  height: kToolbarHeight,
+                  color: kPrimaryColor,
+                  child: Text(
+                    'Micronutriënten',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Container(
+                              child: Table(
+                                columnWidths: {
+                                  0: FractionColumnWidth(0.52),
+                                  1: FractionColumnWidth(0.22),
+                                  2: FractionColumnWidth(0.12),
+                                  3: FractionColumnWidth(0.15)
+                                },
+                                textBaseline: TextBaseline.alphabetic,
+                                defaultVerticalAlignment:
+                                    TableCellVerticalAlignment.middle,
+                                children: [
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0),
+                                      child: Text(
+                                        'Vit A',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${cubit.vitA}µg',
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '800µg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+
+          //  return SingleChildScrollView(
+
+          //   child: Container(
+          //     margin: EdgeInsets.all(8),
+          //     child: Column(
+          //       children: [
+          //         Container(
+          //           margin: EdgeInsets.all(10),
+          //           child: Row(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             children: [
+          //               PieChart(
+          //                 chartRadius: 125.0,
+          //                 ringStrokeWidth: 10,
+          //                 chartLegendSpacing: 25,
+          //                 initialAngleInDegree: 270,
+          //                 // legendOptions: LegendOptions(),
+          //                 chartValuesOptions: ChartValuesOptions(
+          //                   decimalPlaces: 2,
+          //                   showChartValues: false,
+          //                   showChartValuesInPercentage: true,
+          //                   showChartValuesOutside: true,
+          //                   chartValueBackgroundColor: Colors.white,
+          //                 ),
+          //                 colorList: [
+          //                   Colors.green[200],
+          //                   Colors.teal[200],
+          //                   Colors.red[200]
+          //                 ],
+          //                 animationDuration: Duration(seconds: 1),
+          //                 dataMap: {
+          //                   '${cubit.carbsPercent.toStringAsFixed(0)}% ${Koolhydratentotaal}':
+          //                       cubit.carbsPercent,
+          //                   '${cubit.proteinPercent.toStringAsFixed(0)}% ${Eiwittentotaal}':
+          //                       cubit.proteinPercent,
+          //                   '${cubit.fatPercent.toStringAsFixed(0)}% ${Vettentotaal}':
+          //                       cubit.fatPercent,
+          //                 },
+          //                 centerText:
+          //                     '${cubit.kCalSum.toStringAsFixed(0)} ${Calories}',
+
+          //                 chartType: ChartType.ring,
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //         Container(
+          //           child: Row(
+          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //             children: [
+          //               TextButton(
+          //                 child: Text(
+          //                   AppLocalizations.of(context).nutritiontext,
+          //                   style: TextStyle(
+          //                     color: kPrimaryColor,
+          //                     fontSize: 20,
+          //                     fontWeight: FontWeight.bold,
+          //                   ),
+          //                 ),
+          //                 onPressed: null,
+          //               ),
+          //               IconButton(
+          //                 icon: const Icon(Icons.info), color: kPrimaryColor,
+          //                 // tooltip: 'Increase volume by 10',
+          //                 onPressed: () {
+          //                   showDialog(
+          //                     context: context,
+          //                     builder: (BuildContext context) =>
+          //                         _buildPopupDialog(context),
+          //                   );
+          //                 },
+          //               ),
+          //               // onPressed: () {
+          //               //   showDialog(
+          //               //     context: context,
+          //               //     builder: (BuildContext context) =>
+          //               //         _buildPopupDialog(context),
+          //               //   );
+          //               // },
+          //             ],
+          //           ),
+          //         ),
+          //         SingleChildScrollView(
+          //           child: Container(
+          //             child: Column(
+          //               children: [
+          //                 Container(
+          //                   child: Table(
+          //                     columnWidths: {
+          //                       0: FractionColumnWidth(0.52),
+          //                       1: FractionColumnWidth(0.22),
+          //                       2: FractionColumnWidth(0.12),
+          //                       3: FractionColumnWidth(0.15)
+          //                     },
+          //                     textBaseline: TextBaseline.alphabetic,
+          //                     defaultVerticalAlignment:
+          //                         TableCellVerticalAlignment.middle,
+          //                     children: [
+          //                       TableRow(children: [
+          //                         Padding(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 10.0),
+          //                           child: Text(
+          //                             AppLocalizations.of(context).typetext,
+          //                             style: TextStyle(
+          //                                 fontSize: 18,
+          //                                 fontWeight: FontWeight.bold),
+          //                           ),
+          //                         ),
+          //                         Text(
+          //                           AppLocalizations.of(context).howmuchtext,
+          //                           style: TextStyle(fontSize: 18),
+          //                         ),
+          //                         Text(
+          //                           '%',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                         Text(
+          //                           AppLocalizations.of(context).advicetext,
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                       ]),
+
+          //                       TableRow(children: [
+          //                         Padding(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 10.0),
+          //                           child: Text(
+          //                             AppLocalizations.of(context).energy,
+          //                             style: TextStyle(
+          //                                 fontSize: 18,
+          //                                 fontWeight: FontWeight.bold),
+          //                           ),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.kCalSum.toStringAsFixed(0)}kcal',
+          //                           style: TextStyle(fontSize: 18),
+          //                         ),
+          //                         Text(
+          //                           '${(100 - ((calGoal - cubit.kCalSum) / calGoal) * 100).toStringAsFixed(0)}%',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                         Text(
+          //                           '',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                       ]),
+          //                       TableRow(children: [
+          //                         Padding(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 10.0),
+          //                           child: Text(
+          //                             AppLocalizations.of(context)
+          //                                 .totallproteintext,
+          //                             style: TextStyle(
+          //                                 fontSize: 18,
+          //                                 fontWeight: FontWeight.bold),
+          //                           ),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.protein.toStringAsFixed(0)}g',
+          //                           style: TextStyle(fontSize: 18),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.proteinPercent.toStringAsFixed(0)}%',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                         Text(
+          //                           '',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                       ]),
+          //                       TableRow(children: [
+          //                         Padding(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 10.0),
+          //                           child: Text(
+          //                             AppLocalizations.of(context)
+          //                                 .proteinplanttext,
+          //                             style: TextStyle(
+          //                                 fontSize: 18,
+          //                                 fontWeight: FontWeight.bold),
+          //                           ),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.proteinplant.toStringAsFixed(0)}g',
+          //                           style: TextStyle(fontSize: 18),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.proteinPlantPercent.toStringAsFixed(0)}%',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                         Text(
+          //                           '',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                       ]),
+          //                       TableRow(children: [
+          //                         Padding(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 10.0),
+          //                           child: Text(
+          //                             AppLocalizations.of(context)
+          //                                 .proteinanimaltext,
+          //                             style: TextStyle(
+          //                                 fontSize: 18,
+          //                                 fontWeight: FontWeight.bold),
+          //                           ),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.proteinanimal.toStringAsFixed(0)}g',
+          //                           style: TextStyle(fontSize: 18),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.proteinAnimalPercent.toStringAsFixed(0)}%',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                         Text(
+          //                           '',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                       ]),
+          //                       TableRow(children: [
+          //                         Padding(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 10.0),
+          //                           child: Text(
+          //                             AppLocalizations.of(context)
+          //                                 .totalfattext,
+          //                             style: TextStyle(
+          //                                 fontSize: 18,
+          //                                 fontWeight: FontWeight.bold),
+          //                           ),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.fats}g',
+          //                           style: TextStyle(fontSize: 18),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.fatPercent.toStringAsFixed(0)}%',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                         Text(
+          //                           '',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                       ]),
+          //                       TableRow(children: [
+          //                         Padding(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 10.0),
+          //                           child: Text(
+          //                             AppLocalizations.of(context)
+          //                                 .dotssaturatedstext,
+          //                             style: TextStyle(
+          //                                 fontSize: 18,
+          //                                 fontWeight: FontWeight.bold),
+          //                           ),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.saturatedFat}g',
+          //                           style: TextStyle(fontSize: 18),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.saturatedFatPercent.toStringAsFixed(0)}%',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                         Text(
+          //                           '10%',
+          //                           style: TextStyle(
+          //                               fontSize: 16, color: Colors.red),
+          //                         ),
+          //                       ]),
+          //                       TableRow(children: [
+          //                         Padding(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 10.0),
+          //                           child: Text(
+          //                             AppLocalizations.of(context)
+          //                                 .totalcarbstext,
+          //                             style: TextStyle(
+          //                                 fontSize: 18,
+          //                                 fontWeight: FontWeight.bold),
+          //                           ),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.carbs.toStringAsFixed(0)}g',
+          //                           style: TextStyle(fontSize: 18),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.carbsPercent.toStringAsFixed(0)}%',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                         Text(
+          //                           '',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                       ]),
+          //                       TableRow(children: [
+          //                         Padding(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 10.0),
+          //                           child: Text(
+          //                             AppLocalizations.of(context)
+          //                                 .dotsfiberstext,
+          //                             style: TextStyle(
+          //                                 fontSize: 18,
+          //                                 fontWeight: FontWeight.bold),
+          //                           ),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.dietaryFiber}g',
+          //                           style: TextStyle(fontSize: 18),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.dietaryFiberPercent.toStringAsFixed(0)}%',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                         Text(
+          //                           '30-40g',
+          //                           style: TextStyle(
+          //                               fontSize: 16, color: Colors.green),
+          //                         ),
+          //                       ]),
+          //                       TableRow(children: [
+          //                         Padding(
+          //                           padding: const EdgeInsets.symmetric(
+          //                               vertical: 10.0),
+          //                           child: Text(
+          //                             AppLocalizations.of(context)
+          //                                 .dotssugarsstext,
+          //                             style: TextStyle(
+          //                                 fontSize: 18,
+          //                                 fontWeight: FontWeight.bold),
+          //                           ),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.sugars.toStringAsFixed(0)}g',
+          //                           style: TextStyle(fontSize: 18),
+          //                         ),
+          //                         Text(
+          //                           '${cubit.sugarsPercent.toStringAsFixed(0)}%',
+          //                           style: TextStyle(fontSize: 16),
+          //                         ),
+          //                         Text(
+          //                           '60g',
+          //                           style: TextStyle(
+          //                               fontSize: 16, color: Colors.red),
+          //                         )
+          //                       ]),
+          //                       // TableRow(children: [
+          //                       //   Padding(
+          //                       //     padding:
+          //                       //         const EdgeInsets.symmetric(vertical: 10.0),
+          //                       //     child: Text(
+          //                       //       '        Suiker',
+          //                       //       style: TextStyle(
+          //                       //           fontSize: 18,
+          //                       //           fontWeight: FontWeight.bold),
+          //                       //     ),
+          //                       //   ),
+          //                       //   Text(
+          //                       //     '${cubit.sugars.toStringAsFixed(0)}g',
+          //                       //     style: TextStyle(fontSize: 18),
+          //                       //   ),
+          //                       //   Text(
+          //                       //     '${cubit.sugarsPercent.toStringAsFixed(0)}%',
+          //                       //     style: TextStyle(fontSize: 16),
+          //                       //   ),
+          //                       //   Text(
+          //                       //     '60g',
+          //                       //     style:
+          //                       //         TextStyle(fontSize: 16, color: Colors.red),
+          //                       //   )
+          //                       // ]),
+          //                       // TableRow(children: [
+          //                       //   Padding(
+          //                       //     padding:
+          //                       //         const EdgeInsets.symmetric(vertical: 10.0),
+          //                       //     child: Text(
+          //                       //       '        Suiker',
+          //                       //       style: TextStyle(
+          //                       //           fontSize: 18,
+          //                       //           fontWeight: FontWeight.bold),
+          //                       //     ),
+          //                       //   ),
+          //                       //   Text(
+          //                       //     '${cubit.sugars.toStringAsFixed(0)}g',
+          //                       //     style: TextStyle(fontSize: 18),
+          //                       //   ),
+          //                       //   Text(
+          //                       //     '${cubit.sugarsPercent.toStringAsFixed(0)}%',
+          //                       //     style: TextStyle(fontSize: 16),
+          //                       //   ),
+          //                       //   Text(
+          //                       //     '60g',
+          //                       //     style:
+          //                       //         TextStyle(fontSize: 16, color: Colors.red),
+          //                       //   )
+          //                       // ]),
+          //                       // TableRow(children: [
+          //                       //   Padding(
+          //                       //     padding:
+          //                       //         const EdgeInsets.symmetric(vertical: 10.0),
+          //                       //     child: Text(
+          //                       //       'Cholesterol',
+          //                       //       style: TextStyle(
+          //                       //           fontSize: 18, fontWeight: FontWeight.bold),
+          //                       //     ),
+          //                       //   ),
+          //                       //   Text(
+          //                       //     '3g',
+          //                       //     style: TextStyle(fontSize: 18),
+          //                       //   ),
+          //                       //   Text(
+          //                       //     '3%',
+          //                       //     style: TextStyle(fontSize: 18),
+          //                       //   ),
+          //                       // ]),
+          //                     ],
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // );
+        },
+      ),
     );
   }
 }

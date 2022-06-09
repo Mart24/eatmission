@@ -38,8 +38,8 @@
     "energy": "Energie",
     "carbsfulltext": "Koolhydraten",
     "proteinfulltext": "Eiwitten",
-    "proteinplanttext": "  (Plantaardig) ",
-    "proteinanimaltext": "  (Dierlijk) ",
+    "proteinplanttext": "        (Plantaardig) ",
+    "proteinanimaltext": "        (Dierlijk) ",
     "fatsfulltext": "Vetten",
     "saturatedfats": "Verzadigd vet",
     "sugartext": "Suikers",
@@ -66,7 +66,7 @@
     "greentext": "Groen",
 
 
-    "dotsfiberstext": "        Vezels",
+    "dotsfiberstext": "Vezels",
     "dotssaturatedstext": "        Verzadigd vet",
     "dotssugarsstext": "        Suiker",
 

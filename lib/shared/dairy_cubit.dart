@@ -40,7 +40,31 @@ class DairyCubit extends Cubit<DairyStates> {
       sugars = 0,
       saturatedFat = 0,
       dietaryFiber = 0,
-      co2Sum = 0;
+      co2Sum = 0,
+      salt = 0,
+      selenium = 0,
+      vitD = 0,
+      vitB1 = 0,
+      vitB12 = 0,
+      vitB2 = 0,
+      vitB6 = 0,
+      vitC = 0,
+      vitE = 0,
+      zink = 0,
+      alcohol = 0,
+      calcium = 0,
+      foliumzuur = 0,
+      fosfor = 0,
+      iron = 0,
+      jodium = 0,
+      kalium = 0,
+      magnesium = 0,
+      natrium = 0,
+      niacine = 0,
+      water = 0;
+
+  num vitA = 0;
+
   double fatPercent = 0,
       carbsPercent = 0,
       proteinPercent = 0,
@@ -58,8 +82,11 @@ class DairyCubit extends Cubit<DairyStates> {
     kCalSum = breakfastKcalSum = lunchKcalSum = dinerKcalSum = snacksKcalSum =
         othersKcalSum = sumco2Sum = breakfastsumco2Sum = lunchsumco2Sum =
             dinersumco2Sum = snackssumco2Sum = otherssumco2Sum = 0;
-    carbs = protein = proteinplant = proteinanimal =
-        fats = sugars = saturatedFat = dietaryFiber = co2Sum = 0;
+    carbs = protein = proteinplant = proteinanimal = fats = sugars =
+        saturatedFat = dietaryFiber = co2Sum = salt = selenium = vitA = vitD =
+            vitB1 = vitB12 = vitB2 = vitB6 = vitC = vitE = zink = alcohol =
+                calcium = foliumzuur = fosfor = iron =
+                    jodium = kalium = magnesium = natrium = niacine = water = 0;
     fatPercent = carbsPercent = proteinPercent = proteinPlantPercent =
         proteinAnimalPercent =
             sugarsPercent = saturatedFatPercent = dietaryFiberPercent = 0;
@@ -71,9 +98,10 @@ class DairyCubit extends Cubit<DairyStates> {
     print('sum called');
     kCalSum = breakfastKcalSum = lunchKcalSum = dinerKcalSum = snacksKcalSum =
         othersKcalSum = co2Sum = sumco2Sum = breakfastsumco2Sum =
-            lunchsumco2Sum = dinersumco2Sum = snackssumco2Sum =
-                otherssumco2Sum = carbs = fats = protein = proteinplant =
-                    proteinanimal = sugars = saturatedFat = dietaryFiber = 0;
+            lunchsumco2Sum = dinersumco2Sum = snackssumco2Sum = otherssumco2Sum =
+                carbs = fats = protein = proteinplant = proteinanimal = sugars =
+                    saturatedFat = dietaryFiber = salt =
+                        selenium = vitA = vitD = vitB1 = vitB12 = vitB2 = vitB6 = vitC = vitE = zink = alcohol = calcium = foliumzuur = fosfor = iron = jodium = kalium = magnesium = natrium = niacine = water = 0;
     // List<num> ids = [];
 
     tripsList.forEach((element) {
@@ -89,6 +117,29 @@ class DairyCubit extends Cubit<DairyStates> {
       sugars += data['sugars'];
       saturatedFat += data['saturatedfat'];
       dietaryFiber += data['dietaryfiber'];
+      salt += data['salt'];
+      selenium += data['selenium'];
+      vitA += data['vitA'];
+      vitD += data['vitD'];
+      vitB1 += data['vitB1'];
+      vitB12 += data['vitB12'];
+      vitB2 += data['vitB2'];
+      vitB6 += data['vitB6'];
+      vitC += data['vitC'];
+      vitE += data['vitE'];
+      zink += data['zink'];
+      alcohol += data['alcohol'];
+      calcium += data['calcium'];
+      foliumzuur += data['foliumzuur'];
+      fosfor += data['fosfor'];
+      iron += data['iron'];
+      jodium += data['jodium'];
+      kalium += data['kalium'];
+      magnesium += data['magnesium'];
+      natrium += data['natrium'];
+      niacine += data['niacine'];
+      water += data['water'];
+
       //ids.add(data['productid']);
     });
     breakfastList.forEach((element) {
@@ -127,6 +178,28 @@ class DairyCubit extends Cubit<DairyStates> {
     sugars = double.parse(sugars.toStringAsFixed(1));
     saturatedFat = double.parse(saturatedFat.toStringAsFixed(1));
     dietaryFiber = double.parse(dietaryFiber.toStringAsFixed(1));
+    salt = double.parse(salt.toStringAsFixed(1));
+    selenium = double.parse(selenium.toStringAsFixed(1));
+    vitA = int.parse(vitA.toStringAsFixed(0));
+    vitD = double.parse(vitD.toStringAsFixed(0));
+    vitB1 = double.parse(vitB1.toStringAsFixed(0));
+    vitB12 = double.parse(vitB12.toStringAsFixed(1));
+    vitB2 = double.parse(vitB2.toStringAsFixed(1));
+    vitB6 = double.parse(vitB6.toStringAsFixed(1));
+    vitC = double.parse(vitC.toStringAsFixed(1));
+    vitE = double.parse(vitE.toStringAsFixed(1));
+    zink = double.parse(zink.toStringAsFixed(1));
+    alcohol = double.parse(alcohol.toStringAsFixed(1));
+    calcium = double.parse(calcium.toStringAsFixed(1));
+    foliumzuur = double.parse(foliumzuur.toStringAsFixed(1));
+    fosfor = double.parse(fosfor.toStringAsFixed(1));
+    iron = double.parse(iron.toStringAsFixed(1));
+    jodium = double.parse(jodium.toStringAsFixed(1));
+    kalium = double.parse(kalium.toStringAsFixed(1));
+    magnesium = double.parse(magnesium.toStringAsFixed(1));
+    natrium = double.parse(natrium.toStringAsFixed(1));
+    niacine = double.parse(niacine.toStringAsFixed(1));
+    water = double.parse(water.toStringAsFixed(1));
     emit(SumBasicUpdated());
     print('sum calculated');
     // print('energy' + kCalSum.toString());

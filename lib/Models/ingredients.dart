@@ -216,8 +216,9 @@ class Trip {
     dietaryfiber = snapshotAsMap['dietaryfiber'];
 
     salt = snapshot['salt'];
-    selenium = snapshot['selenium'];
+
     // unit = snapshot['unit'];
+    selenium = snapshot['selenium'];
     vitA = snapshot['vitA'];
     vitD = snapshot['vitD'];
     vitB1 = snapshot['vitB1'];

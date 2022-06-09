@@ -74,8 +74,8 @@
     "eatentext": "Eaten    ",
     "carbstext": " Carbs ",
     "proteintext": " Proteins ",
-    "proteinplanttext": "  (Plant) ",
-    "proteinanimaltext": "  (Animal) ",
+    "proteinplanttext": "        (Plant) ",
+    "proteinanimaltext": "        (Animal) ",
     "fatstext": " Fats ",
     "breakfast": "Breakfast",
     "otherstext": "Others",
@@ -118,7 +118,7 @@
     "redtext": "Red",
     "greentext": "Green",
 
-    "dotsfiberstext": "        Fibers",
+    "dotsfiberstext": "Fibers",
     "dotssaturatedstext": "        Saturated fat",
     "dotssugarsstext": "        Sugars",
 
