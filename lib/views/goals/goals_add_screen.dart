@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,8 +11,10 @@ import 'package:food_app/Widgets/custom_button.dart';
 import 'package:food_app/shared/app_cubit.dart';
 import 'package:food_app/shared/goal_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GoalsAddScreen extends StatefulWidget {
   const GoalsAddScreen({Key key}) : super(key: key);
@@ -160,6 +163,124 @@ class _GoalsAddScreenState extends State<GoalsAddScreen> {
                             Icons.info_outline,
                             color: kPrimaryColor,
                           ),
+                          RichText(
+                            text: TextSpan(
+                              text: '',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  background: Paint()..color = kPrimaryColor,
+                                  color: Colors.white),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: 'Spaardoel voorbeelden',
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text('Voorbeelden'),
+                                                content: RichText(
+                                                  text: TextSpan(
+                                                    text:
+                                                        'Hier zijn wat voorbeelden van spaardoelen. Zo heeft één t-shirt een carbon footprint van ',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.black),
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: '7kg/CO₂-eq',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.green),
+                                                        recognizer:
+                                                            new TapGestureRecognizer()
+                                                              ..onTap = () {
+                                                                launch(
+                                                                    'https://oneless.co.in/blogs/blog/carbon-footprint-of-a-t-shirt');
+                                                              },
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            ', één spijkerbroek ',
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      TextSpan(
+                                                        text: '33,4 kg/CO₂-eq',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.green),
+                                                        recognizer:
+                                                            new TapGestureRecognizer()
+                                                              ..onTap = () {
+                                                                launch(
+                                                                    'https://link.springer.com/article/10.1007/s11625-022-01131-0');
+                                                              },
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            ' en een enkeltje met de trein van Amsterdam naar Barcelona zo rond de ',
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      TextSpan(
+                                                        text: '50 kg/CO₂-eq',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.green),
+                                                        recognizer:
+                                                            new TapGestureRecognizer()
+                                                              ..onTap = () {
+                                                                launch(
+                                                                    'https://travelandclimate.org/');
+                                                              },
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            '. Bereken je reis zelf ',
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                      TextSpan(
+                                                        text: 'hier',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.green),
+                                                        recognizer:
+                                                            new TapGestureRecognizer()
+                                                              ..onTap = () {
+                                                                launch(
+                                                                    'https://travelandclimate.org/');
+                                                              },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            context, 'OK'),
+                                                    child: const Text('OK'),
+                                                  ),
+                                                ],
+                                              );
+                                            });
+                                      },
+                                    style: TextStyle(
+                                        //    color: Colors.blue,
+                                        )),
+                                TextSpan(text: ''),
+                              ],
+                            ),
+                          ),
                         ]),
                       ),
                       Row(
@@ -187,7 +308,7 @@ class _GoalsAddScreenState extends State<GoalsAddScreen> {
                             width: 10,
                           ),
                           Text(
-                            'kg/CO₂',
+                            'kg/CO₂-eq',
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,

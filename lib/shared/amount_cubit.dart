@@ -68,69 +68,72 @@ class AmountCubit extends Cubit<AmountState> {
         size *
         portion *
         0.01.toDouble());
-    // double salt = ((foodDocument['salt'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double alcohol = ((foodDocument['alcohol'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double natrium = ((foodDocument['natrium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double kalium = ((foodDocument['kalium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double calcium = ((foodDocument['calcium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double magnesium = ((foodDocument['magnesium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double iron = ((foodDocument['iron'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double selenium = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double zink = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double vitA = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double vitB = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double vitC = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double vitE = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double vitB1 = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double vitB2 = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double vitB6 = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double vitB12 = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double foliumzuur = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double niacine = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double jodium = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
-    // double fosfor = ((foodDocument['selenium'].toDouble()) *
-    //     ((double.tryParse(_budgetController.text) ?? 100)) *
-    //     0.01.toDouble());
+    double salt =
+        ((foodDocument['salt'].toDouble()) * size * portion * 0.01.toDouble());
+    double selenium = ((foodDocument['selenium'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double vitA =
+        ((foodDocument['vitA'].toDouble()) * size * portion * 0.01.toDouble());
+    double alcohol = ((foodDocument['alcohol'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double natrium = ((foodDocument['natrium'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double kalium = ((foodDocument['kalium'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double calcium = ((foodDocument['calcium'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double magnesium = ((foodDocument['magnesium'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double iron =
+        ((foodDocument['iron'].toDouble()) * size * portion * 0.01.toDouble());
+    double zink =
+        ((foodDocument['zink'].toDouble()) * size * portion * 0.01.toDouble());
+    double vitD =
+        ((foodDocument['vitD'].toDouble()) * size * portion * 0.01.toDouble());
+    double vitE =
+        ((foodDocument['vitE'].toDouble()) * size * portion * 0.01.toDouble());
+    double vitC =
+        ((foodDocument['vitC'].toDouble()) * size * portion * 0.01.toDouble());
+    double vitB1 =
+        ((foodDocument['vitB1'].toDouble()) * size * portion * 0.01.toDouble());
+    double vitB2 =
+        ((foodDocument['vitB2'].toDouble()) * size * portion * 0.01.toDouble());
+    double vitB6 =
+        ((foodDocument['vitB6'].toDouble()) * size * portion * 0.01.toDouble());
+    double vitB12 = ((foodDocument['vitB12'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double foliumzuur = ((foodDocument['foliumzuur'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double niacine = ((foodDocument['niacine'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double jodium = ((foodDocument['jodium'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double fosfor = ((foodDocument['fosfor'].toDouble()) *
+        size *
+        portion *
+        0.01.toDouble());
+    double water =
+        ((foodDocument['water'].toDouble()) * size * portion * 0.01.toDouble());
 
     //  trip.startDate = _startDate;
     // trip.endDate = _endDate;
@@ -143,6 +146,41 @@ class AmountCubit extends Cubit<AmountState> {
     trip.fat = fat;
     trip.sugars = sugars;
     trip.dietaryfiber = dietaryfiber;
+    trip.salt = salt;
+    trip.selenium = selenium;
+    trip.vitA = vitA;
+    trip.vitD = vitD;
+    trip.vitB1 = vitB1;
+    trip.vitB2 = vitB2;
+    trip.vitB12 = vitB12;
+    trip.vitB6 = vitB6;
+    trip.vitC = vitC;
+    trip.vitE = vitE;
+    trip.alcohol = alcohol;
+    trip.calcium = calcium;
+    trip.foliumzuur = foliumzuur;
+    trip.fosfor = fosfor;
+    trip.iron = iron;
+    trip.zink = zink;
+    trip.jodium = jodium;
+    trip.kalium = kalium;
+    trip.magnesium = magnesium;
+    trip.natrium = natrium;
+    trip.niacine = niacine;
+    trip.water = water;
+
+    // zink = snapshot['zink'];
+    // alcohol = snapshot['alcohol'];
+    // calcium = snapshot['calcium'];
+    // foliumzuur = snapshot['foliumzuur'];
+    // fosfor = snapshot['fosfor'];
+    // iron = snapshot['iron'];
+    // jodium = snapshot['jodium'];
+    // kalium = snapshot['kalium'];
+    // magnesium = snapshot['magnesium'];
+    // natrium = snapshot['natrium'];
+    // niacine = snapshot['niacine'];
+    // water = snapshot['water'];
 
     trip.saturatedfat = saturatedfat;
     trip.eatDate = eattime;

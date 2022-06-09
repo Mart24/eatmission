@@ -44,6 +44,7 @@ dependencies:
   flutter_settings_screens: ^0.2.2+1
   url_launcher: ^5.3.0
   provider: ^5.0.0
+  
 
  
 

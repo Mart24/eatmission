@@ -52,8 +52,6 @@ class DairyCubit extends Cubit<DairyStates> {
       vitE = 0,
       zink = 0,
       alcohol = 0,
-      calcium = 0,
-      foliumzuur = 0,
       fosfor = 0,
       iron = 0,
       jodium = 0,
@@ -63,7 +61,7 @@ class DairyCubit extends Cubit<DairyStates> {
       niacine = 0,
       water = 0;
 
-  num vitA = 0;
+  num vitA = 0, calcium = 0, foliumzuur = 0;
 
   double fatPercent = 0,
       carbsPercent = 0,
@@ -190,8 +188,8 @@ class DairyCubit extends Cubit<DairyStates> {
     vitE = double.parse(vitE.toStringAsFixed(1));
     zink = double.parse(zink.toStringAsFixed(1));
     alcohol = double.parse(alcohol.toStringAsFixed(1));
-    calcium = double.parse(calcium.toStringAsFixed(1));
-    foliumzuur = double.parse(foliumzuur.toStringAsFixed(1));
+    calcium = double.parse(calcium.toStringAsFixed(0));
+    foliumzuur = double.parse(foliumzuur.toStringAsFixed(0));
     fosfor = double.parse(fosfor.toStringAsFixed(1));
     iron = double.parse(iron.toStringAsFixed(1));
     jodium = double.parse(jodium.toStringAsFixed(1));
