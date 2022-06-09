@@ -374,10 +374,10 @@ class _FoodDateState extends State<FoodDate> {
                                                         trip.recommendation +
                                                         ". Je zal rond de: " +
                                                         co2reduction
-                                                            .toString() +
+                                                            .toStringAsFixed(2) +
                                                         'kg Co2-eq besparen (besparing van ' +
                                                         co2RecommendationPercentage
-                                                            .toString() +
+                                                            .toStringAsFixed(2). +
                                                         "%) per 100 gram van dit product"),
                                                 actions: <Widget>[
                                                   TextButton(
