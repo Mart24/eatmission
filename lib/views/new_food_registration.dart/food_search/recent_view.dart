@@ -59,41 +59,46 @@ class _RecentViewState extends State<RecentView> {
     }, builder: (context, state) {
       if (state is RecentResultFound) {
         return FutureBuilder<List<FooddataSQLJSON>>(
-                      future: dbService.getGFooddata(),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData)
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        return ListView.builder(
-                            keyboardDismissBehavior:
-                            ScrollViewKeyboardDismissBehavior.onDrag,
-                            itemCount: state.tripsList.length,
-                            itemBuilder: (context, index) {
-                              List<Trip> tripsList = state.tripsList;
-                              FooddataSQLJSON tripFromLocalDB = snapshot.data.where((element) => element.productid == state.tripsList[index].id).first;
-                              return ListTile(
-                                title: Text(tripFromLocalDB.foodname),
-                                subtitle: Text(
-                                    '${tripFromLocalDB.category}, ${tripFromLocalDB.brand}'),
-                                // Text(snapshot.data[index].productid.toString()),
-                                trailing: IconButton(
-                                    onPressed: () {
-                                      recentCubit.deleteRecentTrip(tripsList[index]);
-                                    },
-                                    icon: Icon(Icons.delete)),
-                                onTap: () {
-                                  // push the amount value to the summary page
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => FoodDate(trip: tripsList[index])),
-                                  );
-                                },
-                              );
-                            });
-                      }
-                  );
+            future: dbService.getGFooddata(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData)
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              return ListView.builder(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  itemCount: state.tripsList.length,
+                  itemBuilder: (context, index) {
+                    List<Trip> tripsList = state.tripsList;
+                    FooddataSQLJSON tripFromLocalDB = snapshot.data
+                        .where((element) =>
+                            element.productid == state.tripsList[index].id)
+                        .first;
+                    return ListTile(
+                      title: Text(tripFromLocalDB.foodname),
+                      subtitle: Text(
+                          '${tripFromLocalDB.category}, ${tripFromLocalDB.brand}'),
+                      // Text(snapshot.data[index].productid.toString()),
+                      // trailing: IconButton(
+                      //     onPressed: () {
+                      //       recentCubit.deleteRecentTrip(tripsList[index]);
+                      //     },
+                      //     icon: Icon(Icons.delete)),
+                      trailing:
+                          Text('${snapshot.data[index].kcal.toString()} Kcal'),
+                      onTap: () {
+                        // push the amount value to the summary page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  FoodDate(trip: tripsList[index])),
+                        );
+                      },
+                    );
+                  });
+            });
       } else {
         return Center(
           child: CircularProgressIndicator(),

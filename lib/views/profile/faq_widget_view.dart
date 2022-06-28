@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/views/constants.dart';
 
 class FaqView extends StatelessWidget {
   const FaqView({Key key}) : super(key: key);
 
-  static const String _title = 'FAQ';
+  static const String _title = 'Tips & Tricks';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //Title: _title,
-      appBar: AppBar(title: const Text(_title)),
+      appBar: AppBar(
+        title: const Text(_title),
+        backgroundColor: kPrimaryColor,
+      ),
       body: const MyStatefulWidget(),
     );
   }

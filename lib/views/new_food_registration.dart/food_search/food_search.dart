@@ -28,13 +28,14 @@ class NewFoodIntake extends StatefulWidget {
 }
 
 class _NewFoodIntakeState extends State<NewFoodIntake> {
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
           appBar: AppBar(
+            systemOverlayStyle: SystemUiOverlayStyle.light,
+
             title: Text(AppLocalizations.of(context).searchyourproductstext),
             backgroundColor: kPrimaryColor,
             // actions: [
@@ -43,6 +44,7 @@ class _NewFoodIntakeState extends State<NewFoodIntake> {
             //       onPressed: searchCubit.scanBarcode)
             // ],
             bottom: TabBar(
+              indicatorColor: Colors.white,
               tabs: [
                 Tab(
                   height: 45,
@@ -50,10 +52,11 @@ class _NewFoodIntakeState extends State<NewFoodIntake> {
                   icon: Icon(
                     Icons.fastfood_outlined,
                     size: 18,
+                    color: Colors.white,
                   ),
                   child: Text(
-                    'All',
-                    style: TextStyle(fontSize: 14),
+                    (AppLocalizations.of(context).all),
+                    style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                 ),
                 Tab(
@@ -62,22 +65,24 @@ class _NewFoodIntakeState extends State<NewFoodIntake> {
                   icon: Icon(
                     Icons.favorite_outline,
                     size: 18,
+                    color: Colors.white,
                   ),
                   child: Text(
-                    'Favorites',
-                    style: TextStyle(fontSize: 14),
+                    (AppLocalizations.of(context).favorites),
+                    style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                 ),
                 Tab(
                   height: 45,
                   iconMargin: EdgeInsets.only(bottom: 4),
                   icon: Icon(
-                    Icons.flash_on,
+                    Icons.search,
                     size: 18,
+                    color: Colors.white,
                   ),
                   child: Text(
-                    'Recent',
-                    style: TextStyle(fontSize: 14),
+                    (AppLocalizations.of(context).recent),
+                    style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                 ),
               ],
@@ -85,8 +90,8 @@ class _NewFoodIntakeState extends State<NewFoodIntake> {
           ),
           body: TabBarView(children: [
             AllView(),
-            FavView( ),
-            RecentView( ),
+            FavView(),
+            RecentView(),
           ])),
     );
   }

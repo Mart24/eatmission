@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:food_app/Models/ingredients.dart';
@@ -10,6 +11,7 @@ import 'package:food_app/Views/nutrition_details_page.dart';
 import 'package:food_app/Widgets/custom_dialog_impact.dart';
 import 'package:food_app/shared/app_cubit.dart';
 import 'package:food_app/shared/dairy_cubit.dart';
+import 'package:food_app/views/goals/log_cubit.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -49,6 +51,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
+        // systemOverlayStyle: SystemUiOverlayStyle.dark,
         elevation: 0,
       ),
       body: CustomScrollView(
@@ -506,7 +509,7 @@ class CaloriesIndecator extends StatelessWidget {
                   children: <TextSpan>[
                     TextSpan(text: AppLocalizations.of(context).eatentext),
                     TextSpan(
-                      text: '${kCalSum.toStringAsFixed(0)}',
+                      text: ' ${kCalSum.toStringAsFixed(0)}',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -855,11 +858,16 @@ class DetailsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LogCubit logCubit = LogCubit.instance(context);
+
     return TextButton(
       onPressed: () {
         DairyCubit.instance(context).calcPercents();
         Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => NutritionalDetailsPage()));
+
+        logCubit.add1Log("Details button");
+        print("log to Details button");
       },
       child: Text(
         "Details",
@@ -885,6 +893,8 @@ class ImpactButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LogCubit logCubit = LogCubit.instance(context);
+
     return TextButton(
       onPressed: () {
         showDialog(
@@ -897,6 +907,9 @@ class ImpactButton extends StatelessWidget {
                 text: "Sluit",
               );
             });
+
+        logCubit.add1Log("Impact button");
+        print("log to Impact button");
       },
       child: Text(
         "Impact",

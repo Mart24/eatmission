@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_app/Models/ingredients.dart';
 import 'package:food_app/Views/compare_feature/comparison_view.dart';
@@ -9,6 +10,7 @@ import 'package:food_app/Widgets/rounded_button.dart';
 import 'package:food_app/shared/productOne_cubit.dart';
 import 'package:food_app/shared/productTwo_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:food_app/views/goals/log_cubit.dart';
 
 import 'comparison_search_page.dart';
 
@@ -90,6 +92,7 @@ class _ComparePageState extends State<ComparePage> {
     }
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context).comparevietheadertext,
@@ -141,6 +144,7 @@ class ProductTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProductTwoCubit productTwoCubit = ProductTwoCubit.instance(context);
+    LogCubit logCubit = LogCubit.instance(context);
 
     return Expanded(
       key: ValueKey('e2'),
@@ -217,6 +221,8 @@ class ProductTwo extends StatelessWidget {
                                   // productNumber: 2,
                                 ),
                               ));
+                          logCubit.add1Log("Compare2 button");
+                          print("log to Compare button");
                         },
                         label: const Text(
                           'Product 2',
@@ -246,6 +252,7 @@ class ProductOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ProductOneCubit productOneCubit = ProductOneCubit.instance(context);
+    LogCubit logCubit = LogCubit.instance(context);
 
     return Expanded(
       key: ValueKey('e1'),
@@ -321,6 +328,8 @@ class ProductOne extends StatelessWidget {
                                   // productNumber: 1,
                                 ),
                               ));
+                          logCubit.add1Log("Compare1 button");
+                          print("log to Compare1 button");
                         },
                         label: const Text('Product 1',
                             style: TextStyle(color: Colors.white)),

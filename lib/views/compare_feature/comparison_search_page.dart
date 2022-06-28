@@ -39,6 +39,7 @@ class _CompareSearch1State extends State<CompareSearch1> {
 
   // Trip trip;
   String scanResult;
+  FocusNode myFocusNode1 = new FocusNode();
 
   Widget myWidget() {
     return GestureDetector(
@@ -51,10 +52,21 @@ class _CompareSearch1State extends State<CompareSearch1> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  focusNode: myFocusNode1,
+                  cursorColor: kPrimaryColor,
                   autofocus: true,
                   decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: kPrimaryColor, width: 2.0),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                       border: OutlineInputBorder(),
-                      labelText: AppLocalizations.of(context).typesomething),
+                      labelText: AppLocalizations.of(context).typesomething,
+                      labelStyle: TextStyle(
+                          color: myFocusNode1.hasFocus
+                              ? kPrimaryColor
+                              : kPrimaryColor)),
                   onChanged: (value) {
                     keyword = value;
                     setState(() {});
@@ -160,6 +172,7 @@ class _CompareSearch1State extends State<CompareSearch1> {
     // print('Comparison page of Product: ${widget.productNumber}');
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         title: Text('Product 1'),
         backgroundColor: kPrimaryColor,
         //  actions: [
@@ -191,6 +204,7 @@ class _CompareSearch2State extends State<CompareSearch2> {
 
   // Trip trip;
   String scanResult;
+  FocusNode myFocusNode = new FocusNode();
 
   Widget myWidget() {
     return SingleChildScrollView(
@@ -201,10 +215,21 @@ class _CompareSearch2State extends State<CompareSearch2> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                focusNode: myFocusNode,
+                cursorColor: kPrimaryColor,
                 autofocus: true,
                 decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: kPrimaryColor, width: 2.0),
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                     border: OutlineInputBorder(),
-                    labelText: AppLocalizations.of(context).typesomething),
+                    labelText: AppLocalizations.of(context).typesomething,
+                    labelStyle: TextStyle(
+                        color: myFocusNode.hasFocus
+                            ? kPrimaryColor
+                            : kPrimaryColor)),
                 onChanged: (value) {
                   keyword = value;
                   setState(() {});
@@ -309,6 +334,8 @@ class _CompareSearch2State extends State<CompareSearch2> {
     // print('Comparison page of Product: ${widget.productNumber}');
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+
         title: Text('Product 2'),
         backgroundColor: kPrimaryColor,
         // actions: [

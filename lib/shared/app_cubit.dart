@@ -331,13 +331,20 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  Future<void> getOneMonthData(Database database, String tableName) async {
+  Future<void> getOneMonthData(Database database, String tableName,
+      {DateTime date, bool forwardDirection = false}) async {
     // emit(DatabaseGetLoadingState());
-    DateTime now = DateTime.now();
+    DateTime now;
+    if (forwardDirection) {
+      now = date.add(Duration(days: 30)) ?? DateTime.now();
+    } else {
+      now = date ?? DateTime.now();
+    }
     now = DateTime(now.year, now.month, now.day);
     database.query(tableName,
-        limit: 31,
+        limit: 30,
         where: "date > ? and date <= ?",
+        orderBy: 'date DESC',
         whereArgs: [
           now.subtract(Duration(days: 30)).toIso8601String(),
           now.toIso8601String()
@@ -358,13 +365,20 @@ class AppCubit extends Cubit<AppStates> {
     });
   }
 
-  Future<void> getOneMonthDataCo2(Database database, String tableName) async {
+  Future<void> getOneMonthDataCo2(Database database, String tableName,
+      {DateTime date, bool forwardDirection = false}) async {
     // emit(DatabaseGetLoadingState());
-    DateTime now = DateTime.now();
+    DateTime now;
+    if (forwardDirection) {
+      now = date.add(Duration(days: 30)) ?? DateTime.now();
+    } else {
+      now = date ?? DateTime.now();
+    }
     now = DateTime(now.year, now.month, now.day);
     database.query(tableName,
-        limit: 31,
+        limit: 30,
         where: "date > ? and date <= ?",
+        orderBy: 'date DESC',
         whereArgs: [
           now.subtract(Duration(days: 30)).toIso8601String(),
           now.toIso8601String()

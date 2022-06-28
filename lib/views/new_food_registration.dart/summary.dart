@@ -35,12 +35,14 @@ class NewFoodSummaryView extends StatelessWidget {
             Text(" ${trip.carbs.toStringAsFixed(2)} carbs"),
             Text(" ${trip.fat.toStringAsFixed(2)} fat"),
             Text(" ${trip.protein.toStringAsFixed(2)} protein"),
-            Text("eaten amount ${trip.amount.toString()} ${trip.amountUnit.toString()}"),
+            Text(
+                "eaten amount ${trip.amount.toString()} ${trip.amountUnit.toString()}"),
             Text(
                 "Food intake data ${trip.eatDate.day}-${trip.eatDate.month}-${trip.eatDate.year}"),
             Text("Categorie: ${trip.categorie}"),
             RaisedButton(
               child: Text("Continue"),
+              color: kPrimaryColor,
               onPressed: () async {
                 // save data to firebase
                 final uid = await Provider.of(context).auth.getCurrentUID();

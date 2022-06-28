@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:food_app/Views/constants.dart';
 import 'package:food_app/Widgets/custom_button.dart';
 import 'package:food_app/shared/app_cubit.dart';
 import 'package:food_app/shared/goal_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:food_app/views/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:intl/intl.dart';
@@ -186,7 +186,8 @@ class _GoalsAddScreenState extends State<GoalsAddScreen> {
                                                         'Hier zijn wat voorbeelden van spaardoelen. Zo heeft één t-shirt een carbon footprint van ',
                                                     style: TextStyle(
                                                         fontSize: 16,
-                                                        color: Colors.black),
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
                                                     children: <TextSpan>[
                                                       TextSpan(
                                                         text: '7kg/CO₂-eq',
@@ -205,8 +206,9 @@ class _GoalsAddScreenState extends State<GoalsAddScreen> {
                                                             ', één spijkerbroek ',
                                                         style: TextStyle(
                                                             fontSize: 16,
-                                                            color:
-                                                                Colors.black),
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor),
                                                       ),
                                                       TextSpan(
                                                         text: '33,4 kg/CO₂-eq',
@@ -225,8 +227,9 @@ class _GoalsAddScreenState extends State<GoalsAddScreen> {
                                                             ' en een enkeltje met de trein van Amsterdam naar Barcelona zo rond de ',
                                                         style: TextStyle(
                                                             fontSize: 16,
-                                                            color:
-                                                                Colors.black),
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor),
                                                       ),
                                                       TextSpan(
                                                         text: '50 kg/CO₂-eq',
@@ -245,8 +248,9 @@ class _GoalsAddScreenState extends State<GoalsAddScreen> {
                                                             '. Bereken je reis zelf ',
                                                         style: TextStyle(
                                                             fontSize: 16,
-                                                            color:
-                                                                Colors.black),
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor),
                                                       ),
                                                       TextSpan(
                                                         text: 'hier',
@@ -323,8 +327,8 @@ class _GoalsAddScreenState extends State<GoalsAddScreen> {
                       Row(children: [
                         TextButton(
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Theme.of(context).buttonColor),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(kPrimaryColor),
                           ),
                           onPressed: () {
                             DatePicker.showDatePicker(
@@ -351,7 +355,8 @@ class _GoalsAddScreenState extends State<GoalsAddScreen> {
                                 //color: Theme.of(context).primaryColor,
                                 // color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16),
+                                fontSize: 16,
+                                color: Colors.white),
                           ),
                         ),
                         SizedBox(

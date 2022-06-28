@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/Services/auth_service.dart';
 import 'package:food_app/Widgets/Provider_Auth.dart';
+import 'package:food_app/Widgets/notification.dart';
 import 'package:food_app/shared/app_cubit.dart';
 import 'package:food_app/shared/dairy_cubit.dart';
 import 'package:food_app/views/constants.dart';
 import 'package:food_app/views/profile/bmr_test.dart';
 import 'package:food_app/views/profile/co2_calorie_goal_view.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class SettingsThreePage extends StatelessWidget {
   static final String path = "lib/src/pages/settings/settings3.dart";
@@ -15,11 +18,13 @@ class SettingsThreePage extends StatelessWidget {
     fontWeight: FontWeight.bold,
     fontSize: 20.0,
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         backgroundColor: kPrimaryColor,
         title: Text(
           'Settings',

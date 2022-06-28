@@ -5,9 +5,11 @@ import 'package:food_app/Views/compare_feature/compare_page.dart';
 import 'package:food_app/Views/constants.dart';
 import 'package:food_app/Views/goals/goals_home.dart';
 import 'package:food_app/Views/dashboard_diary_view.dart';
+import 'package:food_app/Widgets/notification.dart';
 import 'package:food_app/shared/app_cubit.dart';
 import 'package:food_app/shared/productOne_cubit.dart';
 import 'package:food_app/shared/productTwo_cubit.dart';
+import 'package:food_app/views/goals/log_cubit.dart';
 import 'package:food_app/views/new_food_registration.dart/food_search/food_search.dart';
 import 'package:food_app/views/profile/bmr_test.dart';
 import 'package:food_app/views/profile/faq_widget_view.dart';
@@ -88,6 +90,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    LogCubit logCubit = LogCubit.instance(context);
+
     return Scaffold(
       // appBar: AppBar(
       //   title: Text("Food App"),
@@ -133,6 +137,10 @@ class _HomeState extends State<Home> {
               MaterialPageRoute(
                 builder: (context) => NewFoodIntake(),
               ));
+          sendNotification(
+              title: "Beste deelnemer", body: "Vergeet niet te tracken :)");
+          logCubit.add1Log("Intake button");
+          print("log to Intake button");
         },
         //  label: const Text('Food'),
         child: const Icon(
@@ -183,6 +191,8 @@ class _HomeState extends State<Home> {
   }
 
   void onTabTapped(int index) {
+    LogCubit logCubit = LogCubit.instance(context);
+
     if (index == 2) {
       final appCubit = AppCubit.instance(context);
       final uid = FirebaseAuth.instance.currentUser.uid;
@@ -210,5 +220,30 @@ class _HomeState extends State<Home> {
     setState(() {
       _currentIndex = index;
     });
+    switch (_currentIndex) {
+      case 0:
+        logCubit.add1Log("Dashboard button");
+        print("log to Dashboard button");
+        break;
+      case 1:
+        logCubit.add1Log("Compare button");
+        print("log to Compare button");
+        break;
+
+      case 2:
+        logCubit.add1Log("Intake button");
+        print("log to Intake button");
+        break;
+      case 3:
+        logCubit.add1Log("Goals button");
+        print("log to Goals button");
+        break;
+      case 4:
+        logCubit.add1Log("Profile button");
+        print("log to Profile button");
+        break;
+      default:
+        print("do nothing");
+    }
   }
 }

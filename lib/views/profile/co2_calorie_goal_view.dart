@@ -108,6 +108,10 @@ class _HomePage extends State<RadioGroup> {
           child: Column(
             children: [
               Text(
+                '*Let op: Als je je caloriegoal verandert: Vul dan ook opnieuw verhoudingswaarden in. Anders heb je nog je oude goals',
+                style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+              ),
+              Text(
                 'Caloriegoal',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
@@ -148,8 +152,7 @@ class _HomePage extends State<RadioGroup> {
                     Text(
                       "Kooly",
                       textAlign: TextAlign.center,
-                      style: TextStyle()
-                          .copyWith(color: Colors.black, fontSize: 18.0),
+                      style: TextStyle().copyWith(fontSize: 18.0),
                     ),
                     new Flexible(
                       child: Padding(
@@ -176,8 +179,7 @@ class _HomePage extends State<RadioGroup> {
                     Text(
                       "Eiwit",
                       textAlign: TextAlign.center,
-                      style: TextStyle()
-                          .copyWith(color: Colors.black, fontSize: 18.0),
+                      style: TextStyle().copyWith(fontSize: 18.0),
                     ),
                     new Flexible(
                       child: Padding(
@@ -185,11 +187,10 @@ class _HomePage extends State<RadioGroup> {
                         child: new TextFormField(
                           controller: fatcontroler,
                           keyboardType: TextInputType.number,
-                          // initialValue: 30.toString(),
+                          //  initialValue: _fatsGoalPercentage.toString() ? ,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(2),
                           ],
-
                           onChanged: (fatsGoal) async {
                             cubit.setFatsGoal(cubit.calGoal /
                                 9 *
@@ -201,8 +202,7 @@ class _HomePage extends State<RadioGroup> {
                     Text(
                       "Vet",
                       textAlign: TextAlign.center,
-                      style: TextStyle()
-                          .copyWith(color: Colors.black, fontSize: 18.0),
+                      style: TextStyle().copyWith(fontSize: 18.0),
                     ),
                     // Container(
                     //   height: 60,
@@ -226,10 +226,17 @@ class _HomePage extends State<RadioGroup> {
                   ],
                 ),
               ),
-              Text('Koolhydraten percentage ${_carbGoalPercentage.toString()}'),
+              //Text('Koolhydraten percentage ${_carbGoalPercentage.toString()}'),
+              Text('Koolhydraten totaal ${cubit.carbGoal.toStringAsFixed(0)}g'),
               //   Text('Koolhydraten hoeveel gram ${koolaantal.toString()}'),
-              Text('Eiwitten percentage ${_proteinGoalPercentage.toString()}'),
-              Text('Vetten percentage ${_fatsGoalPercentage.toString()}'),
+              //Text('Eiwitten percentage ${_proteinGoalPercentage.toString()}'),
+              Text('Eiwitten totaal ${cubit.proteinGoal.toStringAsFixed(0)}g'),
+
+              //  Text('Vetten percentage ${_fatsGoalPercentage.toString()}'),
+              Text('Vetten totaal ${cubit.fatsGoal.toStringAsFixed(0)}g'),
+
+              Text(
+                  'Calorieën totaal ${((cubit.carbGoal * 4) + (cubit.proteinGoal * 4) + (cubit.fatsGoal * 9)).toStringAsFixed(0)}kcal'),
 
               Padding(
                 padding: const EdgeInsets.only(top: 16.0, bottom: 8),

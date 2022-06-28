@@ -25,6 +25,7 @@ import 'package:food_app/Widgets/Provider_Auth.dart';
 import 'package:food_app/Views/sign_up_view.dart';
 import 'package:food_app/Views/introduction_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 // @dart=2.9
 // /test
@@ -75,6 +76,9 @@ class MyBlocObserver extends BlocObserver {
 //   // await prefs.setInt('counter', counter);
 // }
 
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -85,7 +89,8 @@ void main() async {
   await Firebase.initializeApp();
 
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //     statusBarBrightness: Brightness.dark, statusBarColor: Colors.white));
+  //     statusBarBrightness: Brightness.light,
+  //     statusBarColor: Colors.transparent));
   Bloc.observer = MyBlocObserver();
 
   runApp(MyApp());
@@ -93,6 +98,51 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of the application.
+
+  void sendNotification({String title, String body}) async {
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+
+    ////Set the settings for various platform
+    // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const IOSInitializationSettings initializationSettingsIOS =
+        IOSInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+    const LinuxInitializationSettings initializationSettingsLinux =
+        LinuxInitializationSettings(
+      defaultActionName: 'hello',
+    );
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+            android: initializationSettingsAndroid,
+            iOS: initializationSettingsIOS,
+            linux: initializationSettingsLinux);
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+    );
+
+    ///
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+        'high_channel', 'High Importance Notification',
+        description: "This channel is for important notification",
+        importance: Importance.max);
+
+    flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      body,
+      NotificationDetails(
+        android: AndroidNotificationDetails(channel.id, channel.name,
+            channelDescription: channel.description),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) => provider1.ChangeNotifierProvider(
         create: (context) => ThemeProvider(),
@@ -130,7 +180,8 @@ class MyApp extends StatelessWidget {
                       FavCubit()..getUserFavTripsList(Source.serverAndCache),
                 ),
                 BlocProvider(
-                  create: (BuildContext context) => RecentCubit()..getUserRecentTripsList(Source.serverAndCache),
+                  create: (BuildContext context) => RecentCubit()
+                    ..getUserRecentTripsList(Source.serverAndCache),
                 ),
                 BlocProvider(
                   create: (BuildContext context) => AmountCubit(),

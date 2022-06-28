@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/views/constants.dart';
 
 class CustomDialogBox extends StatefulWidget {
   final String title, descriptions, text;
@@ -50,14 +51,17 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             children: <Widget>[
               Text(
                 widget.title,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
               ),
               SizedBox(
                 height: 15,
               ),
               Text(
                 widget.descriptions,
-                style: TextStyle(fontSize: 14),
+                style: TextStyle(fontSize: 14, color: Colors.black),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -71,7 +75,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                     },
                     child: Text(
                       widget.text,
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 18, color: kPrimaryColor),
                     )),
               ),
             ],

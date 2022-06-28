@@ -483,8 +483,8 @@ class NutritionalDetailsPage extends StatelessWidget {
                                 columnWidths: {
                                   0: FractionColumnWidth(0.52),
                                   1: FractionColumnWidth(0.22),
-                                  2: FractionColumnWidth(0.12),
-                                  3: FractionColumnWidth(0.15)
+                                  2: FractionColumnWidth(0.07),
+                                  3: FractionColumnWidth(0.19)
                                 },
                                 textBaseline: TextBaseline.alphabetic,
                                 defaultVerticalAlignment:
@@ -508,7 +508,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      '%',
+                                      '',
                                       style: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
@@ -629,7 +629,8 @@ class NutritionalDetailsPage extends StatelessWidget {
                                           style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.black),
+                                              color: Theme.of(context)
+                                                  .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
                                                 text: 'Alcohol',
@@ -650,11 +651,11 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                       TextSpan(
                                                                     text:
                                                                         'Het advies is om geen alcohol te drinken, of in ieder geval niet meer dan 1 glas per dag. Dit advies is hetzelfde voor mannen en vrouwen.',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            16,
-                                                                        color: Colors
-                                                                            .black),
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          16,
+                                                                    ),
                                                                     children: <
                                                                         TextSpan>[
                                                                       TextSpan(
@@ -679,15 +680,15 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                         Navigator.pop(
                                                                             context,
                                                                             'OK'),
-                                                                    child:
-                                                                        const Text(
-                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
                                                                   ),
                                                                 ],
                                                               );
                                                             });
-                                                        print(
-                                                            "log recommendation");
                                                       },
                                                 style: TextStyle(
                                                     //    color: Colors.blue,
@@ -725,7 +726,8 @@ class NutritionalDetailsPage extends StatelessWidget {
                                           style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.black),
+                                              color: Theme.of(context)
+                                                  .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
                                                 text: 'Calcium',
@@ -749,8 +751,8 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
-                                                                        color: Colors
-                                                                            .black),
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
                                                                     children: <
                                                                         TextSpan>[
                                                                       TextSpan(
@@ -775,15 +777,15 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                         Navigator.pop(
                                                                             context,
                                                                             'OK'),
-                                                                    child:
-                                                                        const Text(
-                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
                                                                   ),
                                                                 ],
                                                               );
                                                             });
-                                                        print(
-                                                            "log recommendation");
                                                       },
                                                 style: TextStyle(
                                                     //    color: Colors.blue,
@@ -796,7 +798,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       // ),
                                     ),
                                     Text(
-                                      '${cubit.calcium.toStringAsFixed(0)}mg',
+                                      '${cubit.calcium.toStringAsFixed(0)} mg',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
@@ -804,7 +806,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      '950mg',
+                                      '950 mg',
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.green),
                                     ),
@@ -821,7 +823,8 @@ class NutritionalDetailsPage extends StatelessWidget {
                                           style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.black),
+                                              color: Theme.of(context)
+                                                  .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
                                                 text: 'Foliumzuur',
@@ -845,8 +848,8 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
-                                                                        color: Colors
-                                                                            .black),
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
                                                                     children: <
                                                                         TextSpan>[
                                                                       TextSpan(
@@ -871,15 +874,15 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                         Navigator.pop(
                                                                             context,
                                                                             'OK'),
-                                                                    child:
-                                                                        const Text(
-                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
                                                                   ),
                                                                 ],
                                                               );
                                                             });
-                                                        print(
-                                                            "log recommendation");
                                                       },
                                                 style: TextStyle(
                                                     //    color: Colors.blue,
@@ -892,7 +895,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       // ),
                                     ),
                                     Text(
-                                      '${cubit.foliumzuur.toStringAsFixed(0)}mg',
+                                      '${cubit.foliumzuur.toStringAsFixed(0)} mg',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
@@ -900,7 +903,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      '300mg',
+                                      '300 mg',
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.green),
                                     ),
@@ -917,7 +920,784 @@ class NutritionalDetailsPage extends StatelessWidget {
                                           style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.black),
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Fosfor',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Fosfor'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Fosfor',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/fosfor.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.fosfor.toStringAsFixed(0)} µg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '550 µg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'IJzer',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' IJZer'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'IJzer',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/ijzer.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.iron.toStringAsFixed(0)} mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '11-16mg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Jodium',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Jodium'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Jodium',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/Jodium.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.jodium.toStringAsFixed(0)} µg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '150 µg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Kalium',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Kalium'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Kalium',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/kalium.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.kalium.toStringAsFixed(0)} mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '3500 mg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Magnesium',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Magnesium'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Magnesium',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/magnesium.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.magnesium.toStringAsFixed(0)}mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '350 mg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Natrium',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Natrium'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Natrium',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/zout-en-natrium.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.natrium.toStringAsFixed(0)}mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '1500 mg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Niacine',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Niacine'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Niacine',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/niacine.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.niacine.toStringAsFixed(0)}mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Selenium',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Selenium'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Selenium',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/seleen.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.selenium.toStringAsFixed(0)} mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '70 mg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
                                                 text: 'VitA',
@@ -943,8 +1723,8 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
-                                                                        color: Colors
-                                                                            .black),
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
                                                                     children: <
                                                                         TextSpan>[
                                                                       TextSpan(
@@ -969,15 +1749,15 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                         Navigator.pop(
                                                                             context,
                                                                             'OK'),
-                                                                    child:
-                                                                        const Text(
-                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
                                                                   ),
                                                                 ],
                                                               );
                                                             });
-                                                        print(
-                                                            "log recommendation");
                                                       },
                                                 style: TextStyle(
                                                     //    color: Colors.blue,
@@ -988,7 +1768,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      '${cubit.vitA}µg',
+                                      '${cubit.vitA} µg',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
@@ -1013,7 +1793,8 @@ class NutritionalDetailsPage extends StatelessWidget {
                                           style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.black),
+                                              color: Theme.of(context)
+                                                  .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
                                                 text: 'Vit B1',
@@ -1035,12 +1816,12 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Om gezond te blijven is de dagelijkse aanbeveling van vitamine A voor een volwassen man 800 microgram en voor een volwassen vrouw 680 microgram.',
+                                                                        'Vitamine B1',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
-                                                                        color: Colors
-                                                                            .black),
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
                                                                     children: <
                                                                         TextSpan>[
                                                                       TextSpan(
@@ -1052,7 +1833,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                         recognizer:
                                                                             new TapGestureRecognizer()
                                                                               ..onTap = () {
-                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/vitamine-a.aspx');
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/vitamine-B1.aspx');
                                                                               },
                                                                       ),
                                                                     ],
@@ -1065,15 +1846,15 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                         Navigator.pop(
                                                                             context,
                                                                             'OK'),
-                                                                    child:
-                                                                        const Text(
-                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
                                                                   ),
                                                                 ],
                                                               );
                                                             });
-                                                        print(
-                                                            "log recommendation");
                                                       },
                                                 style: TextStyle(
                                                     //    color: Colors.blue,
@@ -1084,7 +1865,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      '${cubit.vitB1}µg',
+                                      '${cubit.vitB1} mg',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
@@ -1092,7 +1873,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      '10µg',
+                                      '${((cubit.kCalSum * 0.0041868) * 0.1).toStringAsFixed(1)} mg',
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.green),
                                     ),
@@ -1109,7 +1890,301 @@ class NutritionalDetailsPage extends StatelessWidget {
                                           style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.black),
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Vitamine B12',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Vitamine B12'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Vitamine B12',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/vitamine-b12.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.vitB12.toStringAsFixed(1)} µg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '2.8 µg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Vitamine B2',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Vitamine B2'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Vitamine B2',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/vitamine-b2.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.vitB2.toStringAsFixed(1)} mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '1.6 mg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Vitamine B6',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Vitamine B6'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Vitamine B6',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/vitamine-b6.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child:
+                                                                        const Text(
+                                                                      'OK',
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              kPrimaryColor),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.vitB6.toStringAsFixed(1)} mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '1.5 mg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
                                                 text: 'Vit D',
@@ -1135,8 +2210,8 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
-                                                                        color: Colors
-                                                                            .black),
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
                                                                     children: <
                                                                         TextSpan>[
                                                                       TextSpan(
@@ -1161,15 +2236,15 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                         Navigator.pop(
                                                                             context,
                                                                             'OK'),
-                                                                    child:
-                                                                        const Text(
-                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
                                                                   ),
                                                                 ],
                                                               );
                                                             });
-                                                        print(
-                                                            "log recommendation");
                                                       },
                                                 style: TextStyle(
                                                     //    color: Colors.blue,
@@ -1180,7 +2255,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      '${cubit.vitD}µg',
+                                      '${cubit.vitD} µg',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
@@ -1188,7 +2263,201 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      '10µg',
+                                      '10 µg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Water',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Water'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Water',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/water.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.water.toStringAsFixed(0)} g',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '1,5-2L',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Zink',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    ' Zink'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Zink',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/zink.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.zink.toStringAsFixed(1)} mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '7-9 mg',
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.green),
                                     ),

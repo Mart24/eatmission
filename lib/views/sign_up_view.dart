@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_app/Services/auth_service.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_app/Widgets/Provider_Auth.dart';
@@ -90,50 +91,53 @@ class _SignUpViewState extends State<SignUpView> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          Container(
-            // color: colorlightgreen,
-            decoration: new BoxDecoration(
-              image: new DecorationImage(
-                colorFilter: new ColorFilter.mode(
-                    Colors.black.withOpacity(0.4), BlendMode.darken),
-                image: new AssetImage("assets/background.png"),
-                fit: BoxFit.cover,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: Stack(
+          children: [
+            Container(
+              // color: colorlightgreen,
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  colorFilter: new ColorFilter.mode(
+                      Colors.black.withOpacity(0.4), BlendMode.darken),
+                  image: new AssetImage("assets/background.png"),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-            height: _height,
-            width: _width,
-            child: SafeArea(
-              child: GestureDetector(
-                onTap: () {
-                  print('Clicked outside');
-                  FocusScope.of(context).unfocus();
-                },
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(height: _height * 0.025),
-                      showAlert(),
-                      SizedBox(height: _height * 0.025),
-                      buildHeaderText(),
-                      SizedBox(height: _height * 0.05),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Form(
-                          key: formKey,
-                          child: Column(
-                            children: buildInputs() + buildButtons(),
+              height: _height,
+              width: _width,
+              child: SafeArea(
+                child: GestureDetector(
+                  onTap: () {
+                    print('Clicked outside');
+                    FocusScope.of(context).unfocus();
+                  },
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(height: _height * 0.025),
+                        showAlert(),
+                        SizedBox(height: _height * 0.025),
+                        buildHeaderText(),
+                        SizedBox(height: _height * 0.05),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Form(
+                            key: formKey,
+                            child: Column(
+                              children: buildInputs() + buildButtons(),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -347,7 +351,6 @@ class _SignUpViewState extends State<SignUpView> {
             color: Colors.white,
           ),
           SizedBox(height: 10),
-
         ],
       ),
       // visible: visible,

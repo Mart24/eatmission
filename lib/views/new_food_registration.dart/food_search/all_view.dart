@@ -25,6 +25,7 @@ class _AllViewState extends State<AllView> {
   String keyword;
   Trip trip = Trip.empty();
   String scanResult;
+  FocusNode myFocusNode = new FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class _AllViewState extends State<AllView> {
         } else if (state is SearchResultFound) {
           print('SearchResultFound');
           print(searchCubit.scanResult);
-          print("trip:\n"+state.trip.toJson().toString());
+          print("trip:\n" + state.trip.toJson().toString());
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (BuildContext context) {
             return FoodDate(
@@ -72,7 +73,7 @@ class _AllViewState extends State<AllView> {
         }
       },
       builder: (context, state) {
-        return SingleChildScrollView(
+        return SafeArea(
           child: GestureDetector(
             onTap: () {
               print('Clicked outside');
@@ -86,19 +87,28 @@ class _AllViewState extends State<AllView> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+                      focusNode: myFocusNode,
+                      cursorColor: kPrimaryColor,
                       autofocus: true,
                       decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: kPrimaryColor, width: 2.0),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
                           border: OutlineInputBorder(),
-                          labelText:
-                              AppLocalizations.of(context).typesomething),
+                          labelText: AppLocalizations.of(context).typesomething,
+                          labelStyle: TextStyle(
+                              color: myFocusNode.hasFocus
+                                  ? kPrimaryColor
+                                  : kPrimaryColor)),
                       onChanged: (value) {
                         keyword = value;
                         setState(() {});
                       },
                     ),
                   ),
-                  Container(
-                    height: 800,
+                  Expanded(
                     child: FutureBuilder<List<FooddataSQLJSON>>(
                       future: dbService.searchGFooddata(keyword),
                       builder: (context, snapshot) {
@@ -113,8 +123,8 @@ class _AllViewState extends State<AllView> {
                             itemBuilder: (context, index) {
                               return ListTile(
                                 title: Text(snapshot.data[index].foodname),
-                                subtitle: Text(
-                                    '${snapshot.data[index].category}, ${snapshot.data[index].brand}'),
+                                subtitle:
+                                    Text('${snapshot.data[index].category}'),
                                 // Text(snapshot.data[index].productid.toString()),
                                 trailing: Text(
                                     '${snapshot.data[index].kcal.toString()} Kcal'),
@@ -123,8 +133,10 @@ class _AllViewState extends State<AllView> {
                                   trip.productid =
                                       snapshot.data[index].productid;
                                   trip.id = snapshot.data[index].productid;
-                                  trip.documentId = snapshot.data[index].productid.toString();
-                                  searchCubit.searchByIdOnDb(snapshot.data[index].productid);
+                                  trip.documentId =
+                                      snapshot.data[index].productid.toString();
+                                  searchCubit.searchByIdOnDb(
+                                      snapshot.data[index].productid);
                                   // push the amount value to the summary page
                                   // Navigator.push(
                                   //   context,

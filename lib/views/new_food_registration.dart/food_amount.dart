@@ -226,7 +226,7 @@ class _FoodDateState extends State<FoodDate> {
                 double co2reduction = trip.co2 - trip.recomco2;
                 if (trip.recomco2 != null) {
                   co2RecommendationPercentage =
-                      ((trip.recomco2 - trip.co2) / trip.recomco2) * 100;
+                      ((trip.co2 - trip.recomco2) / trip.co2) * 100;
                 }
                 Map<String, double> dataMap = {
                   "Carbs": trip.kcal,
@@ -366,7 +366,7 @@ class _FoodDateState extends State<FoodDate> {
                                                 title: Text(
                                                     'Aanbeveling voor: ' +
                                                         trip.name),
-                                                content: co2RecommendationPercentage >=
+                                                content: co2RecommendationPercentage <=
                                                         0
                                                     ? Text(
                                                         "Geen aanbeveling gevonden.")

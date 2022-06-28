@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_app/Views/constants.dart';
 import 'package:food_app/Views/goals/graphs_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -32,56 +33,62 @@ class _GoalsHomeState extends State<GoalsHome>
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+    // SystemChrome.setSystemUIOverlayStyle(
+    //     SystemUiOverlayStyle(statusBarColor: kPrimaryColor));
     LogCubit logCubit = LogCubit.instance(context);
-    return SafeArea(
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size(double.infinity, 50),
-          child: Container(
-            height: 50,
-            color: kPrimaryColor,
-            child: TabBar(
-              controller: tabController,
-              indicator: BoxDecoration(
-                color: Colors.black.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(5),
+    return Container(
+      color: kPrimaryColor,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size(double.infinity, 50),
+            child: Container(
+              height: 50,
+              color: kPrimaryColor,
+              child: TabBar(
+                controller: tabController,
+                indicator: BoxDecoration(
+                  color: Colors.black.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+                labelColor: Colors.white,
+                tabs: [
+                  Tab(child: Text(AppLocalizations.of(context).goals)),
+                  Tab(child: Text(AppLocalizations.of(context).graphs)),
+                  Tab(child: Text('Tips')),
+                ],
+                onTap: (index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                  switch (currentIndex) {
+                    case 0:
+                      logCubit.addLog("button goal");
+                      print("log to goals");
+                      break;
+                    case 1:
+                      logCubit.addLog("button graph");
+                      print("log to graphs");
+                      break;
+                    case 2:
+                      print("do nothing");
+                      break;
+                    default:
+                      print("do nothing");
+                  }
+                },
               ),
-              labelStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-              labelColor: Colors.white,
-              tabs: [
-                Tab(child: Text(AppLocalizations.of(context).goals)),
-                Tab(child: Text(AppLocalizations.of(context).graphs)),
-                Tab(child: Text('Tips')),
-              ],
-              onTap: (index) {
-                setState(() {
-                  currentIndex = index;
-                });
-                switch (currentIndex) {
-                  case 0:
-                    logCubit.addLog("button goal");
-                    print("log to goals");
-                    break;
-                  case 1:
-                    logCubit.addLog("button graph");
-                    print("log to graphs");
-                    break;
-                  case 2:
-                    print("do nothing");
-                    break;
-                  default:
-                    print("do nothing");
-                }
-              },
             ),
           ),
-        ),
-        body: TabBarView(
-          controller: tabController,
-          children: screens,
+          body: TabBarView(
+            controller: tabController,
+            children: screens,
+          ),
         ),
       ),
     );
