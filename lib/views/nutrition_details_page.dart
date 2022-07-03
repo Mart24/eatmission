@@ -651,11 +651,11 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                       TextSpan(
                                                                     text:
                                                                         'Het advies is om geen alcohol te drinken, of in ieder geval niet meer dan 1 glas per dag. Dit advies is hetzelfde voor mannen en vrouwen.',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      fontSize:
-                                                                          16,
-                                                                    ),
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
                                                                     children: <
                                                                         TextSpan>[
                                                                       TextSpan(
