@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.eatmission">
    <application
-        android:label="Foodtracker"
+        android:label="Voedingsapp"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="firebase_analytics_collection_enabled" android:value="false" />
         <activity

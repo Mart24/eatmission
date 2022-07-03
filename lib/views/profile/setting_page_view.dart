@@ -129,7 +129,7 @@ class SettingsThreePage extends StatelessWidget {
                   leading: Icon(Icons.info),
                   title: Text("App licensies"),
                   onTap: () => showLicensePage(
-                      context: context, applicationName: "Foodtracker")),
+                      context: context, applicationName: "VoedingsApp")),
             ),
             Card(
               margin: const EdgeInsets.symmetric(
