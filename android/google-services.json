@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "362327116699",
+    "project_id": "voedingsappbasic",
+    "storage_bucket": "voedingsappbasic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362327116699:android:6790f2fa513e006425af3e",
+        "android_client_info": {
+          "package_name": "app.eatmission.voedinsappbasic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362327116699-atp94mbvaoi58npjsaffqvl0fvsga30b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-VdU8RvLg0AYWKzJIYp7k-vwqh2x0DVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362327116699-atp94mbvaoi58npjsaffqvl0fvsga30b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
