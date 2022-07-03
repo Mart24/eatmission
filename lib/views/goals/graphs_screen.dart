@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_app/Views/constants.dart';
 import 'package:food_app/shared/app_cubit.dart';
+import 'package:food_app/views/goals/log_cubit.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -47,6 +48,8 @@ class _GraphsScreenState extends State<GraphsScreen>
 
   @override
   Widget build(BuildContext context) {
+    LogCubit logCubit = LogCubit.instance(context);
+
     // final String uid = FirebaseAuth.instance.currentUser.uid;
     // final AppCubit appCubit = AppCubit.instance(context);
     return Scaffold(
@@ -59,12 +62,16 @@ class _GraphsScreenState extends State<GraphsScreen>
             onTap: (index) {
               if (index == 0) {
                 appCubit.getOneWeekData(appCubit.database, uid);
+                logCubit.add2Log("week_kcal_button");
               } else if (index == 1) {
                 appCubit.getOneWeekDataCo2(appCubit.database, uid);
+                logCubit.add2Log("week_co2_button");
               } else if (index == 2) {
                 appCubit.getOneMonthData(appCubit.database, uid);
+                logCubit.add2Log("month_kcal_button");
               } else if (index == 3) {
                 appCubit.getOneMonthDataCo2(appCubit.database, uid);
+                logCubit.add2Log("month_co2_button");
               } else {
                 print('error in tab index');
               }
@@ -86,6 +93,7 @@ class _GraphsScreenState extends State<GraphsScreen>
         ),
       ),
       body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         controller: tabController,
         children: [
           OneWeekGraph(),

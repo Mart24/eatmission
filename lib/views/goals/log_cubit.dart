@@ -39,4 +39,16 @@ class LogCubit extends Cubit<LogState> {
         .set({"date": now, 'knop': knop});
     emit(LogResultAdded());
   }
+
+  Future<void> add2Log(String buttonName) async {
+    Timestamp now = Timestamp.now();
+    String knop = buttonName;
+    await db
+        .collection("userData")
+        .doc(uid)
+        .collection("button graph")
+        .doc()
+        .set({"date": now, 'knop': knop});
+    emit(LogResultAdded());
+  }
 }

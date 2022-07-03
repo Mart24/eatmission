@@ -311,16 +311,16 @@ class _SignUpViewState extends State<SignUpView> {
           onPressed: submit,
         ),
       ),
-      showForgotPassword(_showForgotPassword),
-      TextButton(
-        child: Text(
-          _switchButtonText,
-          style: TextStyle(color: Colors.white),
-        ),
-        onPressed: () {
-          switchFormState(_newFormState);
-        },
-      ),
+      // showForgotPassword(_showForgotPassword),
+      // TextButton(
+      //   child: Text(
+      //     _switchButtonText,
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      //   onPressed: () {
+      //     switchFormState(_newFormState);
+      //   },
+      // ),
       buildSocialIcons(_showSocial),
     ];
   }

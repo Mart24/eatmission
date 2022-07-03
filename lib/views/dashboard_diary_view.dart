@@ -12,6 +12,7 @@ import 'package:food_app/Widgets/custom_dialog_impact.dart';
 import 'package:food_app/shared/app_cubit.dart';
 import 'package:food_app/shared/dairy_cubit.dart';
 import 'package:food_app/views/goals/log_cubit.dart';
+import 'package:food_app/views/profile/co2_calorie_goal_view.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -484,87 +485,95 @@ class CaloriesIndecator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(10.0),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            // child: Text(
-            //   'Eaten ${cubit.kCalSum.toStringAsFixed(0)} ',
-            //   style: TextStyle(
-            //       color: Colors.black, fontWeight: FontWeight.normal),
-            //   maxLines: 2,
-            //   textAlign: TextAlign.center,
-            // ),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: 10.0,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Goalgoal()),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              // child: Text(
+              //   'Eaten ${cubit.kCalSum.toStringAsFixed(0)} ',
+              //   style: TextStyle(
+              //       color: Colors.black, fontWeight: FontWeight.normal),
+              //   maxLines: 2,
+              //   textAlign: TextAlign.center,
+              // ),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 10.0,
+                ),
+                child: Text.rich(TextSpan(
+                    style: GoogleFonts.roboto(
+                      fontSize: 20,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(text: AppLocalizations.of(context).eatentext),
+                      TextSpan(
+                        text: ' ${kCalSum.toStringAsFixed(0)}',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: kPrimaryColor),
+                      ),
+                      TextSpan(text: ' kcal', style: TextStyle(fontSize: 12)),
+                    ])),
               ),
-              child: Text.rich(TextSpan(
-                  style: GoogleFonts.roboto(
-                    fontSize: 20,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(text: AppLocalizations.of(context).eatentext),
+            ),
+            Expanded(
+              flex: 2,
+              child: CircularPercentIndicator(
+                radius: 145.0,
+                lineWidth: 6.5,
+                animation: true,
+                backgroundColor: Colors.grey[350],
+                percent: circularPercent,
+                center: Text(
+                  "${diff.toStringAsFixed(0)} Kcal",
+                  style: TextStyle(fontSize: 20),
+                ),
+                progressColor: calculateBackgroundColorCircularindicator(
+                    circularPercent: circularPercent),
+                circularStrokeCap: CircularStrokeCap.round,
+              ),
+            ),
+            Expanded(
+              // child: Text(
+              //   'Eaten ${cubit.kCalSum.toStringAsFixed(0)} ',
+              //   style: TextStyle(
+              //       color: Colors.black, fontWeight: FontWeight.normal),
+              //   maxLines: 2,
+              //   textAlign: TextAlign.center,
+              // ),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 5.0),
+                child: Text.rich(
+                  TextSpan(style: TextStyle(fontSize: 20), children: <TextSpan>[
+                    TextSpan(text: 'Over     '),
                     TextSpan(
-                      text: ' ${kCalSum.toStringAsFixed(0)}',
+                      text: '${((calGoal - kCalSum).toStringAsFixed(0))}',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: kPrimaryColor),
                     ),
-                    TextSpan(text: ' kcal', style: TextStyle(fontSize: 12)),
-                  ])),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: CircularPercentIndicator(
-              radius: 145.0,
-              lineWidth: 6.5,
-              animation: true,
-              backgroundColor: Colors.grey[350],
-              percent: circularPercent,
-              center: Text(
-                "${diff.toStringAsFixed(0)} Kcal",
-                style: TextStyle(fontSize: 20),
-              ),
-              progressColor: calculateBackgroundColorCircularindicator(
-                  circularPercent: circularPercent),
-              circularStrokeCap: CircularStrokeCap.round,
-            ),
-          ),
-          Expanded(
-            // child: Text(
-            //   'Eaten ${cubit.kCalSum.toStringAsFixed(0)} ',
-            //   style: TextStyle(
-            //       color: Colors.black, fontWeight: FontWeight.normal),
-            //   maxLines: 2,
-            //   textAlign: TextAlign.center,
-            // ),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 5.0),
-              child: Text.rich(
-                TextSpan(style: TextStyle(fontSize: 20), children: <TextSpan>[
-                  TextSpan(text: 'Over     '),
-                  TextSpan(
-                    text: '${((calGoal - kCalSum).toStringAsFixed(0))}',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: kPrimaryColor),
-                  ),
-                  TextSpan(
-                    text: ' kcal',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ]),
+                    TextSpan(
+                      text: ' kcal',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ]),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -590,69 +599,80 @@ class LinearCo2Indecator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 14.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              new LinearPercentIndicator(
-                animation: true,
-                backgroundColor: Colors.grey[350],
-                // backgroundColor: calculateBackgroundColor(barPercent: barPercent),
-                width: 300.0,
-                lineHeight: 25.0,
-                percent: barPercent,
-                progressColor: calculateBackgroundColor(barPercent: barPercent),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 7.0, bottom: 7.0),
-          child: Padding(
-            padding: const EdgeInsets.only(right: 8.0, left: 20.0),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Goalgoal()),
+        );
+      },
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 14.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // Text('Co2 ${cubit.co2Sum.toStringAsFixed(1)} kg ',
-                //     style: TextStyle(fontSize: 20)),
-                Text.rich(TextSpan(
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(text: 'CO₂ '),
-                      TextSpan(
-                        text: '${cubit.co2Sum.toStringAsFixed(1)}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: kPrimaryColor),
-                      ),
-                      TextSpan(
-                          text: ' kg/CO₂-eq', style: TextStyle(fontSize: 12)),
-                    ])),
-                Text.rich(TextSpan(
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(text: 'Max. '),
-                      TextSpan(
-                        text: '${cubit.saveco2Goal.toStringAsFixed(1)}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: kPrimaryColor),
-                      ),
-                      TextSpan(
-                          text: ' kg/CO₂-eq', style: TextStyle(fontSize: 12)),
-                    ])),
-
-                // Text('max 5.0 kg/Co²')
+                new LinearPercentIndicator(
+                  animation: true,
+                  backgroundColor: Colors.grey[350],
+                  // backgroundColor: calculateBackgroundColor(barPercent: barPercent),
+                  width: 300.0,
+                  lineHeight: 25.0,
+                  percent: barPercent,
+                  progressColor:
+                      calculateBackgroundColor(barPercent: barPercent),
+                ),
               ],
             ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(top: 7.0, bottom: 7.0),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0, left: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Text('Co2 ${cubit.co2Sum.toStringAsFixed(1)} kg ',
+                  //     style: TextStyle(fontSize: 20)),
+                  Text.rich(TextSpan(
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'CO₂ '),
+                        TextSpan(
+                          text: '${cubit.co2Sum.toStringAsFixed(1)}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: kPrimaryColor),
+                        ),
+                        TextSpan(
+                            text: ' kg/CO₂-eq', style: TextStyle(fontSize: 12)),
+                      ])),
+                  Text.rich(TextSpan(
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(text: 'Max. '),
+                        TextSpan(
+                          text: '${cubit.saveco2Goal.toStringAsFixed(1)}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: kPrimaryColor),
+                        ),
+                        TextSpan(
+                            text: ' kg/CO₂-eq', style: TextStyle(fontSize: 12)),
+                      ])),
+
+                  // Text('max 5.0 kg/Co²')
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

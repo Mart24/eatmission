@@ -50,7 +50,7 @@ class SettingsThreePage extends StatelessWidget {
                 children: <Widget>[
                   ListTile(
                     leading: Icon(Icons.person),
-                    title: Text("Participant"),
+                    title: Text("Participant van onderzoek"),
                     onTap: () {},
                   ),
                   _buildDivider(),
@@ -78,7 +78,7 @@ class SettingsThreePage extends StatelessWidget {
                   ),
                   ListTile(
                     leading: Icon(Icons.calculate),
-                    title: Text("Bereken BMR, AMR en BMI"),
+                    title: Text("Bereken BMR en AMR"),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -101,7 +101,7 @@ class SettingsThreePage extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
             Text(
-              "PUSH NOTIFICATIONS",
+              "Notificatie & App informatie",
               style: headerStyle,
             ),
             Card(
@@ -114,7 +114,7 @@ class SettingsThreePage extends StatelessWidget {
                   SwitchListTile(
                     activeColor: Colors.green,
                     value: true,
-                    title: Text("Received notification"),
+                    title: Text("Notificatie (standaard aan)"),
                     onChanged: (val) {},
                   ),
                 ],
@@ -126,8 +126,19 @@ class SettingsThreePage extends StatelessWidget {
                 horizontal: 0,
               ),
               child: ListTile(
+                  leading: Icon(Icons.info),
+                  title: Text("App licensies"),
+                  onTap: () => showLicensePage(
+                      context: context, applicationName: "Foodtracker")),
+            ),
+            Card(
+              margin: const EdgeInsets.symmetric(
+                vertical: 8.0,
+                horizontal: 0,
+              ),
+              child: ListTile(
                 leading: Icon(Icons.exit_to_app),
-                title: Text("Logout"),
+                title: Text("Log uit"),
                 onTap: () async {
                   try {
                     AuthService auth = Provider.of(context).auth;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/views/constants.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -46,7 +47,31 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       child: Column(
         children: <Widget>[
           ExpansionTile(
-            title: const Text('Wat betekent duurzaam eten?'),
+            title: Text('Wat is de impact van ons voedsel op de natuur?'),
+            //   subtitle: const Text('Custom expansion arrow icon'),
+
+            trailing: Icon(
+              _customTileExpanded
+                  ? Icons.arrow_drop_down_circle
+                  : Icons.arrow_drop_down,
+            ),
+            children: <Widget>[
+              //  ListTile(
+              // title:
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                    'Het voedselsysteem levert wereldwijd een enorme bijdrage aan klimaatopwarming. Schattingen geven aan dat 26% van de wereldwijde CO2eq uitstoot afkomstig is van de voedselketen. Zoals te zien is op de afbeelding, is het grootste aandeel van de voedseluitstoot afkomstig van vee en visserij. Ook landbouw levert een groot aandeel. Het is echter belangrijk om te noemen dat de totale landbouw productie vele malen groter is dan de vleesproductie, waardoor gewassen aanzienlijk beter scoren per kilogram. Het verwerken en vervoeren van voedsel zorgt slechts voor iets minder dan één vijfde van de uitstoot. Ook zijn er tussen landen grote verschillen te vinden in deze cijfers, onder andere door bevolkingsgrootte, cultuur en vooral welvaart.'),
+              ),
+              Image.network(
+                  'https://assets.weforum.org/editor/responsive_large_webp_xYEGxaqCqyW20yO4XWjGXrGv2uZxZqyEoMr2USCerJY.webp'),
+            ],
+            onExpansionChanged: (bool expanded) {
+              setState(() => _customTileExpanded = expanded);
+            },
+          ),
+          ExpansionTile(
+            title: const Text('Wat is de belangrijkste impact factor?'),
             //   subtitle: const Text('Custom expansion arrow icon'),
 
             trailing: Icon(
@@ -55,7 +80,27 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   : Icons.arrow_drop_down,
             ),
             children: const <Widget>[
-              ListTile(title: Text('Answer number  1')),
+              ListTile(
+                  title: Text(
+                      'Voor de opwarming van de aarde is CO2eq de belangrijkste factor, maar dit betekent niet dat de andere factoren niet belangrijk zijn. Ook landgebruik en waterverbruik zorgen voor veel klimaatgerelateerde problemen. Echter was het voor dit onderzoek niet mogelijk om deze data mee te nemen. Er is nog niet genoeg informatie beschikbaar om dit voor elk product te bepalen.')),
+            ],
+            onExpansionChanged: (bool expanded) {
+              setState(() => _customTileExpanded = expanded);
+            },
+          ),
+          ExpansionTile(
+            title: const Text('Waarom de CO2-eq uitstoot?'),
+            //   subtitle: const Text('Custom expansion arrow icon'),
+
+            trailing: Icon(
+              _customTileExpanded
+                  ? Icons.arrow_drop_down_circle
+                  : Icons.arrow_drop_down,
+            ),
+            children: const <Widget>[
+              ListTile(
+                  title: Text(
+                      'CO2eq staat voor CO2 equivalenten gemeten in kilogram (kg). Het zijn alle broeikasgassen die vrijkomen tijdens de productie, transport of verwerking van het product. Behalve CO2 zijn er nog veel andere broeikasgassen, bijvoorbeeld methaan (CH4) of stikstofdioxiden (N2O). Om alle broeikasgassen samen te vatten, is de term CO2eq bedacht, wat inhoudt dat de andere uistootbronnen vertaald worden naar CO2 equivalenten. Methaan houdt 28x meer warmte vast dan CO2. De uitstoot van 1 g methaan wordt dus beschreven als 28 g CO2eq. Voor stikstofoxide is dit nog vele malen erger, namelijk 265 keer de impact dan CO2. Het kan dus zo zijn dat een product maar weinig CO2 uitstoot, maar toch een hoge CO2eq heeft. Dit komt dan door de uitstoot van andere broeikasgassen. Voorbeelden zijn de productie van vlees en rijst waarbij methaan vrijkomt. Voor CO2eq geldt altijd, hoe hoger hoe meer het bijdraagt aan klimaatopwarming. Probeer dus gerechten en producten te gebruiken met een lage CO2eq uitstoot.')),
             ],
             onExpansionChanged: (bool expanded) {
               setState(() => _customTileExpanded = expanded);
@@ -70,12 +115,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                    '*Getallen in kg CO2-equivalenten, gebaseerd op het gemiddelde aanbod van de producten op de Nederlandse markt'),
+                    '*Getallen in kg CO₂-equivalenten, gebaseerd op het gemiddelde aanbod van de producten op de Nederlandse markt'),
               ),
               Container(
                 height: 400,
                 child: SfCartesianChart(
-                  title: ChartTitle(text: 'CO2eq uitstoot per kg product'),
+                  title: ChartTitle(text: 'CO₂eq uitstoot per kg product'),
                   legend: Legend(isVisible: false),
                   tooltipBehavior: _tooltipBehavior,
 
@@ -109,15 +154,166 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ? Icons.arrow_drop_down_circle
                   : Icons.arrow_drop_down,
             ),
-            children: const <Widget>[
-              ListTile(title: Text('Answer number  3')),
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        FaIcon(FontAwesomeIcons.paw, color: kPrimaryColor),
+                        const Text('Runder gehakt:'),
+                        const Text('3,1kg CO₂eq'),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Icon(Icons.percent, color: kPrimaryColor),
+                        const Text('85% besparing'),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        ImageIcon(
+                          AssetImage("assets/icons/leaf_icon.png"),
+                          color: kPrimaryColor,
+                        ),
+                        const Text('Vegetarisch gehakt:'),
+                        const Text('0,44kg CO₂eq'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        FaIcon(FontAwesomeIcons.paw, color: kPrimaryColor),
+                        const Text('Glas melk:'),
+                        const Text('0.4kg CO₂eq'),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Icon(Icons.percent, color: kPrimaryColor),
+                        const Text('64% besparing'),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        ImageIcon(
+                          AssetImage("assets/icons/leaf_icon.png"),
+                          color: kPrimaryColor,
+                        ),
+                        const Text('Glas melk (soja):'),
+                        const Text('0.14kg CO₂eq'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        FaIcon(FontAwesomeIcons.paw, color: kPrimaryColor),
+                        const Text('Kip (100g):'),
+                        const Text('1.2kg CO₂eq'),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Icon(Icons.percent, color: kPrimaryColor),
+                        const Text('86% besparing'),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        ImageIcon(
+                          AssetImage("assets/icons/leaf_icon.png"),
+                          color: kPrimaryColor,
+                        ),
+                        const Text('Tahoe (tofu):'),
+                        const Text('0.17kg CO₂eq'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        FaIcon(FontAwesomeIcons.paw, color: kPrimaryColor),
+                        const Text('Hamburger:'),
+                        const Text('3.1kg CO₂eq'),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Icon(Icons.percent, color: kPrimaryColor),
+                        const Text('74% besparing'),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        FaIcon(FontAwesomeIcons.paw, color: kPrimaryColor),
+                        const Text('Kipburger:'),
+                        const Text('0.80kg CO₂eq'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        FaIcon(FontAwesomeIcons.paw, color: kPrimaryColor),
+                        const Text('Hamburger:'),
+                        const Text('3.1kg CO₂eq'),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Icon(Icons.percent, color: kPrimaryColor),
+                        const Text('88% besparing'),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        ImageIcon(
+                          AssetImage("assets/icons/leaf_icon.png"),
+                          color: kPrimaryColor,
+                        ),
+                        const Text('Vega burger:'),
+                        const Text('0.38kg CO₂eq'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ],
             onExpansionChanged: (bool expanded) {
               setState(() => _customTileExpanded = expanded);
             },
           ),
           ExpansionTile(
-            title: const Text('Is biologisch eten duurzamer?'),
+            title: const Text('Waar komt de data vandaan?'),
             //   subtitle: const Text('Custom expansion arrow icon'),
 
             trailing: Icon(
@@ -126,14 +322,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   : Icons.arrow_drop_down,
             ),
             children: const <Widget>[
-              ListTile(title: Text('Answer number  4')),
+              ListTile(
+                  title: Text(
+                      'De dataset in deze app bestaat uit ongeveer 2100 producten. Deze data is afkomstig uit het Nederlands Voedingsstoffenbestand (NEVO). Deze database bevat gegevens over de samenstelling van voedingsmiddelen die in Nederland regelmatig worden gebruikt of die van belang zijn voor bepaalde groepen in de bevolking. Hier staan helaas geen specifieke producten in met de barcode. Dit had het tracken natuurlijk makkelijker kunnen maken. \nDe data omtrent de CO₂ komt voornamelijk van een recent dataset van het RIVM (250 producten) en is aangevuld met data uit een Deense LCA database (500 producten).')),
             ],
             onExpansionChanged: (bool expanded) {
               setState(() => _customTileExpanded = expanded);
             },
           ),
+
           ExpansionTile(
-            title: const Text('What products are high in protein?'),
+            title: const Text('Wat betekent duurzaam eten?'),
             //   subtitle: const Text('Custom expansion arrow icon'),
 
             trailing: Icon(
@@ -142,7 +341,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   : Icons.arrow_drop_down,
             ),
             children: const <Widget>[
-              ListTile(title: Text('Answer number  2')),
+              ListTile(title: Text('Answer number  1')),
             ],
             onExpansionChanged: (bool expanded) {
               setState(() => _customTileExpanded = expanded);

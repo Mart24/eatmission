@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/Views/constants.dart';
 
@@ -10,14 +11,28 @@ class _BMRcalculationState extends State<BMRcalculation> {
   List<DropdownMenuItem<String>> dropdownGenderList = [];
   List<DropdownMenuItem<String>> dropdownEquationList = [];
   List<DropdownMenuItem<String>> dropdownActivityList = [];
-  List<String> dropdownGender = ["Female", "Male"];
+  List<String> dropdownGender = ["Vrouw", "Man"];
   List<String> dropdownEquation = ["Mifflin-St Jeor", "Harris-Benedict"];
   List<String> dropdownActivity = [
-    "I am inactive (PAL 1,2)",
-    "I am lightly active (PAL 1,375)",
-    "I am moderately active (PAL 1,5)",
-    "I am very active (PAL 1,7)",
-    "I am super active (PAL 1,9)"
+    "Inactief (kantoorbaan en sport niet of zeer nauwelijks) (PAL 1,2)",
+    "Licht actief (kantoorbaan, maar sport wel licht 1-3 x per week) (Pal 1,375) ",
+    "Gemiddeld actief (kantoorbaan, maar sport wel 3-5 x per week) (PAL 1,5)",
+    "Actief (staand werk, sport 4-7 x per week) (PAL 1,7)",
+    "Zeer actief (staand / zwaar werk, sport meerdere keren per dag) (PAL 1,9)"
+
+//  } else if (activityController ==
+//           "Licht actief (kantoorbaan, maar sport wel licht 1-3 x per week) (Pal 1,375) ") {
+//         caloriesDouble = (bmrTotal * 1.375);
+//       } else if (activityController ==
+//           "Gemiddeld actief (kantoorbaan, maar sport wel 3-5 x per week) (PAL 1,5)") {
+//         caloriesDouble = (bmrTotal * 1.55);
+//       } else if (activityController ==
+//           "Actief (staand werk, sport 4-7 x per week) (PAL 1,7)") {
+//         caloriesDouble = (bmrTotal * 1.725);
+//       } else if (activityController ==
+//           "Zeer actief (staand / zwaar werk, sport meerdere keren per dag) (PAL 1,9)") {
+//         caloriesDouble = (bmrTotal * 1.9);
+//       }
   ];
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
@@ -38,7 +53,7 @@ class _BMRcalculationState extends State<BMRcalculation> {
     loadActivity();
     return Scaffold(
         appBar: AppBar(
-          title: Text('BMR calculation'),
+          title: Text('BMR en AMR berekenen'),
           backgroundColor: kPrimaryColor,
         ),
         body: SingleChildScrollView(
@@ -65,9 +80,9 @@ class _BMRcalculationState extends State<BMRcalculation> {
                     hint: new Text("Geslacht"),
                     icon: Icon(Icons.arrow_drop_down_circle),
                     iconSize: 15,
-                    iconEnabledColor: Colors.black,
+                    // iconEnabledColor: Colors.black,
                     elevation: 20,
-                    style: TextStyle(color: Colors.black),
+                    //  style: TextStyle(color: Colors.black),
                     underline: Container(
                       height: 2,
                       color: kPrimaryColor,
@@ -85,12 +100,12 @@ class _BMRcalculationState extends State<BMRcalculation> {
                   child: new DropdownButton(
                     value: selected1,
                     items: dropdownEquationList,
-                    hint: new Text("Equation method"),
+                    hint: new Text("Reken methode"),
                     icon: Icon(Icons.arrow_drop_down_circle),
                     iconSize: 15,
-                    iconEnabledColor: Colors.black,
+                    //   iconEnabledColor: Colors.black,
                     elevation: 20,
-                    style: TextStyle(color: Colors.orange),
+                    //   style: TextStyle(color: Colors.orange),
                     underline: Container(
                       height: 2,
                       color: kPrimaryColor,
@@ -107,7 +122,7 @@ class _BMRcalculationState extends State<BMRcalculation> {
                   style: new TextStyle(
                       fontSize: 15.0, height: 1.5, color: Colors.black),
                   decoration: InputDecoration(
-                    labelText: 'Age',
+                    labelText: 'Leeftijd',
                     contentPadding: const EdgeInsets.symmetric(horizontal: 0.0),
                   ),
                   keyboardType: TextInputType.numberWithOptions(),
@@ -115,14 +130,14 @@ class _BMRcalculationState extends State<BMRcalculation> {
                 ),
                 TextField(
                   decoration: InputDecoration(
-                    labelText: 'Height (cm)',
+                    labelText: 'Lengte (cm)',
                   ),
                   keyboardType: TextInputType.numberWithOptions(),
                   controller: _heightController,
                 ),
                 TextField(
                   decoration: InputDecoration(
-                    labelText: 'Weight (kg)',
+                    labelText: 'Gewicht (kg)',
                   ),
                   keyboardType: TextInputType.numberWithOptions(),
                   controller: _weightController,
@@ -130,14 +145,15 @@ class _BMRcalculationState extends State<BMRcalculation> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: new DropdownButton(
+                    isExpanded: true,
                     value: selected2,
                     items: dropdownActivityList,
-                    hint: new Text("Level of Activeness"),
+                    hint: new Text("Hoe actief ben je?"),
                     icon: Icon(Icons.arrow_drop_down_circle),
                     iconSize: 15,
                     iconEnabledColor: Colors.black,
                     elevation: 20,
-                    style: TextStyle(color: Colors.orange),
+                    // style: TextStyle(color: Colors.orange),
                     underline: Container(
                       height: 2,
                       color: kPrimaryColor,
@@ -155,25 +171,72 @@ class _BMRcalculationState extends State<BMRcalculation> {
                       borderRadius: BorderRadius.circular(30)),
                   minWidth: 300,
                   height: 30,
-                  child: Text('Calculate BMR'),
+                  child: Text('Bereken BMR'),
                   color: kPrimaryColor,
                   textColor: Colors.black,
                   elevation: 5,
                   onPressed: _onPress,
                 ),
-                Text("Your results are as follows:"),
+                Text("Je resultaten zijn als volgt:"),
                 SizedBox(
                   height: 8,
                 ),
                 Text(
-                  "Your BMR is $bmrTotal",
+                  "Je BMR is $bmrTotal",
                 ),
                 SizedBox(
                   height: 8,
                 ),
-                Text("Recommended Calorie intake is $calories"),
+                Text("Je aanbeveling voor calorieën is $calories"),
                 SizedBox(
                   height: 8,
+                ),
+
+                RichText(
+                  text: TextSpan(
+                    text: '',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: 'Wat is BMR en AMR?',
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(' Wat is BMR?'),
+                                      content: RichText(
+                                        text: TextSpan(
+                                          text:
+                                              'BMR (Basic Metabolic Rate) geeft het minimale aantal calorieën aan wat het lichaam iedere dag nodig heeft voor de stofwisseling om goed te functioneren in rust. De AMR (Active Metabolic Rate) is uw BMR plus het aantal calorieën dat iedere dag nodig is voor basisbeweging en andere activiteiten. Omdat de AMR afhangt van uw dagelijkse activiteit, zal deze hoger zijn wanneer u meer beweegt. De uitkomsten zjin een resultaat van gemiddelden en niet precies op de persoon berekend.\n\nBeschouw de uitkomst als een indicatie.Wil je het nauwkeurig laten berekenen raadpleeg dan je huisarts of andere deskundigen.',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'OK'),
+                                          child: const Text('OK',
+                                              style: TextStyle(
+                                                  color: kPrimaryColor)),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
+                          style: TextStyle(
+                              //    color: Colors.blue,
+                              )),
+                      TextSpan(text: ''),
+                    ],
+                  ),
                 ),
               ],
             )));
@@ -215,14 +278,14 @@ class _BMRcalculationState extends State<BMRcalculation> {
       height = int.parse(_heightController.text);
       weight = int.parse(_weightController.text);
 
-      if (genderController == "Male") {
+      if (genderController == "Man") {
         if (equationController == "Mifflin-St Jeor") {
           bmrDouble = (10 * weight) + (6.25 * height) - (5 * age) + 5;
         } else if (equationController == "Harris-Benedict") {
           bmrDouble =
               66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age);
         }
-      } else if (genderController == "Female") {
+      } else if (genderController == "Vrouw") {
         if (equationController == "Mifflin-St Jeor") {
           bmrDouble = (10 * weight) + (6.25 * height) - (5 * age) - 161;
         } else if (equationController == "Harris-Benedict") {
@@ -231,15 +294,20 @@ class _BMRcalculationState extends State<BMRcalculation> {
         }
       }
       bmrTotal = (bmrDouble.round());
-      if (activityController == "I am inactive (PAL 1,2)") {
+      if (activityController ==
+          "Inactief (kantoorbaan en sport niet of zeer nauwelijks) (PAL 1,2)") {
         caloriesDouble = (bmrTotal * 1.2);
-      } else if (activityController == "I am lightly active (PAL 1,375)") {
+      } else if (activityController ==
+          "Licht actief (kantoorbaan, maar sport wel licht 1-3 x per week) (Pal 1,375) ") {
         caloriesDouble = (bmrTotal * 1.375);
-      } else if (activityController == "I am moderately active (PAL 1,5)") {
+      } else if (activityController ==
+          "Gemiddeld actief (kantoorbaan, maar sport wel 3-5 x per week) (PAL 1,5)") {
         caloriesDouble = (bmrTotal * 1.55);
-      } else if (activityController == "I am very active (PAL 1,7)") {
+      } else if (activityController ==
+          "Actief (staand werk, sport 4-7 x per week) (PAL 1,7)") {
         caloriesDouble = (bmrTotal * 1.725);
-      } else if (activityController == "I am super active (PAL 1,9)") {
+      } else if (activityController ==
+          "Zeer actief (staand / zwaar werk, sport meerdere keren per dag) (PAL 1,9)") {
         caloriesDouble = (bmrTotal * 1.9);
       }
       calories = (caloriesDouble.round());

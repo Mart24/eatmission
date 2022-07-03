@@ -86,6 +86,7 @@ class _GoalsHomeState extends State<GoalsHome>
             ),
           ),
           body: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
             controller: tabController,
             children: screens,
           ),

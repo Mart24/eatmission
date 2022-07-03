@@ -17,7 +17,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   void _onIntroEnd(context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-          builder: (_) => SignUpView(authFormType: AuthFormType.signUp)),
+          builder: (_) => SignUpView(authFormType: AuthFormType.signIn)),
     );
   }
 
