@@ -47,6 +47,14 @@ dependencies:
   flutter_local_notifications: ^9.2.0
   timezone: ^0.8.0
   flutter_native_timezone: ^2.0.0
+  flutter_launcher_icons: ^0.9.1
+
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon.png"
+
 
 
 

@@ -332,7 +332,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
 
           ExpansionTile(
-            title: const Text('Wat betekent duurzaam eten?'),
+            title:
+                const Text('Hoeveel kg CO₂eq eet de gemiddelde Nederlander?'),
             //   subtitle: const Text('Custom expansion arrow icon'),
 
             trailing: Icon(
@@ -341,7 +342,27 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   : Icons.arrow_drop_down,
             ),
             children: const <Widget>[
-              ListTile(title: Text('Answer number  1')),
+              ListTile(
+                  title: Text(
+                      'Recente onderzoeken hebben uitgerekend dat de gemiddelde Nederlander 5.0 ± 2.0kg CO₂eq per persoon per dag eet. Mannen hebben over het algemeen een hogere voetafdruk dan vrouwen. Voor een gezond en duurzaam voedingspatroon zonder vlees, schommelde de gemiddelde CO₂eq per persoon tussen de 2.3 en 3.0 kg CO₂eq')),
+            ],
+            onExpansionChanged: (bool expanded) {
+              setState(() => _customTileExpanded = expanded);
+            },
+          ),
+          ExpansionTile(
+            title: const Text('Hoeveel kg CO₂eq eten we in de toekomst?'),
+            //   subtitle: const Text('Custom expansion arrow icon'),
+
+            trailing: Icon(
+              _customTileExpanded
+                  ? Icons.arrow_drop_down_circle
+                  : Icons.arrow_drop_down,
+            ),
+            children: const <Widget>[
+              ListTile(
+                  title: Text(
+                      'Onderzoekers hebben uitgerekend dat als we ons willen houden aan de minder dan 1.5°C graden opwarming van de temperatuur op aarde (IPCC), we moeten streven in 2030  naar 2.05kg CO₂eq per persoon per dag (pppd) in een strikt scenario en 2.5kg CO₂eq pppd in een minder strikt scenario.\n\nEchter stellen de onderzoekers ook dat in 2050 onze CO₂eq uitstoot 1,11kg kg CO₂eq pppd moet bedragen. Om dit doel te behalen met daarnaast ook een gezond voedingspatroon zullen er meer voedingsproducten op de markt moeten komen die zijn verrijkt met extra voedingsstoffen of kunnen we zelf extra voedingsstoffen middels suppletie tot ons nemen. Zo worden veganisten aangeraden om extra vitamine B12 supplementen bij te nemen, omdat dit alleen in dierlijke producten voorkomt.')),
             ],
             onExpansionChanged: (bool expanded) {
               setState(() => _customTileExpanded = expanded);
