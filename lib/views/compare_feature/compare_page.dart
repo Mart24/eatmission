@@ -109,11 +109,12 @@ class _ComparePageState extends State<ComparePage> {
             controller: scrollController,
             children: [
               Container(
-                height: MediaQuery.of(context).size.height,
+                // height: MediaQuery.of(context).size.height,
+                height: 1050,
                 child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    // mainAxisSize: MainAxisSize.max,
+                    //  mainAxisAlignment: MainAxisAlignment.center,
+                    //  crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ProductOne(
                         scrollController: scrollController,
@@ -208,7 +209,7 @@ class ProductTwo extends StatelessWidget {
                 );
               } else {
                 return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FloatingActionButton.extended(
                         heroTag: 'product2',
@@ -315,7 +316,7 @@ class ProductOne extends StatelessWidget {
                 );
               } else {
                 return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    //  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FloatingActionButton.extended(
                         heroTag: 'product1',

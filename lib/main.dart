@@ -93,6 +93,11 @@ void main() async {
   //     statusBarColor: Colors.transparent));
   Bloc.observer = MyBlocObserver();
 
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(MyApp());
 }
 

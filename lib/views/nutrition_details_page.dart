@@ -11,6 +11,7 @@ import 'constants.dart';
 
 class NutritionalDetailsPage extends StatelessWidget {
   const NutritionalDetailsPage({Key key}) : super(key: key);
+  static bool _customTileExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -210,13 +211,86 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5.0),
-                                      child: Text(
-                                        AppLocalizations.of(context)
-                                            .totallproteintext,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text:
+                                                    AppLocalizations.of(context)
+                                                        .totallproteintext,
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    'Eiwitten'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Eiwit is een voedingsstof en een bouwstof. Er zijn dierlijke en plantaardige eiwitten. Dierlijke eiwitten zitten vooral in vlees, vis, melk, kaas en eieren. Plantaardige eiwitten zitten vooral in brood, graanproducten, peulvruchten en noten.\n\nVolwassen personen hebben gemiddeld elke dag 0,83 gram eiwit per kilo lichaamsgewicht nodig. Sommige groepen hebben wat meer nodig. Dat zijn vegetariërs, veganisten, kinderen, zwangere vrouwen en vrouwen die borstvoeding geven. Ook mensen met bepaalde aandoeningen of wonden en kracht- en duursporters hebben iets meer nodig.',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/eiwitten.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
                                       ),
+
+                                      // ),
                                     ),
                                     Text(
                                       '${cubit.protein.toStringAsFixed(0)}g',
@@ -289,13 +363,86 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5.0),
-                                      child: Text(
-                                        AppLocalizations.of(context)
-                                            .totalfattext,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text:
+                                                    AppLocalizations.of(context)
+                                                        .totalfattext,
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    'Vetten'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Vet is een bron van energie, vitamine A, vitamine D, vitamine E en essentiële vetzuren. Er bestaat onverzadigd en verzadigd vet. Vet in voedingsmiddelen bestaat altijd uit een combinatie van beide. Het vervangen van verzadigd vet door onverzadigd vet verlaagt het LDL-cholesterol. Een te hoog LDL-cholesterol is niet goed voor de bloedvaten en kan leiden tot hart- en vaatziekten.\n\nOm de kans op hart- en vaatziekten te verlagen, is het dus van belang producten met veel verzadigd vet te vervangen door producten met veel onverzadigd vet.',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/vetten.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
                                       ),
+
+                                      // ),
                                     ),
                                     Text(
                                       '${cubit.fats}g',
@@ -318,13 +465,86 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5.0),
-                                      child: Text(
-                                        AppLocalizations.of(context)
-                                            .dotssaturatedstext,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text:
+                                                    AppLocalizations.of(context)
+                                                        .dotssaturatedstext,
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    'Verzadigde vetten'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Verzadigd vet zit veel in dierlijke producten, zoals vet vlees en volle melkproducten en volvette kaas. Ook zit er veel verzadigd vet in koek, gebak en snacks.Verzadigd vet verhoogt het LDL-cholesterol van het bloed. Een te hoog LDL-cholesterol is niet goed voor de bloedvaten.\n\nIn Nederland en in de meeste andere landen wordt aangeraden om te zorgen dat niet meer dan 10% van de calorieën die je op een dag nodig hebt van verzadigd vet komt.',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/verzadigd-vet.aspxx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
                                       ),
+
+                                      // ),
                                     ),
                                     Text(
                                       '${cubit.saturatedFat}g',
@@ -344,13 +564,86 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5.0),
-                                      child: Text(
-                                        AppLocalizations.of(context)
-                                            .totalcarbstext,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text:
+                                                    AppLocalizations.of(context)
+                                                        .totalcarbstext,
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    'Koolhydraten'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Suikers, zetmeel en vezels zijn vormen van koolhydraten in onze voeding. Suikers en zetmeel zijn koolhydraten die een belangrijke bron van energie zijn voor het lichaam. De Gezondheidsraad adviseert dat wie gezond wil eten, minimaal 40% van zijn energie uit koolhydraten haalt.\n\nKoolhydraten kunnen het beste gegeten worden door voedingsmiddelen te eten waarvan is aangetoond dat ze gezondheidswinst leveren of andere goede voedingsstoffen bevatten. Dit zijn volkoren graanproducten zoals volkorenbrood en volkoren pasta, aardappels, peulvruchten, groente en fruit. Producten met koolhydraten die niet in de Schijf van Vijf staan, zoals frisdrank, koek en snoep, kunnen beter in beperkte mate worden genomen.',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/koolhydraten.aspxx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
                                       ),
+
+                                      // ),
                                     ),
                                     Text(
                                       '${cubit.carbs.toStringAsFixed(0)}g',
@@ -373,12 +666,83 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5.0),
-                                      child: Text(
-                                        AppLocalizations.of(context)
-                                            .dotssugarsstext,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text:
+                                                    AppLocalizations.of(context)
+                                                        .dotssugarsstext,
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    'Suikers'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'De meeste suikers bestaan uit glucose, fructose of een mengsel daarvan. Dit geldt voor alle soorten suiker, stropen, honing, en siropen. Het lichaam maakt geen onderscheid tussen van nature aanwezige of toegevoegde suiker en verwerkt het op dezelfde manier.\n\nHet drinken van suikerhoudende dranken vergroot de kans op overgewicht. Dit komt waarschijnlijk doordat de calorieën die je in vloeibare vorm binnenkrijgt, niet makkelijk worden waargenomen door het lichaam. Hierdoor voel je je minder snel verzadigd (vol) na het drinken dan na het eten van een voedingsmiddel.\n\nDe aanbeveling van het WHO zegt dat je minder dan 10% van de calorieën op een dag uit suikers moet halen. Voor jou is het uitgerekend met je huidige calorie doel op: "${(calGoal).toStringAsFixed(0)}" calorieën. Dat komt neer op ${(((calGoal / 4) / 10)).toStringAsFixed(0)}g.',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/suiker.aspxx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     Text(
@@ -390,7 +754,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      '60g',
+                                      '${(((calGoal / 4) / 10)).toStringAsFixed(0)}',
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.red),
                                     )
@@ -399,12 +763,83 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5.0),
-                                      child: Text(
-                                        AppLocalizations.of(context)
-                                            .dotsfiberstext,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text:
+                                                    AppLocalizations.of(context)
+                                                        .dotsfiberstext,
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    'Suikers'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Voedingsvezels (vezels) zijn belangrijk voor de gezondheid. Ze dragen bij aan een goede spijsvertering, een verzadigd gevoel na het eten en verminderen het risico op hart- en vaatziekten, diabetes type 2 en darmkanker.\n\nIn groente, fruit, aardappelen, volkorenbrood, ontbijtgranen, peulvruchten en noten zitten veel voedingsvezels. Per dag wordt geadviseerd zo’n 30 tot 40 gram voedingsvezels te eten. Omdat er veel verschillende typen vezels zijn met elk hun eigen goede eigenschappen, is het belangrijk om vezels uit verschillende typen voedingsmiddelen te eten.',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/vezels.aspxx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     Text(
@@ -425,12 +860,86 @@ class NutritionalDetailsPage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5.0),
-                                      child: Text(
-                                        AppLocalizations.of(context).salttext,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text:
+                                                    AppLocalizations.of(context)
+                                                        .salttext,
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    'Zout'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Zout is belangrijk voor het regelen van de vochtbalans in het lichaam, het regelen van de bloeddruk en voor een goede werking van spier- en zenuwcellen. Het komt zelden voor dat mensen te weinig zout binnenkrijgen. Zout is de belangrijkste bron van natrium in onze voeding. Te veel zout eten kan echter leiden tot een hoge bloeddruk. Een hoge bloeddruk verhoogt de kans op hart- en vaatziekten.\n\nDe dagelijkse aanbevolen hoeveelheid zout voor mannen en vrouwen is 3 gram. De maximum aanbevolen hoeveelheid zout per dag is 6 gram. Deze advieswaarden gelden niet voor personen die grote hoeveelheden zweet verliezen als gevolg van extreme omstandigheden, zoals wedstrijdsporters of werken in extreem warme omstandigheden.',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/koolhydraten.aspxx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
                                       ),
+
+                                      // ),
                                     ),
                                     Text(
                                       '${cubit.salt}g',
@@ -747,7 +1256,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Calcium is een mineraal dat je nodig hebt voor de opbouw en het onderhoud van de botten en het gebit. Calcium helpt tegen botontkalking op latere leeftijd en is nodig voor een goede werking van de zenuwen en spieren, de bloedstolling en het transport van andere mineralen in het lichaam.',
+                                                                        'Calcium is een mineraal dat je nodig hebt voor de opbouw en het onderhoud van de botten en het gebit. Calcium helpt tegen botontkalking op latere leeftijd en is nodig voor een goede werking van de zenuwen en spieren, de bloedstolling en het transport van andere mineralen in het lichaam.\n\nDe dagelijks aanbevolen hoeveelheden haal je voornamelijk uit melk en kaas. De rest haal je uit andere producten zoals dranken (water, koffie, thee). Ook in graanproducten en groenten zit een beetje calcium.\n\nDe dagelijkse aanbevolen hoeveelheid calcium voor mannen tussen de 29 en 69 jaar en voor vrouwen tussen de 25 en 50 jaar is 950 milligram.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -844,7 +1353,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Foliumzuur (vitamine B11) is nodig voor de groei en goede werking van het lichaam en voor de aanmaak van witte en rode bloedcellen. Foliumzuur is ook belangrijk voor de vroege ontwikkeling van het ongeboren kind.',
+                                                                        'Foliumzuur (vitamine B11) is nodig voor de groei en goede werking van het lichaam en voor de aanmaak van witte en rode bloedcellen. Foliumzuur is ook belangrijk voor de vroege ontwikkeling van het ongeboren kind. Foliumzuur komt van nature voor in groenten, vooral de groene soorten, volkorenproducten, brood, vlees en zuivel.\n\nDe dagelijkse aanbevolen hoeveelheid foliumzuur voor mannen en vrouwen is 300 microgram.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -895,7 +1404,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       // ),
                                     ),
                                     Text(
-                                      '${cubit.foliumzuur.toStringAsFixed(0)} mg',
+                                      '${cubit.foliumzuur.toStringAsFixed(0)} µg',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
@@ -903,7 +1412,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      '300 mg',
+                                      '300 µg',
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.green),
                                     ),
@@ -941,7 +1450,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Fosfor',
+                                                                        'Fosfor of fosfaat geeft samen met calcium stevigheid aan botten en tanden. Ook vervult fosfor een functie bij de energiestofwisseling (tijdelijke opslag en transport) in het lichaam. Fosfor komt in alle voedingsmiddelen voor in de vorm van fosfaat. Fosfor zit vooral in melk, melkproducten, kaas, vis, vlees, peulvruchten en volkoren producten. Het lichaam heeft niet snel een tekort aan fosfor. \n\nDe dagelijkse aanbevolen hoeveelheid fosfor voor mannen en vrouwen is 550 milligram.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -992,7 +1501,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       // ),
                                     ),
                                     Text(
-                                      '${cubit.fosfor.toStringAsFixed(0)} µg',
+                                      '${cubit.fosfor.toStringAsFixed(0)} mg',
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
@@ -1000,7 +1509,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      '550 µg',
+                                      '550 mg',
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.green),
                                     ),
@@ -1021,7 +1530,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                   .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
-                                                text: 'IJzer',
+                                                text: 'IJzer*',
                                                 recognizer:
                                                     TapGestureRecognizer()
                                                       ..onTap = () {
@@ -1032,13 +1541,14 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                     context) {
                                                               return AlertDialog(
                                                                 title: Text(
-                                                                    ' IJZer'),
+                                                                  ' IJzer',
+                                                                ),
                                                                 content:
                                                                     RichText(
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'IJzer',
+                                                                        'IJzer is o.a. belangrijk voor de vorming van hemoglobine, een onderdeel van rode bloedcellen. Rode bloedcellen vervoeren zuurstof door ons lichaam.\n\nIJzer komt in eten voor in 2 vormen; heemijzer en non-heemijzer. Heemijzer zit alleen in dierlijke producten (vlees, vis en kip). Non-heemijzer zit in dierlijke en plantaardige producten (brood, volkorenproducten, peulvruchten, noten, groene groenten zoals spinazie, postelein, paksoi en snijbiet). Heemijzer wordt wat beter opgenomen. \n\nDe dagelijkse aanbevolen hoeveelheid ijzer voor mannen is 11 milligram en voor vrouwen 16 milligram. Voor ',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -1046,6 +1556,25 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                             .primaryColor),
                                                                     children: <
                                                                         TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            'vegetariërs',
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                16,
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            color: Theme.of(context).primaryColor),
+                                                                      ),
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' is het van belang extra te letten op ijzer.',
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                16,
+                                                                            color:
+                                                                                Theme.of(context).primaryColor),
+                                                                      ),
                                                                       TextSpan(
                                                                         text:
                                                                             ' Meer informatie',
@@ -1135,7 +1664,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Jodium',
+                                                                        'Jodium is een spoorelement dat belangrijk is voor de productie van schildklierhormonen. Deze hormonen zijn nodig voor een goede groei, de ontwikkeling van het zenuwstelsel en de stofwisseling. Van nature komt jodium voor in zeevis, eieren, zuivelproducten en zeewier. Toegevoegd jodium zit in sommige vleeswaren, gejodeerd keukenzout en bakkerszout.\n\nDe dagelijkse aanbevolen hoeveelheid jodium voor mannen en vrouwen is 150 microgram.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -1232,7 +1761,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Kalium',
+                                                                        'Kalium is betrokken bij het regelen van de vochtbalans en bloeddruk in het lichaam. Kalium heeft daarbij een gunstig effect op de bloeddruk omdat het het bloeddrukverhogende effect van natrium tegenwerkt. Een tekort komt zelden voor. Kalium komt in bijna alle voedingsmiddelen voor. Het zit vooral in groente, fruit, aardappelen, vlees, vis, noten en ook in melkproducten en brood.\n\nDe dagelijkse aanbevolen hoeveelheid kalium voor mannen en vrouwen is 3500 milligram.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -1329,7 +1858,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Magnesium',
+                                                                        'Magnesium is nodig voor onder andere de vorming van bot en spieren en speelt een rol bij de goede werking van spieren en overdracht van zenuwprikkels. Het zit in veel verschilende voedingsmiddelen zoals bijvoorbeeld volkorenbrood en andere volkoren graanproducten, groente, noten, melk en melkproducten en vlees. Ook water kan bijdragen aan de inname van magnesium.\n\nDe dagelijkse aanbevolen hoeveelheid magnesium voor mannen is 350 milligram en voor vrouwen 300 milligram.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -1426,7 +1955,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Natrium',
+                                                                        'Natrium is belangrijk voor het regelen van de vochtbalans in het lichaam, het regelen van de bloeddruk en voor een goede werking van spier- en zenuwcellen. Het komt zelden voor dat mensen te weinig zout binnenkrijgen. Zout is de belangrijkste bron van natrium in onze voeding. Te veel zout eten kan echter leiden tot een hoge bloeddruk. Een hoge bloeddruk verhoogt de kans op hart- en vaatziekten.\n\nDe dagelijkse aanbevolen hoeveelheid natrium voor mannen en vrouwen is 1500 milligram (1,5 gram). De maximum aanbevolen hoeveelheid natrium per dag is 2400 milligram ',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -1523,7 +2052,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Niacine',
+                                                                        'Niacine (vitamine B3) is belangrijk voor de energievoorziening van het lichaam en de aanmaak van vetzuren. Niacine zit in vlees, vis, volkoren graanproducten, groente en aardappelen.\n\nDe dagelijks aanbevolen hoeveelheid niacine die je nodig hebt hangt af van het aantal calorieën dat je eet. Voor jou is het uitgerekend met je huidige calorie doel op: "${(calGoal).toStringAsFixed(0)}" calorieën. Dat komt neer op ${(((calGoal * 4.2) / 1000) * 1.6).toStringAsFixed(0)} mg.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -1582,7 +2111,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                       style: TextStyle(fontSize: 16),
                                     ),
                                     Text(
-                                      '',
+                                      '${(((calGoal * 4.2) / 1000) * 1.6).toStringAsFixed(0)} mg',
                                       style: TextStyle(
                                           fontSize: 16, color: Colors.green),
                                     ),
@@ -1620,7 +2149,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Selenium',
+                                                                        'Selenium of seleen is een spoorelement. Selenium zit in de lever en beschermt rode bloedlichaampjes en cellen tegen beschadiging. Verder maakt selenium zware metalen die soms in voeding terecht kunnen komen minder giftig. Selenium is ook belangrijk voor een goede werking van de schildklier. Het zit in veel voedingsmiddelen, zowel in dierlijke als plantaardige producten. Een tekort komt normaal gesproken niet voor en het is bijna onmogelijk om met eten te veel binnen te krijgen.\n\n De dagelijks aanbevolen hoeveelheid voor mannen en vrouwen is 70 milligram. De aanbevolen bovengrens is 300 miligram.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -1700,7 +2229,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                   .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
-                                                text: 'VitA',
+                                                text: 'Vitamine A',
                                                 recognizer:
                                                     TapGestureRecognizer()
                                                       ..onTap = () {
@@ -1719,7 +2248,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Om gezond te blijven is de dagelijkse aanbeveling van vitamine A voor een volwassen man 800 microgram en voor een volwassen vrouw 680 microgram.',
+                                                                        'Vitamine A of retinol is van belang voor de normale groei, een gezonde huid, haar en nagels en een goede werking van de ogen en het afweersysteem. Het zit vooral in dierlijke producten zoals vlees(waren), zuivel vis en eidooier. Daarnaast wordt het toegevoegd aan margarine, halvarine en bakproducten. Vooral in lever zit veel vitamine A. Carotenoïden (provitamine A) komen veel voor in verschillende soorten groenten, zoals wortel, boerenkool, spinazie en andijvie.\n\nDe aanbevolen dagelijkse hoeveelheid van vitamine A voor een volwassen man 800 microgram en voor een volwassen vrouw 680 microgram.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -1797,7 +2326,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                   .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
-                                                text: 'Vit B1',
+                                                text: 'Vitamine B1',
                                                 recognizer:
                                                     TapGestureRecognizer()
                                                       ..onTap = () {
@@ -1816,7 +2345,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Vitamine B1',
+                                                                        'Thiamine (vitamine B1) is onmisbaar voor de energievoorziening van het lichaam, en voor een goede werking van de hartspier en het zenuwstelsel. Bij een tekort aan vitamine B1 kunnen afwijkingen aan het zenuwstelsel en psychische afwijkingen ontstaan. Thiamine komt voor in brood en graanproducten, aardappelen, groente, vlees en vleeswaren, melk en melkproducten.\n\nDe dagelijkse aanbevolen hoeveelheid voor mannen en vrouen is afhankelijk van het aantal calorieën dat je eet. Voor jouw calorie doel is het uitgrekend op "${(calGoal).toStringAsFixed(0)}" calorieën. Dat komt neer op ${((cubit.kCalSum * 0.0041868) * 0.1).toStringAsFixed(1)} mg.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -1894,7 +2423,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                   .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
-                                                text: 'Vitamine B12',
+                                                text: 'Vitamine B12*',
                                                 recognizer:
                                                     TapGestureRecognizer()
                                                       ..onTap = () {
@@ -1911,7 +2440,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Vitamine B12',
+                                                                        'Vitamine B12 (cobalamine) is nodig voor de aanmaak van rode bloedcellen. Rode bloedcellen zijn nodig om zuurstof in je bloed te vervoeren. Daarnaast is vitamine B12 nodig voor een goede werking van het zenuwstelsel. Vitamine B12 zit alleen in dierlijke producten, zoals melk, melkproducten, vlees, vleeswaren, vis en eieren.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -1919,6 +2448,23 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                             .primaryColor),
                                                                     children: <
                                                                         TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Veganisten',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Theme.of(context).primaryColor,
+                                                                            fontWeight: FontWeight.bold),
+                                                                      ),
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' wordt aangeraden een vitamine B12-supplement te slikken of producten te gebruiken met toegevoegd vitamine B12.\n\nDe dagelijks aanbevolen hoeveelheid voor mannen en vrouwen is 2.8 microgram per dag.',
+                                                                        style:
+                                                                            new TextStyle(
+                                                                          color:
+                                                                              Theme.of(context).primaryColor,
+                                                                        ),
+                                                                      ),
                                                                       TextSpan(
                                                                         text:
                                                                             ' Meer informatie',
@@ -2008,7 +2554,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Vitamine B2',
+                                                                        'Riboflavine (vitamine B2) is onmisbaar voor de energievoorziening van het lichaam. Het speelt namelijk een belangrijke rol bij het vrijmaken van energie voor je lichaam uit koolhydraten, eiwitten en vetten. Riboflavine zit vooral in melk en melkproducten, maar ook in vlees, vleeswaren, groente, fruit, brood en graanproducten.\n\nDe dagelijk aanbevolen hoeveelheid voor mannen en vrouwen is 1,6 milligram.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -2105,7 +2651,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Vitamine B6',
+                                                                        'Vitamine B6 is belangrijk voor de stofwisseling, vooral voor de afbraak en opbouw van aminozuren. Aminozuren zijn de bouwstenen van eiwitten. Vitamine B6 zit in vlees, eieren, vis, brood en graanproducten, aardappelen, peulvruchten, groente, melk, melkproducten en kaas.\n\nDe dagelijks aanbevolen hoeveelheid voor mannen en vrouwen is 1.5 milligram.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -2187,7 +2733,104 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                   .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
-                                                text: 'Vit D',
+                                                text: 'Vitamine C',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    'Vitamine C'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Vitamine C of ascorbinezuur is de bekendste vitamine. Vitamine C heeft een functie als antioxidant in het lichaam en is nodig voor de vorming van bindweefsel, de opname van ijzer en het in stand houden van de weerstand. Vitamine C zit in fruit, groente en aardappelen, met name in koolsoorten, citrusfruit, kiwi’s, bessen en aardbeien. Om vitamine C zoveel mogelijk te behouden, is het belangrijk om groente in weinig water te koken, en niet langer dan nodig is.\n\nDe dagelijkse aanbeveling voor mannen en vrouwen is 75 milligram',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/vitamine-c.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.vitC.toStringAsFixed(0)} mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '75 mg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: 'Vitamine D',
                                                 recognizer:
                                                     TapGestureRecognizer()
                                                       ..onTap = () {
@@ -2206,7 +2849,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Vitamine D is een vetoplosbare vitamine. Vitamine D is een van de weinige vitamines die het lichaam zelf kan maken. Onder invloed van zonlicht wordt in de huid vitamine D gevormd. Daarnaast levert de voeding vitamine D.',
+                                                                        'Vitamine D is een vetoplosbare vitamine. Vitamine D is een van de weinige vitamines die het lichaam zelf kan maken. Onder invloed van zonlicht wordt in de huid vitamine D gevormd. Daarnaast levert de voeding vitamine D.\n\nVoor iedereen geldt een aanbevolen dagelijkse hoeveelheid van 10 microgram vitamine D. Alleen mensen van boven de 70 moeten 20 microgram per dag binnen krijgen.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -2284,6 +2927,103 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                   .primaryColor),
                                           children: <TextSpan>[
                                             TextSpan(
+                                                text: 'Vitamine E',
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () {
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                    'Vitamine E'),
+                                                                content:
+                                                                    RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    text:
+                                                                        'Vitamine E is een vetoplosbare vitamine. Vitamine E werkt als antioxidant en beschermt zo de cellen, bloedvaten, organen, ogen en weefsel. Vitamine E speelt ook een rol bij het regelen van de stofwisseling in de cel. Vitamine E zit in zonnebloemolie, halvarine, margarine, brood, graanproducten, noten, zaden, groenten en fruit.\n\n De dagelijkse aanbeveling voor mannen is 13 milligram en voor vrouwen 11 milligram',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            16,
+                                                                        color: Theme.of(context)
+                                                                            .primaryColor),
+                                                                    children: <
+                                                                        TextSpan>[
+                                                                      TextSpan(
+                                                                        text:
+                                                                            ' Meer informatie',
+                                                                        style: new TextStyle(
+                                                                            color:
+                                                                                Colors.blue),
+                                                                        recognizer:
+                                                                            new TapGestureRecognizer()
+                                                                              ..onTap = () {
+                                                                                launch('https://www.voedingscentrum.nl/encyclopedie/vitamine-e.aspx');
+                                                                              },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            context,
+                                                                            'OK'),
+                                                                    child: const Text(
+                                                                        'OK',
+                                                                        style: TextStyle(
+                                                                            color:
+                                                                                kPrimaryColor)),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                style: TextStyle(
+                                                    //    color: Colors.blue,
+                                                    )),
+                                            TextSpan(text: ''),
+                                          ],
+                                        ),
+                                      ),
+
+                                      // ),
+                                    ),
+                                    Text(
+                                      '${cubit.vitE.toStringAsFixed(0)} mg',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '',
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                    Text(
+                                      '11 mg',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.green),
+                                    ),
+                                  ]),
+                                  TableRow(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child:
+                                          //
+                                          RichText(
+                                        text: TextSpan(
+                                          text: '',
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          children: <TextSpan>[
+                                            TextSpan(
                                                 text: 'Water',
                                                 recognizer:
                                                     TapGestureRecognizer()
@@ -2301,7 +3041,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Water',
+                                                                        'Het advies voor volwassenen is om per dag 1,5 tot 2 liter vocht te drinken. Water voorziet je lichaam net als andere dranken van vocht. Omdat water geen calorieën bevat, is het een goede dorstlesser. Het drinkwater uit de kraan is in Nederland van goede kwaliteit. De eisen daarvoor zijn vastgelegd in de Waterleidingwet. ',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -2398,7 +3138,7 @@ class NutritionalDetailsPage extends StatelessWidget {
                                                                   text:
                                                                       TextSpan(
                                                                     text:
-                                                                        'Zink',
+                                                                        'Zink is onder meer nodig bij de opbouw van eiwitten, de groei en ontwikkeling van weefsel, en een goede werking van het afweer-/immuunsysteem. Zink komt in kleine hoeveelheden voor in veel verschillende voedingsmiddelen, zoals vlees, kaas, graanproducten, noten en schaal- en schelpdieren zoals garnalen en mosselen.\n\nDe dagelijkse aanbeveling van zink voor mannen is 9 milligram en voor vrouwen 7 milligram. Een veilige bovengrens is 25 milligram per dag.',
                                                                     style: TextStyle(
                                                                         fontSize:
                                                                             16,
@@ -2512,7 +3252,7 @@ Widget _buildPopupDialog(BuildContext context) {
               ),
               TextSpan(
                   text:
-                      ' staat voor de minimale consumptie per dag. Voor meer informatie, kijk op de website voedingscentrum.nl',
+                      ' staat voor de minimale consumptie per dag. Het maakt niet uit als je de ene dag meer binnenkrijgt dan de andere dag. Voor meer informatie, kijk op de website voedingscentrum.nl.\n\nDoor links op het macronutriënt of micronutriënt te klikken krijg je meer informatie van het voedingscentrum',
                   style: TextStyle(fontSize: 16)),
             ])),
       ],

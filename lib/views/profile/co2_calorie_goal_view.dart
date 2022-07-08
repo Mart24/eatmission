@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:food_app/shared/dairy_cubit.dart';
 import 'package:food_app/views/constants.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Goalgoal extends StatelessWidget {
   @override
@@ -111,16 +112,54 @@ class _HomePage extends State<RadioGroup> {
                 '*Let op: Als je je caloriegoal verandert: Vul dan ook opnieuw verhoudingswaarden in. Anders heb je nog je oude goals',
                 style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
               ),
-              Text(
-                'Caloriegoal',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Caloriegoal',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.info),
+                    color: kPrimaryColor,
+                    // tooltip: 'Increase volume by 10',
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            _buildPopupDialogCalorie(context),
+                      );
+                    },
+                  ),
+                ],
               ),
               calorieFormField(cubit: cubit),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: Text('Verhouding koolhydraten, eiwitten en vetten',
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Verhouding koolhydraten, eiwitten en vetten',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold)),
+                        IconButton(
+                          icon: const Icon(Icons.info),
+                          color: kPrimaryColor,
+                          // tooltip: 'Increase volume by 10',
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  _buildPopupDialogRatio(context),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -130,21 +169,29 @@ class _HomePage extends State<RadioGroup> {
                   children: <Widget>[
                     new Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.all(18.0),
+                        padding: const EdgeInsets.only(
+                            right: 10.0, left: 10, bottom: 20),
                         child: Form(
-                          child: new TextFormField(
-                            controller: carbcontroler,
-                            keyboardType: TextInputType.number,
-                            // initialValue: 30.toString(),
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(2),
-                              FilteringTextInputFormatter.digitsOnly,
-                            ],
-                            onChanged: (carbGoal) async {
-                              cubit.setCarbGoal(cubit.calGoal /
-                                  4 *
-                                  (_carbGoalPercentage / 100));
-                            },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 244, 239, 239),
+                              borderRadius: new BorderRadius.circular(10.0),
+                            ),
+                            child: new TextFormField(
+                              style: TextStyle(color: Colors.black),
+                              controller: carbcontroler,
+                              keyboardType: TextInputType.number,
+                              // initialValue: 30.toString(),
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(2),
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              onChanged: (carbGoal) async {
+                                cubit.setCarbGoal(cubit.calGoal /
+                                    4 *
+                                    (_carbGoalPercentage / 100));
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -156,23 +203,31 @@ class _HomePage extends State<RadioGroup> {
                     ),
                     new Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: new TextFormField(
-                          controller: proteincontroler,
-                          keyboardType: TextInputType.number,
-                          //  initialValue: 30.toString(),
-                          // decoration: InputDecoration(hintText: '30'),
-                          // onChanged: (newGoal) async {
-                          //   cubit.setCalGoal(double.tryParse(newGoal));
-                          // },
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(2),
-                          ],
-                          onChanged: (proteinGoal) async {
-                            cubit.setProteinGoal(cubit.calGoal /
-                                4 *
-                                (_proteinGoalPercentage / 100));
-                          },
+                        padding: const EdgeInsets.only(
+                            right: 10.0, left: 10, bottom: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 244, 239, 239),
+                            borderRadius: new BorderRadius.circular(10.0),
+                          ),
+                          child: new TextFormField(
+                            style: TextStyle(color: Colors.black),
+                            controller: proteincontroler,
+                            keyboardType: TextInputType.number,
+                            //  initialValue: 30.toString(),
+                            // decoration: InputDecoration(hintText: '30'),
+                            // onChanged: (newGoal) async {
+                            //   cubit.setCalGoal(double.tryParse(newGoal));
+                            // },
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            onChanged: (proteinGoal) async {
+                              cubit.setProteinGoal(cubit.calGoal /
+                                  4 *
+                                  (_proteinGoalPercentage / 100));
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -183,19 +238,27 @@ class _HomePage extends State<RadioGroup> {
                     ),
                     new Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: new TextFormField(
-                          controller: fatcontroler,
-                          keyboardType: TextInputType.number,
-                          //  initialValue: _fatsGoalPercentage.toString() ? ,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(2),
-                          ],
-                          onChanged: (fatsGoal) async {
-                            cubit.setFatsGoal(cubit.calGoal /
-                                9 *
-                                (_fatsGoalPercentage / 100));
-                          },
+                        padding: const EdgeInsets.only(
+                            right: 10.0, left: 10, bottom: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 244, 239, 239),
+                            borderRadius: new BorderRadius.circular(10.0),
+                          ),
+                          child: new TextFormField(
+                            style: TextStyle(color: Colors.black),
+                            controller: fatcontroler,
+                            keyboardType: TextInputType.number,
+                            //  initialValue: _fatsGoalPercentage.toString() ? ,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(2),
+                            ],
+                            onChanged: (fatsGoal) async {
+                              cubit.setFatsGoal(cubit.calGoal /
+                                  9 *
+                                  (_fatsGoalPercentage / 100));
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -239,10 +302,27 @@ class _HomePage extends State<RadioGroup> {
                   'Calorieën totaal ${((cubit.carbGoal * 4) + (cubit.proteinGoal * 4) + (cubit.fatsGoal * 9)).toStringAsFixed(0)}kcal'),
 
               Padding(
-                padding: const EdgeInsets.only(top: 16.0, bottom: 8),
-                child: Text('Jouw CO2 doel $_groupValue kg/co2 per dag',
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                padding: const EdgeInsets.only(top: 30.0, bottom: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Jouw CO2 doel $_groupValue kg/co2 per dag',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    IconButton(
+                      icon: const Icon(Icons.info),
+                      color: kPrimaryColor,
+                      // tooltip: 'Increase volume by 10',
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              _buildPopupDialogCo2(context),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
 
               // Padding(
@@ -341,23 +421,138 @@ class calorieFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: TextInputType.number,
-      initialValue: cubit.calGoal.toString(),
-      onChanged: (newGoal) async {
-        cubit.setCalGoal(double.tryParse(newGoal));
-      },
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
-        TextInputFormatter.withFunction((oldValue, newValue) {
-          try {
-            final text = newValue.text;
-            if (text.isNotEmpty) double.parse(text);
-            return newValue;
-          } catch (e) {}
-          return oldValue;
-        }),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(right: 40.0, left: 40, bottom: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 244, 239, 239),
+          borderRadius: new BorderRadius.circular(10.0),
+        ),
+        child: TextFormField(
+          style: TextStyle(color: Colors.black),
+          keyboardType: TextInputType.number,
+          initialValue: cubit.calGoal.toString(),
+          onChanged: (newGoal) async {
+            cubit.setCalGoal(double.tryParse(newGoal));
+          },
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+            TextInputFormatter.withFunction((oldValue, newValue) {
+              try {
+                final text = newValue.text;
+                if (text.isNotEmpty) double.parse(text);
+                return newValue;
+              } catch (e) {}
+              return oldValue;
+            }),
+          ],
+        ),
+      ),
     );
   }
+}
+
+Widget _buildPopupDialogCalorie(BuildContext context) {
+  return new AlertDialog(
+    scrollable: true,
+    title: const Text(
+      'Calorie doel',
+      style: TextStyle(fontSize: 18),
+    ),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text.rich(TextSpan(
+            style: GoogleFonts.roboto(
+              fontSize: 16,
+            ),
+            children: <TextSpan>[
+              TextSpan(
+                  text:
+                      'Dit is je caloriegoal. Je kunt deze berekenen bij het kopje: Bereken BMR en AMR'),
+            ])),
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        //textColor: Theme.of(context).primaryColor,
+        child: Text('Sluit'),
+      ),
+    ],
+  );
+}
+
+Widget _buildPopupDialogRatio(BuildContext context) {
+  return new AlertDialog(
+    scrollable: true,
+    title: const Text(
+      'Verhouding',
+      style: TextStyle(fontSize: 18),
+    ),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text.rich(TextSpan(
+            style: GoogleFonts.roboto(
+              fontSize: 16,
+            ),
+            children: <TextSpan>[
+              TextSpan(
+                  text:
+                      'De verhouding wat als advies wordt gegeven ligt voor koolhydraten tussen de 40 en 70 %, voor eiwitten is het advies tussen de 10 en 30 % en van vet hebben we ongeveer 25 tot 40 % nodig. De meest gebruikte verhouding is 50% koolhydraten, 30% eiwitten en 20% vet, of 40 – 30 – 30.'),
+            ])),
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        //textColor: Theme.of(context).primaryColor,
+        child: Text('Sluit'),
+      ),
+    ],
+  );
+}
+
+Widget _buildPopupDialogCo2(BuildContext context) {
+  return new AlertDialog(
+    scrollable: true,
+    title: const Text(
+      'CO2 doel',
+      style: TextStyle(fontSize: 18),
+    ),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text.rich(
+          TextSpan(
+            style: GoogleFonts.roboto(
+              fontSize: 16,
+            ),
+            children: <TextSpan>[
+              TextSpan(
+                  text:
+                      'Recente onderzoeken hebben uitgerekend dat de gemiddelde Nederlander 5.0 ± 2.0kg CO₂eq per persoon per dag eet. Mannen hebben over het algemeen een hogere voetafdruk dan vrouwen. Voor een gezond en duurzaam voedingspatroon zonder vlees, schommelde de gemiddelde CO₂eq per persoon tussen de 2.3 en 3.0 kg CO₂eq.\n\nOnderzoekers hebben uitgerekend dat als we ons willen houden aan de minder dan 1.5°C graden opwarming van de temperatuur op aarde (IPCC), we moeten streven in 2030  naar 2.05kg CO₂eq per persoon per dag (pppd) in een strikt scenario en 2.5kg CO₂eq pppd in een minder strikt scenario.\n\nEchter stellen de onderzoekers ook dat in 2050 onze CO₂eq uitstoot 1,11kg kg CO₂eq pppd moet bedragen. Voor meer info, zie tip&tricks'),
+            ],
+          ),
+        ),
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        //textColor: Theme.of(context).primaryColor,
+        child: Text('Sluit'),
+      ),
+    ],
+  );
 }

@@ -127,7 +127,7 @@ class SettingsThreePage extends StatelessWidget {
               ),
               child: ListTile(
                   leading: Icon(Icons.info),
-                  title: Text("App licensies"),
+                  title: Text("App licenties"),
                   onTap: () => showLicensePage(
                       context: context, applicationName: "VoedingsApp")),
             ),

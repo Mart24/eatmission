@@ -342,7 +342,7 @@ class _FoodDateState extends State<FoodDate> {
                                           TextSpan(text: 'CO₂ '),
                                           TextSpan(
                                             text:
-                                                '${trip.co2.toStringAsFixed(1)}',
+                                                '${trip.co2.toStringAsFixed(2)}',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: kPrimaryColor),
@@ -352,7 +352,7 @@ class _FoodDateState extends State<FoodDate> {
                                               style: TextStyle(fontSize: 12)),
                                         ])),
                                     ElevatedButton(
-                                      child: Text("Recommendation"),
+                                      child: Text("Aanbeveling"),
                                       onPressed: () {
                                         LogCubit logCubit =
                                             LogCubit.instance(context);
@@ -394,7 +394,7 @@ class _FoodDateState extends State<FoodDate> {
                                         print("log recommendation");
                                       },
                                       style: ElevatedButton.styleFrom(
-                                          primary: Colors.purple,
+                                          primary: Colors.orange,
                                           textStyle: const TextStyle(
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold)),

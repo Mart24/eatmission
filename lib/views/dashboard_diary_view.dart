@@ -583,7 +583,7 @@ Color calculateBackgroundColorCircularindicator({double circularPercent}) {
   if (circularPercent < 1) {
     return kPrimaryColor;
   } else {
-    return Colors.red;
+    return kPrimaryColor;
   }
 }
 

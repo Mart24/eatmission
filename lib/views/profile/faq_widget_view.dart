@@ -61,7 +61,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                    'Het voedselsysteem levert wereldwijd een enorme bijdrage aan klimaatopwarming. Schattingen geven aan dat 26% van de wereldwijde CO2eq uitstoot afkomstig is van de voedselketen. Zoals te zien is op de afbeelding, is het grootste aandeel van de voedseluitstoot afkomstig van vee en visserij. Ook landbouw levert een groot aandeel. Het is echter belangrijk om te noemen dat de totale landbouw productie vele malen groter is dan de vleesproductie, waardoor gewassen aanzienlijk beter scoren per kilogram. Het verwerken en vervoeren van voedsel zorgt slechts voor iets minder dan één vijfde van de uitstoot. Ook zijn er tussen landen grote verschillen te vinden in deze cijfers, onder andere door bevolkingsgrootte, cultuur en vooral welvaart.'),
+                  'Het voedselsysteem levert wereldwijd een enorme bijdrage aan klimaatopwarming. Schattingen geven aan dat 26% van de wereldwijde CO₂eq uitstoot afkomstig is van de voedselketen. Zoals te zien is op de afbeelding, is het grootste aandeel van de voedseluitstoot afkomstig van vee en visserij. Ook landbouw levert een groot aandeel. Het is echter belangrijk om te noemen dat de totale landbouw productie vele malen groter is dan de vleesproductie, waardoor gewassen aanzienlijk beter scoren per kilogram. Het verwerken en vervoeren van voedsel zorgt slechts voor iets minder dan één vijfde van de uitstoot. Ook zijn er tussen landen grote verschillen te vinden in deze cijfers, onder andere door bevolkingsgrootte, cultuur en vooral welvaart.',
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
               Image.network(
                   'https://assets.weforum.org/editor/responsive_large_webp_xYEGxaqCqyW20yO4XWjGXrGv2uZxZqyEoMr2USCerJY.webp'),
@@ -82,14 +84,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             children: const <Widget>[
               ListTile(
                   title: Text(
-                      'Voor de opwarming van de aarde is CO2eq de belangrijkste factor, maar dit betekent niet dat de andere factoren niet belangrijk zijn. Ook landgebruik en waterverbruik zorgen voor veel klimaatgerelateerde problemen. Echter was het voor dit onderzoek niet mogelijk om deze data mee te nemen. Er is nog niet genoeg informatie beschikbaar om dit voor elk product te bepalen.')),
+                      'Voor de opwarming van de aarde is CO₂-eq de belangrijkste factor, maar dit betekent niet dat de andere factoren niet belangrijk zijn. Ook landgebruik en waterverbruik zorgen voor veel klimaatgerelateerde problemen. Echter was het voor dit onderzoek niet mogelijk om deze data mee te nemen. Er is nog niet genoeg informatie beschikbaar om dit voor elk product te bepalen.')),
             ],
             onExpansionChanged: (bool expanded) {
               setState(() => _customTileExpanded = expanded);
             },
           ),
           ExpansionTile(
-            title: const Text('Waarom de CO2-eq uitstoot?'),
+            title: const Text('Waarom de CO₂eq uitstoot?'),
             //   subtitle: const Text('Custom expansion arrow icon'),
 
             trailing: Icon(
@@ -100,7 +102,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             children: const <Widget>[
               ListTile(
                   title: Text(
-                      'CO2eq staat voor CO2 equivalenten gemeten in kilogram (kg). Het zijn alle broeikasgassen die vrijkomen tijdens de productie, transport of verwerking van het product. Behalve CO2 zijn er nog veel andere broeikasgassen, bijvoorbeeld methaan (CH4) of stikstofdioxiden (N2O). Om alle broeikasgassen samen te vatten, is de term CO2eq bedacht, wat inhoudt dat de andere uistootbronnen vertaald worden naar CO2 equivalenten. Methaan houdt 28x meer warmte vast dan CO2. De uitstoot van 1 g methaan wordt dus beschreven als 28 g CO2eq. Voor stikstofoxide is dit nog vele malen erger, namelijk 265 keer de impact dan CO2. Het kan dus zo zijn dat een product maar weinig CO2 uitstoot, maar toch een hoge CO2eq heeft. Dit komt dan door de uitstoot van andere broeikasgassen. Voorbeelden zijn de productie van vlees en rijst waarbij methaan vrijkomt. Voor CO2eq geldt altijd, hoe hoger hoe meer het bijdraagt aan klimaatopwarming. Probeer dus gerechten en producten te gebruiken met een lage CO2eq uitstoot.')),
+                      'CO₂eq staat voor CO₂ equivalenten gemeten in kilogram (kg). Het zijn alle broeikasgassen die vrijkomen tijdens de productie, transport of verwerking van het product. Behalve CO₂ zijn er nog veel andere broeikasgassen, bijvoorbeeld methaan (CH4) of stikstofdioxiden (N2O).\n\nOm alle broeikasgassen samen te vatten, is de term CO₂eq bedacht, wat inhoudt dat de andere uistootbronnen vertaald worden naar CO₂ equivalenten. Methaan houdt 28x meer warmte vast dan CO₂. De uitstoot van 1 g methaan wordt dus beschreven als 28 g CO₂eq. Voor stikstofoxide is dit nog vele malen erger, namelijk 265 keer de impact dan CO₂. Het kan dus zo zijn dat een product maar weinig CO₂ uitstoot, maar toch een hoge CO₂eq heeft. Dit komt dan door de uitstoot van andere broeikasgassen.\n\nVoorbeelden zijn de productie van vlees en rijst waarbij methaan vrijkomt. Voor CO₂eq geldt altijd, hoe hoger hoe meer het bijdraagt aan klimaatopwarming. Probeer dus gerechten en producten te gebruiken met een lage CO₂eq uitstoot.')),
+            ],
+            onExpansionChanged: (bool expanded) {
+              setState(() => _customTileExpanded = expanded);
+            },
+          ),
+          ExpansionTile(
+            title: const Text('Hoe zit het met verpakking, transport etc?'),
+            //   subtitle: const Text('Custom expansion arrow icon'),
+
+            trailing: Icon(
+              _customTileExpanded
+                  ? Icons.arrow_drop_down_circle
+                  : Icons.arrow_drop_down,
+            ),
+            children: const <Widget>[
+              ListTile(
+                  title: Text(
+                      'Voor de berekening van de CO₂eq is een Levenscyclus Analyse (LCA) uitgevoerd. Deze methode houdt in dat de milieubelasting berekend wordt op basis van een inventarisatie van alle relevante materiaal- en emissiestromen gedurende de gehele levenscyclus van een voedingsmiddel. Het gaat om het hele proces van oogsten van een product tot dat het op je bord ligt.')),
             ],
             onExpansionChanged: (bool expanded) {
               setState(() => _customTileExpanded = expanded);
@@ -362,7 +382,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             children: const <Widget>[
               ListTile(
                   title: Text(
-                      'Onderzoekers hebben uitgerekend dat als we ons willen houden aan de minder dan 1.5°C graden opwarming van de temperatuur op aarde (IPCC), we moeten streven in 2030  naar 2.05kg CO₂eq per persoon per dag (pppd) in een strikt scenario en 2.5kg CO₂eq pppd in een minder strikt scenario.\n\nEchter stellen de onderzoekers ook dat in 2050 onze CO₂eq uitstoot 1,11kg kg CO₂eq pppd moet bedragen. Om dit doel te behalen met daarnaast ook een gezond voedingspatroon zullen er meer voedingsproducten op de markt moeten komen die zijn verrijkt met extra voedingsstoffen of kunnen we zelf extra voedingsstoffen middels suppletie tot ons nemen. Zo worden veganisten aangeraden om extra vitamine B12 supplementen bij te nemen, omdat dit alleen in dierlijke producten voorkomt.')),
+                      'Onderzoekers hebben uitgerekend dat als we ons willen houden aan de minder dan 1.5°C graden opwarming van de temperatuur op aarde (IPCC), we moeten streven in 2030  naar 2.05kg CO₂eq per persoon per dag (pppd) in een strikt scenario en 2.5kg CO₂eq pppd in een minder strikt scenario.\n\nEchter stellen de onderzoekers ook dat in 2050 onze CO₂eq uitstoot 1,11kg kg CO₂eq pppd moet bedragen. Om dit doel te behalen met daarnaast ook een gezond voedingspatroon zullen er meer voedingsproducten op de markt moeten komen die zijn verrijkt met extra voedingsstoffen of kunnen we zelf extra voedingsstoffen middels suppletie tot ons nemen. Zo worden veganisten aangeraden om extra vitamine B12 supplementen bij te nemen, omdat dit alleen in dierlijke producten voorkomt.\n\n')),
             ],
             onExpansionChanged: (bool expanded) {
               setState(() => _customTileExpanded = expanded);
