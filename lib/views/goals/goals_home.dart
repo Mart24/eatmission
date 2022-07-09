@@ -19,8 +19,8 @@ class _GoalsHomeState extends State<GoalsHome>
     with SingleTickerProviderStateMixin {
   int currentIndex = 0;
   List<Widget> screens = [
-    GoalsScreen(),
-    GraphsScreen(),
+    // GoalsScreen(),
+    // GraphsScreen(),
     FaqView(),
   ];
   TabController tabController;
@@ -28,7 +28,7 @@ class _GoalsHomeState extends State<GoalsHome>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 1, vsync: this);
   }
 
   @override
@@ -58,8 +58,8 @@ class _GoalsHomeState extends State<GoalsHome>
                 ),
                 labelColor: Colors.white,
                 tabs: [
-                  Tab(child: Text(AppLocalizations.of(context).goals)),
-                  Tab(child: Text(AppLocalizations.of(context).graphs)),
+                  // Tab(child: Text(AppLocalizations.of(context).goals)),
+                  // Tab(child: Text(AppLocalizations.of(context).graphs)),
                   Tab(child: Text('Tips')),
                 ],
                 onTap: (index) {

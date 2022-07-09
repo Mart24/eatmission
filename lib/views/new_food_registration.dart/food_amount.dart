@@ -351,54 +351,54 @@ class _FoodDateState extends State<FoodDate> {
                                               text: ' kg/CO₂-eq',
                                               style: TextStyle(fontSize: 12)),
                                         ])),
-                                    ElevatedButton(
-                                      child: Text("Aanbeveling"),
-                                      onPressed: () {
-                                        LogCubit logCubit =
-                                            LogCubit.instance(context);
-                                        logCubit
-                                            .addLog("button recommendation");
+                                    // ElevatedButton(
+                                    //   child: Text("Aanbeveling"),
+                                    //   onPressed: () {
+                                    //     LogCubit logCubit =
+                                    //         LogCubit.instance(context);
+                                    //     logCubit
+                                    //         .addLog("button recommendation");
 
-                                        showDialog<String>(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                    'Aanbeveling voor: ' +
-                                                        trip.name),
-                                                content: co2RecommendationPercentage <=
-                                                        0
-                                                    ? Text(
-                                                        "Geen aanbeveling gevonden.")
-                                                    : Text("Aanbeveling: " +
-                                                        trip.recommendation +
-                                                        ". Je zal rond de: " +
-                                                        co2reduction
-                                                            .toStringAsFixed(
-                                                                2) +
-                                                        'kg Co2-eq besparen (besparing van ' +
-                                                        co2RecommendationPercentage
-                                                            .toStringAsFixed(
-                                                                2) +
-                                                        "%) per 100 gram van dit product"),
-                                                actions: <Widget>[
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            context, 'OK'),
-                                                    child: const Text('OK'),
-                                                  ),
-                                                ],
-                                              );
-                                            });
-                                        print("log recommendation");
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                          primary: Colors.orange,
-                                          textStyle: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold)),
-                                    ),
+                                    //     showDialog<String>(
+                                    //         context: context,
+                                    //         builder: (BuildContext context) {
+                                    //           return AlertDialog(
+                                    //             title: Text(
+                                    //                 'Aanbeveling voor: ' +
+                                    //                     trip.name),
+                                    //             content: co2RecommendationPercentage <=
+                                    //                     0
+                                    //                 ? Text(
+                                    //                     "Geen aanbeveling gevonden.")
+                                    //                 : Text("Aanbeveling: " +
+                                    //                     trip.recommendation +
+                                    //                     ". Je zal rond de: " +
+                                    //                     co2reduction
+                                    //                         .toStringAsFixed(
+                                    //                             2) +
+                                    //                     'kg Co2-eq besparen (besparing van ' +
+                                    //                     co2RecommendationPercentage
+                                    //                         .toStringAsFixed(
+                                    //                             2) +
+                                    //                     "%) per 100 gram van dit product"),
+                                    //             actions: <Widget>[
+                                    //               TextButton(
+                                    //                 onPressed: () =>
+                                    //                     Navigator.pop(
+                                    //                         context, 'OK'),
+                                    //                 child: const Text('OK'),
+                                    //               ),
+                                    //             ],
+                                    //           );
+                                    //         });
+                                    //     print("log recommendation");
+                                    //   },
+                                    //   style: ElevatedButton.styleFrom(
+                                    //       primary: Colors.orange,
+                                    //       textStyle: const TextStyle(
+                                    //           fontSize: 12,
+                                    //           fontWeight: FontWeight.bold)),
+                                    // ),
                                   ],
                                 ),
                               ),
