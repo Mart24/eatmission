@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_app/Services/auth_service.dart';
 import 'package:food_app/Widgets/Provider_Auth.dart';
+import 'package:food_app/Widgets/notifcations/home_page.dart';
 import 'package:food_app/Widgets/notification.dart';
 import 'package:food_app/shared/app_cubit.dart';
 import 'package:food_app/shared/dairy_cubit.dart';
@@ -101,23 +102,40 @@ class SettingsThreePage extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
             Text(
-              "Notificatie & App informatie",
+              "Notificatie & app informatie",
               style: headerStyle,
             ),
+            // Card(
+            //   margin: const EdgeInsets.symmetric(
+            //     vertical: 8.0,
+            //     horizontal: 0,
+            //   ),
+            //   child: Column(
+            //     children: <Widget>[
+            //       SwitchListTile(
+            //         activeColor: Colors.green,
+            //         value: true,
+            //         title: Text("Notificatie (standaard aan)"),
+            //         onChanged: (val) {},
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Card(
               margin: const EdgeInsets.symmetric(
                 vertical: 8.0,
                 horizontal: 0,
               ),
-              child: Column(
-                children: <Widget>[
-                  SwitchListTile(
-                    activeColor: Colors.green,
-                    value: true,
-                    title: Text("Notificatie (standaard aan)"),
-                    onChanged: (val) {},
-                  ),
-                ],
+              child: ListTile(
+                leading: Icon(Icons.notifications_active),
+                title: Text("Notificaties"),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NotificationPage(),
+                      ));
+                },
               ),
             ),
             Card(

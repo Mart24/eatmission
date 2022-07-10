@@ -137,9 +137,7 @@ class _HomeState extends State<Home> {
               MaterialPageRoute(
                 builder: (context) => NewFoodIntake(),
               ));
-          sendNotification(
-              title: "Beste deelnemer", body: "Vergeet niet te tracken :)");
-          logCubit.add1Log("Intake button");
+
           print("log to Intake button");
         },
         //  label: const Text('Food'),

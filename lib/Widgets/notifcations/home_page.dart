@@ -51,7 +51,7 @@ class _NotificationPageState extends State<NotificationPage> {
     await notificationService.scheduleNotification(
       1,
       _textEditingController.text,
-      "De reminder is ingesteld voor: ${eventTime.format(context)}",
+      "Beste deelnemer. Deze notificatie is ingesteld voor de tijd: ${eventTime.format(context)}",
       eventDate,
       eventTime,
       jsonEncode({
