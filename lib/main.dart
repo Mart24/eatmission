@@ -27,6 +27,8 @@ import 'package:food_app/Views/introduction_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import 'Widgets/notifcations/services/notification_service.dart';
+
 // @dart=2.9
 // /test
 // macbook
@@ -79,7 +81,7 @@ class MyBlocObserver extends BlocObserver {
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   //This can be used for accessing the darkmode.
@@ -98,55 +100,17 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
+  NotificationService notificationService = NotificationService();
+  await notificationService.init();
+  await notificationService.requestIOSPermissions();
+
   runApp(MyApp());
 }
 
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   // This widget is the root of the application.
-
-  void sendNotification({String title, String body}) async {
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
-
-    ////Set the settings for various platform
-    // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-    const IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true,
-    );
-    const LinuxInitializationSettings initializationSettingsLinux =
-        LinuxInitializationSettings(
-      defaultActionName: 'hello',
-    );
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-            android: initializationSettingsAndroid,
-            iOS: initializationSettingsIOS,
-            linux: initializationSettingsLinux);
-    await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
-    );
-
-    ///
-    const AndroidNotificationChannel channel = AndroidNotificationChannel(
-        'high_channel', 'High Importance Notification',
-        description: "This channel is for important notification",
-        importance: Importance.max);
-
-    flutterLocalNotificationsPlugin.show(
-      0,
-      title,
-      body,
-      NotificationDetails(
-        android: AndroidNotificationDetails(channel.id, channel.name,
-            channelDescription: channel.description),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) => provider1.ChangeNotifierProvider(
